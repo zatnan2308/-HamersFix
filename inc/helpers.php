@@ -310,3 +310,21 @@ function hf_page_url($slug, $fallback = '#') {
   if ($page) return get_permalink($page);
   return $fallback;
 }
+
+/* ----------------------------------------------------------------
+ * Generic current-page accessors (used by page templates)
+ * ---------------------------------------------------------------- */
+/** Current page field with default. */
+function hf_pg($key, $default = '') {
+  return hf_field($key, $default, get_the_ID());
+}
+
+/** Current page repeater rows or a supplied default array. */
+function hf_pg_rows($key, array $default_rows) {
+  $pid = get_the_ID();
+  if ($pid && function_exists('get_field')) {
+    $acf = get_field($key, $pid);
+    if (is_array($acf) && !empty($acf)) return $acf;
+  }
+  return $default_rows;
+}
