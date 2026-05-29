@@ -1,0 +1,46 @@
+/* =============================================================
+   HamersFix — theme additions (WordPress glue + real ZIP checker)
+   Loaded AFTER tokens/site/menu/responsive. Design-token based.
+   NOTE: .ic-stroke and body.drawer-locked are already defined in the
+   design CSS (site.css / menu.css) — we deliberately do not redefine them.
+   ============================================================= */
+
+/* ---- WordPress admin-bar offset for the sticky header --------- */
+body.admin-bar .site-hd { top: 32px; }
+@media (max-width: 782px) { body.admin-bar .site-hd { top: 46px; } }
+
+/* ---- Real ZIP checker states (mock had a single fake .ok block) -- */
+.zipbox__msg {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+  padding: 10px 12px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 14px;
+}
+.zipbox__msg svg { flex-shrink: 0; }
+.zipbox__msg:focus { outline: none; }
+.zipbox__msg a { color: inherit; text-decoration: underline; }
+.zipbox.has-msg .zipbox__msg { display: flex; }
+.zipbox.has-msg .hint { display: none; }
+.zipbox__msg.is-ok   { background: var(--ok-100);   color: var(--ok-700); }
+.zipbox__msg.is-warn { background: var(--warn-100); color: var(--warn-700); }
+.zipbox__msg.is-err  { background: var(--err-100);  color: var(--err-700); }
+
+/* ---- Cover image helper for ACF/editor hero images ------------ */
+.hf-cover { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* ---- Accessibility: honour reduced-motion preference ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---- Admin editor note for placeholder/marketing fields ------- */
+.acf-field .hf-note { color: var(--cta-700, #c7501a); font-weight: 600; }

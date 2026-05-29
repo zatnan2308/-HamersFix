@@ -1,0 +1,279 @@
+/* =============================================================
+   Scroll-to-top button + Tablet & phone adaptive refinements
+   ============================================================= */
+
+/* ── Scroll to top button ─────────────────────────────────── */
+.scroll-top {
+  position: fixed;
+  right: 20px;
+  bottom: 24px;
+  z-index: 39;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--brand-700);
+  color: #fff;
+  border: 0;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(10px) scale(.92);
+  pointer-events: none;
+  transition: opacity var(--dur-2) var(--ease-out),
+              transform var(--dur-2) var(--ease-out),
+              background var(--dur-2);
+  box-shadow: 0 6px 16px rgba(6, 43, 87, .25), 0 2px 4px rgba(6, 43, 87, .15);
+}
+.scroll-top:hover { background: var(--brand-600); transform: translateY(-2px) scale(1); }
+.scroll-top:focus-visible { outline: 3px solid var(--brand-500); outline-offset: 3px; }
+.scroll-top.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+.scroll-top svg { width: 22px; height: 22px; }
+
+/* Bump scroll-top above the mobile sticky bar */
+@media (max-width: 768px) {
+  .scroll-top {
+    right: 16px;
+    bottom: calc(80px + env(safe-area-inset-bottom, 0px));
+    width: 44px; height: 44px;
+  }
+  .scroll-top svg { width: 20px; height: 20px; }
+}
+
+/* =============================================================
+   TABLET (max 1024 / 900) refinements
+   ============================================================= */
+@media (max-width: 1024px) {
+  /* General section padding */
+  .s, .sec { padding: 64px 0; }
+  .s__head { margin-bottom: 36px; }
+
+  /* Hero h1 size */
+  .hero h1, .svc-hero h1, .ab-hero h1, .b-hero h1, .sa-hero h1, .c-hero h1, .bk-hero h1 {
+    font-size: clamp(34px, 5vw, 48px);
+  }
+
+  /* Footer columns collapse to 2 */
+  .foot__grid { grid-template-columns: 1.4fr 1fr 1fr; }
+  .foot__grid > :nth-child(4) { grid-column: span 3; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.08); }
+
+  /* Cards smaller padding */
+  .card, .svc, .step, .review, .person__bd, .brand-card, .prob, .scope-card { padding: 22px; }
+
+  /* Reduce CTA band padding */
+  .cta-band { padding: 56px 0; }
+  .final-cta { padding: 64px 0; }
+}
+
+/* =============================================================
+   PHONE (max 768 / 600 / 480) refinements
+   ============================================================= */
+@media (max-width: 768px) {
+  /* Sections */
+  .s, .sec { padding: 48px 0; }
+  .s__head { margin-bottom: 28px; padding: 0 4px; }
+  .s__head h2 { font-size: clamp(26px, 6vw, 32px); }
+  .s__head p { font-size: 15px; }
+
+  /* Container side padding */
+  .container, .s__body, .s__head, .foot__grid, .doc-top__inner, .stats-strip__inner, .final-cta__inner {
+    padding-left: 16px; padding-right: 16px;
+  }
+
+  /* Section header eyebrow letter-spacing tighter */
+  .s__head .eyebrow, .eyebrow { letter-spacing: .08em; }
+
+  /* Footer to 2 columns */
+  .foot__grid { grid-template-columns: 1fr 1fr; gap: 24px; }
+  .foot__grid > :first-child { grid-column: span 2; }
+  .foot__grid > :nth-child(4) { grid-column: span 2; }
+  .foot .legal { flex-direction: column; gap: 12px; align-items: flex-start; font-size: 12px; padding-top: 18px; margin-top: 28px; }
+
+  /* CTA bands */
+  .cta-band { padding: 40px 0; }
+  .cta-band__inner { gap: 24px; text-align: center; }
+  .cta-band h2 { font-size: 26px; }
+  .cta-band p { font-size: 14.5px; }
+  .cta-band .actions { width: 100%; }
+  .cta-band .actions .btn { width: 100%; }
+
+  /* Final CTA */
+  .final-cta { padding: 48px 0; }
+  .final-cta h2 { font-size: 28px; }
+  .final-cta p { font-size: 15px; }
+  .phone-card { padding: 22px; }
+  .phone-card .num { padding: 14px; }
+  .phone-card .num .digits { font-size: 22px; }
+  .phone-card .signals { flex-direction: column; }
+
+  /* Trust row pills wrap */
+  .trust-row, .trust-row-big { gap: 6px; }
+  .trust-row li, .trust-row-big .t { font-size: 12.5px; padding: 7px 11px; }
+
+  /* Reviews */
+  .agg { gap: 16px; flex-direction: column; align-items: flex-start; }
+  .agg__score { font-size: 52px; }
+  .agg__meta .src { gap: 12px; font-size: 12px; }
+
+  /* Booking & forms (where remaining) */
+  .book-wrap { padding: 24px 16px 96px; }
+  .book-card { padding: 24px 20px; }
+  .book-card h1 { font-size: 24px; }
+  .book-card .sub { font-size: 14.5px; }
+
+  /* Booking landing */
+  .bk-card { padding: 32px 24px; }
+  .bk-cta { padding: 18px 24px; font-size: 16px; }
+  .alt-card { padding: 24px 22px; }
+
+  /* Service hero */
+  .svc-hero { padding: 24px 0 40px; }
+  .svc-hero h1 { font-size: clamp(28px, 7vw, 36px); }
+  .svc-hero .lede { font-size: 15.5px; }
+
+  /* Brand hero */
+  .b-hero { padding: 24px 0 48px; }
+  .b-hero h1 { font-size: clamp(28px, 7vw, 38px); }
+  .b-hero__stats .stat .n { font-size: 28px; }
+
+  /* Service Areas */
+  .sa-hero { padding: 24px 0 32px; }
+  .sa-hero h1 { font-size: clamp(28px, 7vw, 38px); }
+  .stats-strip { padding: 24px 0; }
+  .stats-strip .stat .n { font-size: 28px; }
+
+  /* Refrigerator types & problems */
+  .types-grid .type-card__art { aspect-ratio: 16/10; }
+
+  /* About — timeline */
+  .timeline { padding-left: 22px; }
+  .tl-item::before { left: -22px; width: 12px; height: 12px; }
+  .tl-item.--major::before { left: -25px; width: 18px; height: 18px; box-shadow: 0 0 0 3px var(--cta-100); }
+  .tl-item h3 { font-size: 18px; }
+  .tl-item p { font-size: 14px; }
+
+  /* About team */
+  .person__bd { padding: 16px 16px 18px; gap: 2px; }
+  .person__bd .bio { font-size: 12.5px; margin-top: 6px; }
+  .person__bd .specs span { font-size: 10.5px; padding: 2px 6px; }
+
+  /* About certs */
+  .certs-band { padding: 32px 22px; border-radius: 12px; }
+  .cert-card { padding: 18px; gap: 12px; }
+  .cert-card .seal { width: 42px; height: 42px; }
+  .cert-card .ttl { font-size: 14.5px; }
+
+  /* About stats */
+  .ab-stat { padding: 22px; }
+  .ab-stat .n { font-size: 36px; }
+
+  /* Brands page tier */
+  .com-promo { padding: 28px 22px; }
+  .com-brands { padding: 22px; }
+  .matrix__appl { padding: 14px 16px; }
+  .matrix__appl .nm { font-size: 14px; }
+  .matrix__brands { padding: 12px 16px; }
+  .matrix__brands a { font-size: 12px; padding: 5px 10px; }
+
+  /* Service area regions */
+  .region { padding: 22px; }
+  .region h3 { font-size: 19px; }
+  .region .cities { columns: 1; }
+  .region .stats { flex-wrap: wrap; gap: 10px; font-size: 12px; }
+  .region .stats > div { flex: 1 0 30%; }
+
+  /* Map overlay cards */
+  .map-frame .map-overlay { left: 10px; top: 10px; padding: 12px; min-width: auto; max-width: 60%; }
+  .map-frame .map-overlay h3 { font-size: 14px; }
+  .map-frame .map-overlay .row { font-size: 11.5px; padding: 3px 0; }
+  .map-frame .map-callout { right: 10px; top: 10px; padding: 10px 12px; max-width: 38%; }
+  .map-frame .map-callout .lbl { font-size: 10px; }
+  .map-frame .map-callout .val { font-size: 16px; }
+  .map-frame .map-callout p { display: none; }
+  .map-frame .map-stat { right: 10px; bottom: 10px; padding: 8px 12px; }
+  .map-frame .map-stat .txt { font-size: 11px; }
+  .map-frame .map-stat .txt small { font-size: 10px; }
+
+  /* Reviews */
+  .review-grid { gap: 12px; }
+  .review { padding: 18px; }
+  .review p { font-size: 14px; }
+
+  /* FAQ */
+  .faq-list details { padding: 14px 16px; }
+  .faq-list summary { font-size: 14.5px; gap: 12px; }
+  .faq-list summary::after { font-size: 18px; }
+  .faq-list p { font-size: 13.5px; }
+
+  /* Contact channels */
+  .channels { gap: 10px; margin-top: -16px; }
+  .ch { padding: 22px 20px; }
+  .ch h3 { font-size: 17px; }
+  .ch .ds { font-size: 12.5px; }
+  .ch .action b { font-size: 17px; }
+  .ch.--primary .action b { font-size: 20px; }
+
+  /* Reach card */
+  .reach-card { padding: 22px 20px; }
+  .reach-card h2 { font-size: 22px; }
+  .reach-link { padding: 14px 16px; gap: 12px; }
+  .reach-link .ic { width: 38px; height: 38px; }
+  .reach-link .ttl { font-size: 14.5px; }
+  .reach-link .val { font-size: 16px; }
+  .reach-link .ds { font-size: 11.5px; }
+
+  /* Info cards (Contact sidebar) */
+  .info-card { padding: 20px 22px; }
+  .info-card h3 { font-size: 15px; }
+  .hours-list .row { font-size: 13px; }
+}
+
+/* Very small phones (≤ 480) */
+@media (max-width: 480px) {
+  .topline__inner { font-size: 11px; }
+  .topline .grp:first-child .sep { display: none; }
+  .stats-strip__inner { grid-template-columns: 1fr 1fr; }
+  .b-hero__stats { grid-template-columns: 1fr; gap: 10px; }
+  .b-hero__stats .stat { display: flex; gap: 12px; align-items: baseline; padding: 8px 0; border-bottom: 1px solid var(--line-200); }
+  .b-hero__stats .stat:last-child { border-bottom: 0; }
+  .b-hero__stats .stat .l { margin-top: 0; }
+
+  /* Hero CTA buttons full width */
+  .hero__ctas .btn, .svc-hero .ctas .btn, .ab-hero .ctas .btn, .b-hero .ctas .btn, .sa-hero .ctas .btn, .bk-hero .ctas .btn {
+    width: 100%;
+  }
+  .svc-hero .ctas, .ab-hero .ctas, .b-hero .ctas, .sa-hero .ctas, .hero__ctas, .bk-hero .ctas { flex-direction: column; }
+
+  /* Crumbs simpler */
+  .crumbs { padding: 12px 16px 0; font-size: 12.5px; }
+
+  /* Card grid: prefer 1 col */
+  .prob-grid, .types-grid, .brand-grid, .prem-grid, .review-grid, .svc-grid, .team-grid, .scope-row { grid-template-columns: 1fr; }
+  .brand-wall { grid-template-columns: repeat(2, 1fr); }
+
+  /* CTA band buttons */
+  .final-cta .signals { gap: 12px; }
+  .final-cta .signals .sig { width: 100%; }
+
+  /* Drawer width */
+  .drawer { width: 100vw; }
+
+  /* Footer to 1 column */
+  .foot__grid { grid-template-columns: 1fr; }
+  .foot__grid > :first-child { grid-column: span 1; }
+  .foot__grid > :nth-child(4) { grid-column: span 1; }
+
+  /* Scroll-top smaller */
+  .scroll-top { right: 12px; bottom: calc(76px + env(safe-area-inset-bottom, 0px)); width: 42px; height: 42px; }
+}
+
+/* =============================================================
+   Print: hide scroll-top, sticky bars, drawer
+   ============================================================= */
+@media print {
+  .scroll-top, .mb-bar, .site-hd, .drawer, .drawer-scrim, .topline { display: none !important; }
+}

@@ -1,0 +1,21 @@
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*~
+
+# Node / build tooling (if added later)
+node_modules/
+npm-debug.log*
+yarn-error.log*
+
+# Design handoff reference — local only, never deployed to the theme
+/design/
+
+# Logs / misc
+*.log

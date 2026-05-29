@@ -1,0 +1,21 @@
+/*
+Theme Name: HamersFix
+Theme URI: https://github.com/zatnan2308/-HamersFix
+Author: Alexey Kachan Agency
+Author URI: https://alexeykachan.com/
+Description: Custom appliance-repair theme for HamersFix (Northeast Georgia, US). Pixel-perfect implementation of the Claude Design handoff, fully editable via ACF Pro. Classic PHP theme with a working ZIP coverage checker, LocalBusiness schema and SEO.
+Version: 1.0.0
+Requires at least: 6.0
+Tested up to: 6.7
+Requires PHP: 7.4
+License: GPL-2.0-or-later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: hamersfix
+Tags: business, appliance-repair, custom-menu, featured-images, threaded-comments
+*/
+
+/*
+ * The visual styles live in /assets/css/ and are loaded with wp_enqueue_style()
+ * from inc/enqueue.php (tokens.css, site.css, menu.css, responsive.css, theme.css).
+ * This file only carries the WordPress theme header above.
+ */

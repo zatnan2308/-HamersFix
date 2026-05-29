@@ -1,0 +1,249 @@
+/* =============================================================
+   APPLIANCE REPAIR — Design Tokens
+   ============================================================= */
+
+:root {
+  /* — Brand & semantic color —————————————————————————— */
+  --brand-900: #062B57;   /* deep navy — headers, footer */
+  --brand-800: #08366B;
+  --brand-700: #0B4F9A;   /* primary brand blue */
+  --brand-600: #1769C2;
+  --brand-500: #2E86E4;   /* hover/lighter brand */
+  --brand-100: #DCE9FA;   /* tinted surfaces */
+  --brand-50:  #EEF4FC;
+
+  --cta-700: #C7501A;
+  --cta-600: #EE6B1F;     /* PRIMARY CTA — warm urgent orange */
+  --cta-500: #F58241;     /* hover */
+  --cta-100: #FCE3D2;
+
+  --ok-700:  #1F7A4C;
+  --ok-600:  #25925A;
+  --ok-100:  #D9EFE2;
+
+  --warn-700:#A05A00;
+  --warn-600:#C77800;
+  --warn-100:#FBEACF;
+
+  --err-700: #B2271B;
+  --err-600: #D9352A;
+  --err-100: #FAD9D6;
+
+  /* — Neutrals —————————————————————————————————————— */
+  --ink-900: #0F1820;     /* body text */
+  --ink-700: #2B3742;
+  --ink-500: #4A5560;     /* secondary text */
+  --ink-400: #6B7682;
+  --ink-300: #99A2AD;     /* placeholder */
+  --line-300:#D6DCE3;     /* divider strong */
+  --line-200:#E2E6EA;     /* divider default */
+  --line-100:#EEF1F4;
+  --surf-100:#F5F7FA;     /* page section bg */
+  --surf-50: #FAFBFC;
+  --white:   #FFFFFF;
+
+  /* — Type ——————————————————————————————————————————— */
+  --ff-sans: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --ff-disp: "Archivo", "Public Sans", system-ui, sans-serif;
+  --ff-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --fz-12: 12px;  --fz-13: 13px;  --fz-14: 14px;  --fz-15: 15px;
+  --fz-16: 16px;  --fz-18: 18px;  --fz-20: 20px;  --fz-24: 24px;
+  --fz-28: 28px;  --fz-32: 32px;  --fz-40: 40px;  --fz-48: 48px;
+  --fz-56: 56px;  --fz-64: 64px;  --fz-72: 72px;
+
+  --lh-tight: 1.1;
+  --lh-snug:  1.25;
+  --lh-norm:  1.45;
+  --lh-relax: 1.6;
+
+  /* — Spacing 4-base ——————————————————————————————————— */
+  --sp-1: 4px;  --sp-2: 8px;  --sp-3: 12px; --sp-4: 16px;
+  --sp-5: 20px; --sp-6: 24px; --sp-7: 32px; --sp-8: 40px;
+  --sp-9: 48px; --sp-10: 64px; --sp-11: 80px; --sp-12: 96px;
+  --sp-13: 128px;
+
+  /* — Radius ——————————————————————————————————————————— */
+  --r-xs: 4px;
+  --r-sm: 6px;
+  --r-md: 8px;    /* default — buttons, cards */
+  --r-lg: 12px;
+  --r-xl: 16px;
+  --r-full: 999px;
+
+  /* — Elevation ——————————————————————————————————————— */
+  --sh-1: 0 1px 2px rgba(15,24,32,.06), 0 1px 1px rgba(15,24,32,.04);
+  --sh-2: 0 2px 4px rgba(15,24,32,.06), 0 4px 12px rgba(15,24,32,.06);
+  --sh-3: 0 4px 8px rgba(15,24,32,.08), 0 12px 28px rgba(15,24,32,.10);
+  --sh-cta: 0 2px 0 rgba(0,0,0,.18), 0 4px 14px rgba(238,107,31,.30);
+
+  /* — Motion ——————————————————————————————————————————— */
+  --ease-out: cubic-bezier(.2,.7,.2,1);
+  --ease-in:  cubic-bezier(.4,.0,.8,.4);
+  --dur-1: 120ms;
+  --dur-2: 200ms;
+  --dur-3: 320ms;
+
+  /* — Layout ——————————————————————————————————————————— */
+  --container: 1200px;
+  --container-wide: 1320px;
+  --gutter-dt: 24px;
+  --gutter-mb: 16px;
+}
+
+/* =============================================================
+   Reset + base
+   ============================================================= */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: var(--ff-sans);
+  font-size: var(--fz-16);
+  line-height: var(--lh-norm);
+  color: var(--ink-900);
+  background: var(--white);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+img, svg { display: block; max-width: 100%; }
+a { color: inherit; }
+button { font-family: inherit; cursor: pointer; }
+
+/* =============================================================
+   Type utilities
+   ============================================================= */
+.t-display-xl { font-family: var(--ff-disp); font-weight: 800; font-size: clamp(40px, 6vw, 72px); line-height: 1.04; letter-spacing: -.02em; }
+.t-display-l  { font-family: var(--ff-disp); font-weight: 800; font-size: clamp(32px, 4.5vw, 56px); line-height: 1.06; letter-spacing: -.018em; }
+.t-display-m  { font-family: var(--ff-disp); font-weight: 700; font-size: clamp(28px, 3.5vw, 40px); line-height: 1.12; letter-spacing: -.012em; }
+.t-h2 { font-family: var(--ff-disp); font-weight: 700; font-size: clamp(24px, 2.5vw, 32px); line-height: 1.18; letter-spacing: -.008em; }
+.t-h3 { font-family: var(--ff-sans); font-weight: 700; font-size: var(--fz-20); line-height: 1.3; letter-spacing: -.002em; }
+.t-h4 { font-family: var(--ff-sans); font-weight: 700; font-size: var(--fz-18); line-height: 1.35; }
+.t-body-l { font-size: var(--fz-18); line-height: 1.55; }
+.t-body   { font-size: var(--fz-16); line-height: var(--lh-norm); }
+.t-sm     { font-size: var(--fz-14); line-height: 1.45; }
+.t-xs     { font-size: var(--fz-13); line-height: 1.4; }
+.t-eyebrow{ font: 600 12px/1 var(--ff-sans); text-transform: uppercase; letter-spacing: .12em; color: var(--brand-700); }
+.t-mono   { font-family: var(--ff-mono); }
+.t-muted  { color: var(--ink-500); }
+.t-ink    { color: var(--ink-900); }
+
+/* =============================================================
+   Buttons (states must be VERY high contrast — outdoor sunlight use)
+   ============================================================= */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: 8px;
+  min-height: 48px;            /* hit target ≥ 44 */
+  padding: 0 22px;
+  border: 0; border-radius: var(--r-md);
+  font: 700 16px/1 var(--ff-sans);
+  letter-spacing: .01em;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background var(--dur-2) var(--ease-out), transform var(--dur-1), box-shadow var(--dur-2);
+}
+.btn:focus-visible { outline: 3px solid var(--brand-500); outline-offset: 2px; }
+.btn--cta { background: var(--cta-600); color: #fff; box-shadow: var(--sh-cta); }
+.btn--cta:hover { background: var(--cta-500); }
+.btn--cta:active { transform: translateY(1px); box-shadow: 0 1px 0 rgba(0,0,0,.18), 0 2px 6px rgba(238,107,31,.25); }
+.btn--primary { background: var(--brand-700); color: #fff; }
+.btn--primary:hover { background: var(--brand-600); }
+.btn--ghost { background: transparent; color: var(--brand-700); border: 1.5px solid var(--brand-700); }
+.btn--ghost:hover { background: var(--brand-50); }
+.btn--lg { min-height: 56px; padding: 0 28px; font-size: 17px; }
+.btn--sm { min-height: 40px; padding: 0 14px; font-size: 14px; }
+.btn--block { width: 100%; }
+
+/* phone CTA — explicit, always at-a-glance */
+.btn--phone { background: var(--cta-600); color: #fff; box-shadow: var(--sh-cta); }
+.btn--phone .num { font-variant-numeric: tabular-nums; }
+
+/* =============================================================
+   Common scaffolding
+   ============================================================= */
+.container { width: 100%; max-width: var(--container); margin: 0 auto; padding: 0 24px; }
+.container--wide { max-width: var(--container-wide); }
+.section { padding: 80px 0; }
+.section--tight { padding: 56px 0; }
+.section--bg { background: var(--surf-100); }
+.section--ink { background: var(--brand-900); color: #F4F7FB; }
+
+.divider { height: 1px; background: var(--line-200); border: 0; margin: 0; }
+
+.grid { display: grid; gap: 24px; }
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
+.grid-6 { grid-template-columns: repeat(6, 1fr); }
+@media (max-width: 900px) {
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr 1fr; }
+  .grid-6 { grid-template-columns: repeat(3, 1fr); }
+  .section { padding: 56px 0; }
+}
+@media (max-width: 560px) {
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+  .grid-6 { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* =============================================================
+   Cards, badges, pills, inputs (shared mock UI)
+   ============================================================= */
+.card {
+  background: #fff; border: 1px solid var(--line-200);
+  border-radius: var(--r-lg); padding: 24px;
+}
+.card--ink { background: var(--brand-800); border-color: transparent; color: #fff; }
+.badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  height: 26px; padding: 0 10px;
+  background: var(--brand-50); color: var(--brand-700);
+  border-radius: var(--r-full);
+  font: 600 12px/1 var(--ff-sans); letter-spacing: .02em;
+}
+.badge--ok   { background: var(--ok-100);   color: var(--ok-700); }
+.badge--cta  { background: var(--cta-100);  color: var(--cta-700); }
+.badge--ink  { background: rgba(255,255,255,.10); color: #fff; }
+
+.input {
+  display: block; width: 100%;
+  min-height: 48px; padding: 12px 14px;
+  background: #fff; color: var(--ink-900);
+  border: 1.5px solid var(--line-300);
+  border-radius: var(--r-md);
+  font: 500 16px/1.2 var(--ff-sans);
+  transition: border-color var(--dur-2), box-shadow var(--dur-2);
+}
+.input::placeholder { color: var(--ink-300); }
+.input:focus { outline: 0; border-color: var(--brand-700); box-shadow: 0 0 0 4px var(--brand-50); }
+.input--err  { border-color: var(--err-600); }
+
+/* trust badge — reusable */
+.tbadge {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 10px 14px;
+  background: #fff;
+  border: 1px solid var(--line-200);
+  border-radius: var(--r-md);
+  font: 600 13px/1.2 var(--ff-sans);
+  color: var(--ink-700);
+}
+.tbadge .ic {
+  width: 28px; height: 28px;
+  display: grid; place-items: center;
+  border-radius: var(--r-sm);
+  background: var(--brand-50);
+  color: var(--brand-700);
+}
+
+/* star row */
+.stars { display: inline-flex; gap: 1px; color: #F2A413; }
+.stars svg { width: 16px; height: 16px; }
+
+/* misc helpers */
+.flex { display: flex; }
+.flex-col { display: flex; flex-direction: column; }
+.items-center { align-items: center; }
+.justify-between { justify-content: space-between; }
+.gap-2 { gap: 8px; } .gap-3 { gap: 12px; } .gap-4 { gap: 16px; } .gap-6 { gap: 24px; }
+.mt-2 { margin-top: 8px; } .mt-4 { margin-top: 16px; } .mt-6 { margin-top: 24px; } .mt-8 { margin-top: 32px; }
+.text-center { text-align: center; }
