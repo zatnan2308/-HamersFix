@@ -25,9 +25,10 @@ add_action('wp_enqueue_scripts', function () {
   wp_enqueue_style('hf-menu',       "$uri/assets/css/menu.css",       ['hf-tokens'], $ver);
   wp_enqueue_style('hf-responsive', "$uri/assets/css/responsive.css", ['hf-tokens', 'hf-site', 'hf-menu'], $ver);
   wp_enqueue_style('hf-theme',      "$uri/assets/css/theme.css",      ['hf-responsive'], $ver);
+  wp_enqueue_style('hf-pages',      "$uri/assets/css/pages.css",      ['hf-theme'], $ver);
 
   // The registered theme stylesheet (header only) loads last.
-  wp_enqueue_style('hamersfix', get_stylesheet_uri(), ['hf-theme'], $ver);
+  wp_enqueue_style('hamersfix', get_stylesheet_uri(), ['hf-pages'], $ver);
 
   // Scripts — footer, deferred (vanilla, no dependencies).
   wp_enqueue_script('hf-nav',       "$uri/assets/js/nav.js",        [], $ver, true);

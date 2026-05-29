@@ -16,11 +16,13 @@ define('HF_DIR', get_template_directory());
 define('HF_URI', get_template_directory_uri());
 
 $hf_includes = [
-  'inc/defaults.php',     // design default content (single source of truth)
-  'inc/helpers.php',      // ACF-or-default accessors, ZIP/hours/services helpers
-  'inc/setup.php',        // theme supports, menus, image sizes
-  'inc/enqueue.php',      // styles, scripts, fonts, HF_ZIP localization
-  'inc/cpt.php',          // `service` custom post type
+  'inc/defaults.php',        // design default content (single source of truth)
+  'inc/helpers.php',         // ACF-or-default accessors, ZIP/hours/services helpers
+  'inc/service-defaults.php',// single-service reference content + accessors
+  'inc/setup.php',           // theme supports, menus, image sizes
+  'inc/enqueue.php',         // styles, scripts, fonts, HF_ZIP localization
+  'inc/cpt.php',             // `service` custom post type
+  'inc/seed.php',            // first-run: create the 6 service posts
   'inc/nav-mega.php',     // primary nav config + Residential mega from CPT
   'inc/zip-checker.php',  // optional AJAX endpoint (client-side is primary)
   'inc/seo.php',          // title/meta/OG/Twitter (yields to SEO plugins)
