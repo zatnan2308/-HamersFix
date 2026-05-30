@@ -248,7 +248,9 @@ function hf_demo_apply_pages($overwrite, &$count) {
     hf_demo_set('why_intro',   $d['why']['intro'],   $pid, $overwrite, $count);
     $why = [];
     foreach ($d['why']['cards'] as $c) {
-      $why[] = ['num' => $c['num'], 'h3' => $c['h3'], 'p' => $c['p'], 'list' => hf_demo_lines($c['list'])];
+      // why_cards.list is a nested REPEATER (subfield 'text'), so write rows —
+      // not a newline string — or a Reset-to-demo leaves the bullets empty.
+      $why[] = ['num' => $c['num'], 'h3' => $c['h3'], 'p' => $c['p'], 'list' => hf_demo_rows($c['list'], 'text')];
     }
     hf_demo_set('why_cards', $why, $pid, $overwrite, $count);
 
