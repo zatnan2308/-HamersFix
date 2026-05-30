@@ -138,3 +138,122 @@ function hf_commercial_defaults() {
   ];
   return $d;
 }
+
+/** Cached defaults for the About page (transcribed verbatim from About.html). */
+function hf_about_defaults() {
+  static $d = null;
+  if ($d !== null) return $d;
+
+  $d = [
+    'hero' => [
+      'eyebrow' => 'About HamersFix',
+      'h1'      => 'Helping <em>Northeast Georgia</em> homes & businesses get back to normal.',
+      'lede'    => 'HamersFix provides reliable appliance repair for homes, rentals, restaurants, cafés, and local businesses across Gwinnett, Barrow & the Athens area. When an appliance breaks down, we help make the next step simple, clear, and less stressful.',
+      'cta_label' => 'Schedule Service',
+    ],
+    'who' => [
+      'eyebrow' => 'Who we are',
+      'h2'      => 'A local appliance repair team built around clear service',
+      'paras'   => [
+        'HamersFix was created to make appliance repair feel simple, professional, and easy to understand. Whether you are dealing with a refrigerator that is not cooling, a washer that will not drain, an oven that will not heat, or commercial equipment that needs attention, our goal is to help you move forward with confidence.',
+        'We work with homeowners, landlords, restaurants, cafés, offices, and local businesses across Northeast Georgia. Our approach is simple: listen carefully, diagnose the issue, explain the repair options clearly, and help you get your home or business running smoothly again.',
+      ],
+      'tags'    => ['Homes & rental properties', 'Restaurants & cafés', 'Local businesses', 'Residential & commercial'],
+      'vis_lbl' => 'Local service for everyday appliance problems',
+      'vis_h3'  => 'One team. One number. One promise.',
+      'items'   => [
+        ['icon' => '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l3-9 4 6 4-3 4 9 3-3"/></svg>', 'title' => 'Same-day service available', 'sub' => 'Most ZIPs · book before noon'],
+        ['icon' => '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-7 8-13a8 8 0 10-16 0c0 6 8 13 8 13z"/><circle cx="12" cy="9" r="3"/></svg>', 'title' => '14 cities · 18 ZIPs', 'sub' => 'Gwinnett, Barrow & Athens area'],
+        ['icon' => '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>', 'title' => '1-year parts & labor warranty', 'sub' => 'On every completed repair'],
+        ['icon' => '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>', 'title' => 'Open 7 days a week', 'sub' => 'Mon–Fri 7 AM–9 PM · weekends too'],
+      ],
+    ],
+    'values' => [
+      'eyebrow' => 'Our values',
+      'h2'      => 'Service that feels clear, respectful, and reliable',
+      'intro'   => 'Appliance problems can interrupt real life. Our values are built around making the repair experience easier from the first call to the final update.',
+      'cards'   => [
+        ['icon' => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>', 'h3' => 'Clear communication', 'p' => 'We explain what we find, what your options are, and what to expect before repair work begins.'],
+        ['icon' => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8M5 9v12h14V9"/></svg>', 'h3' => 'Respect for your home', 'p' => 'We treat homes, kitchens, laundry rooms, and workspaces with care and professionalism.'],
+        ['icon' => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 9c0-1.5 1.5-3 3-3s3 1.5 3 3-3 2-3 4"/><circle cx="12" cy="17" r=".5" fill="currentColor"/></svg>', 'h3' => 'Honest guidance', 'p' => "You don't need to know the exact problem before calling. Tell us the symptoms and we'll help guide you."],
+        ['icon' => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>', 'h3' => 'Fast local support', 'p' => 'Same-day appointments may be available depending on location, schedule, and appliance issue.'],
+      ],
+    ],
+    'trust' => [
+      'eyebrow' => 'Trust & peace of mind',
+      'h2'      => 'Licensed, insured, and ready to help',
+      'intro'   => 'Choosing an appliance repair company means trusting someone in your home or business. HamersFix is built around professionalism, clear communication, and reliable local service.',
+      'pillars' => [
+        ['icon' => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>', 'val' => 'Licensed', 'lbl' => '+ Bonded & Insured', 'sub' => "Licensing in progress · $2M general liability + workers' comp"],
+        ['icon' => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15 9 22 10 17 15 18 22 12 18 6 22 7 15 2 10 9 9 12 2"/></svg>', 'val' => '4.9★', 'lbl' => 'Local reviews', 'sub' => 'Verified Google rating across Gwinnett & Barrow customers'],
+        ['icon' => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>', 'val' => 'Same-day', 'lbl' => 'Availability', 'sub' => 'Subject to your location, schedule, and appliance issue'],
+        ['icon' => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8M5 9v12h14V9"/><rect x="9" y="13" width="6" height="8"/></svg>', 'val' => 'Both', 'lbl' => 'Residential + Commercial', 'sub' => 'Homes, rentals, restaurants, cafés, offices, local businesses'],
+      ],
+    ],
+    'hb' => [
+      'eyebrow' => 'Homes & businesses',
+      'h2'      => 'Repair support for everyday homes and local businesses',
+      'intro'   => 'From family kitchens and laundry rooms to cafés, restaurants, rentals, and commercial spaces, HamersFix helps keep essential appliances and equipment working.',
+      'cards'   => [
+        ['kind' => 'res', 'eyebrow' => 'Residential', 'h3' => 'Residential appliance repair', 'p' => 'We help homeowners and landlords with the appliances people rely on every day.', 'items' => ['Refrigerator & Wine Cooler Repair', 'Washer & Dryer Repair', 'Dishwasher Repair', 'Oven, Stove & Cooktop Repair', 'Microwave & Small Appliances'], 'link' => 'View Residential Services', 'url_key' => 'service'],
+        ['kind' => 'com', 'eyebrow' => 'Commercial', 'h3' => 'Commercial equipment repair', 'p' => 'We support local restaurants, cafés, rentals, offices, and business spaces with commercial equipment.', 'items' => ['Commercial Refrigeration', 'Commercial Kitchen Equipment', 'Commercial Laundry & Dishwashers'], 'link' => 'View Commercial Services', 'url_key' => 'commercial'],
+      ],
+    ],
+    'promise' => [
+      'eyebrow' => 'Our promise',
+      'h2'      => 'We keep appliance repair simple',
+      'intro'   => 'Our goal is to make the service experience clear from the moment you reach out.',
+      'steps'   => [
+        ['h3' => 'Listen first', 'p' => "Tell us what's happening with your appliance or equipment."],
+        ['h3' => 'Confirm the details', 'p' => 'We review the appliance type, brand, location, and preferred timing.'],
+        ['h3' => 'Diagnose & explain', 'p' => 'A technician checks the issue and explains repair options clearly.'],
+        ['h3' => 'Help you move forward', 'p' => 'Once approved, we complete the repair when possible and help get things back to normal.'],
+      ],
+    ],
+    'areas' => [
+      'eyebrow' => 'Local service areas',
+      'h2'      => 'Proudly serving Northeast Georgia and nearby communities',
+      'intro'   => 'HamersFix helps homeowners and local businesses across Gwinnett, Barrow, Walton, Jackson and Oconee counties get appliance repair support when they need it.',
+      'cards'   => [
+        ['num' => 'Area 1 · HQ region', 'title' => 'Bethlehem & Gwinnett Core', 'cities' => 'Bethlehem · Lawrenceville · Snellville · Dacula · Grayson · Auburn', 'link' => 'View area'],
+        ['num' => 'Area 2 · Daily routes', 'title' => 'Barrow & Jackson', 'cities' => 'Winder · Statham · Braselton · Hoschton', 'link' => 'View area'],
+        ['num' => 'Area 3 · Outer ring', 'title' => 'Walton & Oconee', 'cities' => 'Monroe · Loganville · Bogart · Watkinsville', 'link' => 'View area'],
+        ['num' => 'Area 4 · Full map', 'title' => '14 cities · 18 ZIPs', 'cities' => 'Full coverage map with response times by zone', 'link' => 'View map'],
+      ],
+      'cta_note' => "Don't see your city?",
+      'cta_text' => " Call us and we'll check availability for your exact location.",
+    ],
+    'brands' => [
+      'eyebrow' => 'Brands & equipment',
+      'h2'      => 'We service many major appliance brands',
+      'intro'   => 'From everyday home appliances to premium and commercial equipment, HamersFix works with many of the brands Northeast Georgia homes and businesses rely on.',
+      'cols'    => [
+        ['h3' => 'Everyday home', 'sub' => 'Mainstream brands', 'prem' => false, 'list' => ['Whirlpool', 'GE', 'Samsung', 'LG', 'KitchenAid', 'Maytag', 'Frigidaire', 'Bosch']],
+        ['h3' => 'Premium', 'sub' => 'Factory-authorized', 'prem' => true, 'list' => ['Sub-Zero', 'Wolf', 'Viking', 'Thermador', 'Miele', 'JennAir']],
+        ['h3' => 'Commercial', 'sub' => 'B2B equipment', 'prem' => false, 'list' => ['True', 'Hoshizaki', 'Vulcan', 'Hobart', 'Manitowoc']],
+      ],
+      'cta_label' => 'View All Brands We Service →',
+      'footnote'  => 'Brand names are used for identification purposes only. HamersFix is an independent appliance repair service unless otherwise stated.',
+    ],
+    'friendly' => [
+      'eyebrow' => 'Friendly & local',
+      'h2'      => 'Professional help with a friendly local approach',
+      'intro'   => 'Honest, careful service from people who live and work in the Northeast Georgia area.',
+      'stamp_nm' => 'Local team',
+      'stamp_role' => 'Northeast Georgia',
+      'items'   => [
+        'Clear explanations of every issue we find',
+        'Estimates shared before any work begins',
+        'Respect for your home, kitchen, and time',
+        'Honest options instead of pressure to upsell',
+      ],
+    ],
+    'final' => [
+      'eyebrow' => 'Ready when you need help',
+      'h2'      => "Let's get your appliance working again.",
+      'intro'   => "Tell us what's going on with your appliance. We'll guide you to the right next step for your home or business. Not sure what's wrong? Just describe the symptoms — we'll help guide you.",
+      'card_lbl'=> 'Call our dispatcher',
+    ],
+  ];
+  return $d;
+}

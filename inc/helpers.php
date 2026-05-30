@@ -319,6 +319,18 @@ function hf_pg($key, $default = '') {
   return hf_field($key, $default, get_the_ID());
 }
 
+/** Coerce a value (array, ACF rows, or comma/newline string) to a flat string list. */
+function hf_to_list($v) {
+  if (is_string($v)) $v = preg_split('/[\r\n]+/', $v);
+  $out = [];
+  foreach ((array) $v as $x) {
+    $s = is_array($x) ? (isset($x['text']) ? $x['text'] : (isset($x['name']) ? $x['name'] : '')) : $x;
+    $s = trim((string) $s);
+    if ($s !== '') $out[] = $s;
+  }
+  return $out;
+}
+
 /** Current page repeater rows or a supplied default array. */
 function hf_pg_rows($key, array $default_rows) {
   $pid = get_the_ID();
