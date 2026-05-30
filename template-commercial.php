@@ -1,107 +1,118 @@
 <?php
 /**
  * Template Name: Commercial
- * Transferred pixel-perfect from Commercial.html. Global chrome + phone/booking/email
- * are dynamic (Theme Settings); section copy is static pending ACF-ization.
+ *
+ * Source: Commercial.html. Fully ACF-editable — every string/list falls back
+ * to the design defaults in hf_commercial_defaults() until a field is set.
+ * Phone / booking / internal links resolve from Theme Settings.
+ *
  * @package HamersFix
  */
-if ( ! defined( 'ABSPATH' ) ) exit;
+
+if (!defined('ABSPATH')) exit;
+
 get_header();
+
+$d         = hf_commercial_defaults();
+$phone_l   = hf_phone_link();
+$phone_d   = hf_phone_display();
+$booking   = hf_booking_url();
+$areas_url = hf_page_url('service-areas', '#');
+$call      = sprintf(__('Call %s', 'hamersfix'), $phone_d);
+$phone_svg = '<svg width="18" height="18" viewBox="0 0 24 24" class="ic-stroke" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>';
+
+/* Hero image (ACF array/id/url → default). */
+$hero_img = hf_pg('hero_image', '');
+$hero_alt = hf_pg('hero_image_alt', $d['hero']['image_alt']);
+$hero_url = '';
+if (is_array($hero_img) && !empty($hero_img['url'])) { $hero_url = $hero_img['url']; if (!empty($hero_img['alt'])) $hero_alt = $hero_img['alt']; }
+elseif (is_numeric($hero_img)) { $hero_url = wp_get_attachment_image_url((int) $hero_img, 'hf-hero'); }
+elseif (is_string($hero_img) && $hero_img) { $hero_url = $hero_img; }
+if (!$hero_url) $hero_url = $d['hero']['image'];
+
+$issues   = hf_pg_rows('hero_issues', array_map(function ($t) { return ['text' => $t]; }, $d['hero']['issues']));
+$qpills   = hf_pg_rows('hero_qpills', array_map(function ($t) { return ['text' => $t]; }, $d['hero']['qpills']));
+$services = hf_pg_rows('com_services', $d['services']['cards']);
+$downtime = hf_pg_rows('downtime', $d['downtime']['cards']);
+$pillars  = hf_pg_rows('trust_pillars', $d['trust']['pillars']);
+$blist    = hf_pg_rows('brand_list', array_map(function ($t) { return ['name' => $t]; }, $d['brands']['list']));
+$steps    = hf_pg_rows('process_steps', $d['process']['steps']);
+$acards   = hf_pg_rows('area_cards', $d['areas']['cards']);
+$faqs     = hf_pg_rows('faq', $d['faq']['items']);
+
+/** Coerce a chips/cities value (array, ACF rows, or comma/newline string) to a flat string array. */
+function hf_com_list($v) {
+  if (is_string($v)) $v = preg_split('/[\r\n,]+/', $v);
+  $out = [];
+  foreach ((array) $v as $x) {
+    $s = is_array($x) ? (isset($x['text']) ? $x['text'] : (isset($x['name']) ? $x['name'] : '')) : $x;
+    $s = trim((string) $s);
+    if ($s !== '') $out[] = $s;
+  }
+  return $out;
+}
 ?>
+
 <main id="main">
 
-  <nav class="crumbs" aria-label="Breadcrumb"><a href="<?php echo esc_url(home_url("/")); ?>">Home</a><span>›</span><b>Commercial</b></nav>
+  <nav class="crumbs" aria-label="<?php esc_attr_e('Breadcrumb', 'hamersfix'); ?>"><a href="<?php echo esc_url(home_url('/')); ?>"><?php esc_html_e('Home', 'hamersfix'); ?></a><span>›</span><b><?php echo esc_html(get_the_title()); ?></b></nav>
 
   <!-- 1 · HERO -->
   <section class="c-hero" aria-labelledby="hero-h">
     <div class="c-hero__grid">
       <div>
-        <span class="hero__eyebrow"><span class="pulse"></span>4.9 Google rating · Licensed &amp; Insured</span>
-        <h1 id="hero-h">Commercial appliance repair in <em>Northeast Georgia</em></h1>
-        <p class="lede">Restaurants, cafés, offices, rentals, and local businesses — we help keep commercial refrigeration, kitchen equipment, and laundry running.</p>
+        <span class="hero__eyebrow"><span class="pulse"></span><?php echo esc_html(hf_pg('hero_eyebrow', $d['hero']['eyebrow'])); ?></span>
+        <h1 id="hero-h"><?php echo hf_kses_inline(hf_pg('hero_h1', $d['hero']['h1'])); ?></h1>
+        <p class="lede"><?php echo esc_html(hf_pg('hero_lede', $d['hero']['lede'])); ?></p>
 
         <div class="issues">
-          <span>Refrigeration issues</span>
-          <span>Cooking equipment</span>
-          <span>Laundry / dishwashing</span>
-          <span>Downtime emergency</span>
+          <?php foreach ($issues as $i) { $t = is_array($i) ? (isset($i['text']) ? $i['text'] : '') : $i; if ($t) echo '<span>' . esc_html($t) . '</span>'; } ?>
         </div>
 
         <div class="ctas">
-          <a class="btn btn--cta btn--lg" href="<?php echo esc_url(hf_booking_url()); ?>">Schedule Service</a>
-          <a class="btn btn--ghost btn--lg" href="tel:<?php echo esc_attr(hf_phone_link()); ?>">
-            <svg width="18" height="18" viewBox="0 0 24 24" class="ic-stroke"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>
-            Call Now
-          </a>
+          <a class="btn btn--cta btn--lg" href="<?php echo esc_url($booking); ?>"><?php echo esc_html(hf_pg('hero_cta_label', $d['hero']['cta_label'])); ?></a>
+          <a class="btn btn--ghost btn--lg" href="tel:<?php echo esc_attr($phone_l); ?>"><?php echo $phone_svg; ?><?php esc_html_e('Call Now', 'hamersfix'); ?></a>
         </div>
-        <p class="note">Not sure what's wrong? Just describe the symptoms — we'll help guide you.</p>
+        <p class="note"><?php echo esc_html(hf_pg('hero_note', $d['hero']['note'])); ?></p>
 
         <div class="qpills">
-          <span>Same-day availability</span>
-          <span>Residential &amp; commercial</span>
-          <span>Transparent pricing</span>
+          <?php foreach ($qpills as $q) { $t = is_array($q) ? (isset($q['text']) ? $q['text'] : '') : $q; if ($t) echo '<span>' . esc_html($t) . '</span>'; } ?>
         </div>
       </div>
 
       <figure class="c-hero__photo">
-        <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=1100&auto=format&fit=crop&q=80"
-             alt="Commercial kitchen with stainless steel appliances"
-             loading="eager" fetchpriority="high">
-        <span class="badge">B2B · 24/7 emergency</span>
+        <img src="<?php echo esc_url($hero_url); ?>" alt="<?php echo esc_attr($hero_alt); ?>" loading="eager" fetchpriority="high">
+        <span class="badge"><?php echo esc_html(hf_pg('hero_badge', $d['hero']['badge'])); ?></span>
         <div class="tag">
-          <div class="lbl">Commercial dispatch</div>
-          <h3>Restaurants · cafés · laundromats · property managers</h3>
+          <div class="lbl"><?php echo esc_html(hf_pg('hero_tag_lbl', $d['hero']['tag_lbl'])); ?></div>
+          <h3><?php echo esc_html(hf_pg('hero_tag_h3', $d['hero']['tag_h3'])); ?></h3>
         </div>
       </figure>
     </div>
   </section>
 
-  <!-- 2 · OUR SERVICES (3 cards) -->
+  <!-- 2 · OUR SERVICES -->
   <section class="s" aria-labelledby="svc-h">
     <div class="s__head">
-      <span class="eyebrow">Our services</span>
-      <h2 id="svc-h">Commercial repairs we offer</h2>
-      <p>Choose the appliance or equipment you need help with.</p>
+      <span class="eyebrow"><?php echo esc_html(hf_pg('services_eyebrow', $d['services']['eyebrow'])); ?></span>
+      <h2 id="svc-h"><?php echo esc_html(hf_pg('services_h2', $d['services']['h2'])); ?></h2>
+      <p><?php echo esc_html(hf_pg('services_intro', $d['services']['intro'])); ?></p>
     </div>
     <div class="s__body">
       <div class="com-svc-grid">
-
-        <a class="com-svc" href="#book">
-          <div class="com-svc__art" style="background: linear-gradient(135deg, #0B4F9A, #062B57);">
-            <div class="ic"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="20" height="24" rx="2"/><line x1="6" y1="14" x2="26" y2="14"/><line x1="9" y1="8" x2="9" y2="11"/></svg></div>
-          </div>
-          <div class="com-svc__bd">
-            <h3>Commercial refrigeration</h3>
-            <p>Reach-ins, walk-ins, prep tables, ice makers, undercounter &amp; display units.</p>
-            <div class="chips"><span>Temperature loss</span><span>Compressor</span><span>Ice makers</span></div>
-            <div class="more"><span>Learn more</span><span>→</span></div>
-          </div>
-        </a>
-
-        <a class="com-svc" href="#book">
-          <div class="com-svc__art" style="background: linear-gradient(135deg, #C7501A, #082C58);">
-            <div class="ic"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="22" height="22" rx="2"/><rect x="9" y="10" width="14" height="13" rx="1"/><circle cx="11" cy="8" r=".8"/><circle cx="16" cy="8" r=".8"/></svg></div>
-          </div>
-          <div class="com-svc__bd">
-            <h3>Commercial kitchen equipment</h3>
-            <p>Ovens, ranges, grills, fryers, steamers, mixers, prep equipment.</p>
-            <div class="chips"><span>Heat / ignition</span><span>Controls</span><span>Mechanical</span></div>
-            <div class="more"><span>Learn more</span><span>→</span></div>
-          </div>
-        </a>
-
-        <a class="com-svc" href="#book">
-          <div class="com-svc__art" style="background: linear-gradient(135deg, #1F7A4C, #062B57);">
-            <div class="ic"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="20" height="24" rx="2"/><circle cx="16" cy="18" r="7"/><circle cx="16" cy="18" r="3"/></svg></div>
-          </div>
-          <div class="com-svc__bd">
-            <h3>Commercial laundry &amp; dishwashers</h3>
-            <p>Washers, dryers, dishwashers, glasswashers, ironing equipment.</p>
-            <div class="chips"><span>Drain / fill</span><span>Heat</span><span>Error codes</span></div>
-            <div class="more"><span>Learn more</span><span>→</span></div>
-          </div>
-        </a>
-
+        <?php foreach ($services as $c) : $chips = hf_com_list(isset($c['chips']) ? $c['chips'] : []); ?>
+          <a class="com-svc" href="#book">
+            <div class="com-svc__art" style="background: <?php echo esc_attr(isset($c['gradient']) ? $c['gradient'] : 'var(--brand-900)'); ?>;">
+              <div class="ic"><?php echo isset($c['icon']) ? $c['icon'] : ''; /* trusted SVG */ ?></div>
+            </div>
+            <div class="com-svc__bd">
+              <h3><?php echo esc_html(isset($c['title']) ? $c['title'] : ''); ?></h3>
+              <p><?php echo esc_html(isset($c['desc']) ? $c['desc'] : ''); ?></p>
+              <div class="chips"><?php foreach ($chips as $ch) echo '<span>' . esc_html($ch) . '</span>'; ?></div>
+              <div class="more"><span><?php esc_html_e('Learn more', 'hamersfix'); ?></span><span>→</span></div>
+            </div>
+          </a>
+        <?php endforeach; ?>
       </div>
     </div>
   </section>
@@ -109,42 +120,19 @@ get_header();
   <!-- 3 · COMMON DOWNTIME -->
   <section class="s s--bg" aria-labelledby="down-h">
     <div class="s__head">
-      <span class="eyebrow">Common downtime</span>
-      <h2 id="down-h">Commercial equipment issues we see most</h2>
-      <p>The most frequent commercial repair calls — restaurants, cafés, rentals, and local businesses.</p>
+      <span class="eyebrow"><?php echo esc_html(hf_pg('downtime_eyebrow', $d['downtime']['eyebrow'])); ?></span>
+      <h2 id="down-h"><?php echo esc_html(hf_pg('downtime_h2', $d['downtime']['h2'])); ?></h2>
+      <p><?php echo esc_html(hf_pg('downtime_intro', $d['downtime']['intro'])); ?></p>
     </div>
     <div class="s__body">
       <div class="down-grid">
-        <div class="down-card">
-          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><line x1="4" y1="11" x2="20" y2="11"/></svg></div>
-          <h3>Walk-in temperature loss</h3>
-          <p>Walk-in coolers and freezers warming up with product inside.</p>
-        </div>
-        <div class="down-card">
-          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2"/></svg></div>
-          <h3>Compressor / refrigeration</h3>
-          <p>Reach-ins, prep tables, ice machines short-cycling or down.</p>
-        </div>
-        <div class="down-card">
-          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c-3 5-6 9-6 12a6 6 0 0 0 12 0c0-3-3-7-6-12z"/></svg></div>
-          <h3>Cooking line issues</h3>
-          <p>Ovens, fryers, grills, and steamers losing heat or controls.</p>
-        </div>
-        <div class="down-card">
-          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="12" height="16" rx="2"/><circle cx="12" cy="12" r="4"/></svg></div>
-          <h3>Commercial laundry</h3>
-          <p>Washers, dryers, and dishwashers not draining or heating.</p>
-        </div>
-        <div class="down-card">
-          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><path d="M12 6v6l4 2"/></svg></div>
-          <h3>Mechanical failure</h3>
-          <p>Loud bearings, motors, fans, or vibration in commercial gear.</p>
-        </div>
-        <div class="down-card">
-          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><line x1="7" y1="9" x2="17" y2="9"/><line x1="7" y1="13" x2="13" y2="13"/></svg></div>
-          <h3>Controls / sensors</h3>
-          <p>Error codes, electronic controls, or safety lockouts.</p>
-        </div>
+        <?php foreach ($downtime as $c) : ?>
+          <div class="down-card">
+            <div class="ic"><?php echo isset($c['icon']) ? $c['icon'] : ''; /* trusted SVG */ ?></div>
+            <h3><?php echo esc_html(isset($c['title']) ? $c['title'] : ''); ?></h3>
+            <p><?php echo esc_html(isset($c['desc']) ? $c['desc'] : ''); ?></p>
+          </div>
+        <?php endforeach; ?>
       </div>
     </div>
   </section>
@@ -154,35 +142,19 @@ get_header();
     <div class="s__body">
       <div class="trust-band">
         <div class="trust-band__head">
-          <span class="eyebrow">Trust &amp; uptime</span>
-          <h2 id="trust-h">Clear, friendly commercial equipment support</h2>
-          <p>Downtime costs money. We work to get you scheduled fast, explain the issue clearly, and respect your operating hours.</p>
+          <span class="eyebrow"><?php echo esc_html(hf_pg('trust_eyebrow', $d['trust']['eyebrow'])); ?></span>
+          <h2 id="trust-h"><?php echo esc_html(hf_pg('trust_h2', $d['trust']['h2'])); ?></h2>
+          <p><?php echo esc_html(hf_pg('trust_intro', $d['trust']['intro'])); ?></p>
         </div>
         <div class="pillars">
-          <div class="pillar">
-            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-            <div class="val">Licensed</div>
-            <div class="lbl">+ Bonded &amp; Insured</div>
-            <div class="sub">$2M general liability + workers' comp on every employee</div>
-          </div>
-          <div class="pillar">
-            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15 9 22 10 17 15 18 22 12 18 6 22 7 15 2 10 9 9 12 2"/></svg></div>
-            <div class="val">4.9★</div>
-            <div class="lbl">Local reviews</div>
-            <div class="sub">Verified rating from Northeast Georgia customers</div>
-          </div>
-          <div class="pillar">
-            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
-            <div class="val">Same-day</div>
-            <div class="lbl">Availability</div>
-            <div class="sub">Subject to your location, schedule, and equipment</div>
-          </div>
-          <div class="pillar">
-            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8M5 9v12h14V9"/><rect x="9" y="13" width="6" height="8"/></svg></div>
-            <div class="val">Both</div>
-            <div class="lbl">Residential + Commercial</div>
-            <div class="sub">Homes, restaurants, cafés, rentals, offices</div>
-          </div>
+          <?php foreach ($pillars as $p) : ?>
+            <div class="pillar">
+              <div class="ic"><?php echo isset($p['icon']) ? $p['icon'] : ''; /* trusted SVG */ ?></div>
+              <div class="val"><?php echo esc_html(isset($p['val']) ? $p['val'] : ''); ?></div>
+              <div class="lbl"><?php echo esc_html(isset($p['lbl']) ? $p['lbl'] : ''); ?></div>
+              <div class="sub"><?php echo esc_html(isset($p['sub']) ? $p['sub'] : ''); ?></div>
+            </div>
+          <?php endforeach; ?>
         </div>
       </div>
     </div>
@@ -191,32 +163,30 @@ get_header();
   <!-- 5 · BRANDS -->
   <section class="s s--bg" aria-labelledby="brands-h">
     <div class="s__head">
-      <span class="eyebrow">Brands we service</span>
-      <h2 id="brands-h">Commercial equipment brands we service</h2>
-      <p>Selected commercial refrigeration, kitchen, and laundry equipment brands used by Northeast Georgia restaurants, cafés, and local businesses.</p>
+      <span class="eyebrow"><?php echo esc_html(hf_pg('brands_eyebrow', $d['brands']['eyebrow'])); ?></span>
+      <h2 id="brands-h"><?php echo esc_html(hf_pg('brands_h2', $d['brands']['h2'])); ?></h2>
+      <p><?php echo esc_html(hf_pg('brands_intro', $d['brands']['intro'])); ?></p>
     </div>
     <div class="s__body">
       <div class="com-brand-card">
         <div class="head">
           <div>
-            <h3>Commercial equipment</h3>
-            <div class="meta">Local business equipment · Restaurants · Cafés · Rentals</div>
+            <h3><?php echo esc_html(hf_pg('brands_card_h3', $d['brands']['card_h3'])); ?></h3>
+            <div class="meta"><?php echo esc_html(hf_pg('brands_card_meta', $d['brands']['card_meta'])); ?></div>
           </div>
         </div>
         <div class="com-brand-list">
-          <span>True</span><span>Hoshizaki</span><span>Traulsen</span><span>Beverage-Air</span>
-          <span>Turbo Air</span><span>Manitowoc</span><span>Scotsman</span><span>Hobart</span>
-          <span>Vulcan</span><span>Blodgett</span><span>Garland</span><span>Southbend</span>
+          <?php foreach ($blist as $b) { $n = is_array($b) ? (isset($b['name']) ? $b['name'] : '') : $b; if ($n) echo '<span>' . esc_html($n) . '</span>'; } ?>
         </div>
-        <div class="footnote">Built for restaurants, cafés, rentals, and busy local commercial spaces. Brand names are used for identification purposes only. HamersFix is an independent appliance repair service unless otherwise stated.</div>
+        <div class="footnote"><?php echo esc_html(hf_pg('brands_footnote', $d['brands']['footnote'])); ?></div>
       </div>
 
       <div class="ask-band">
         <div class="tx">
-          <h4>Don't see your brand?</h4>
-          <p>There's a good chance we can still help. Tell us your appliance brand and model, and we'll point you in the right direction. No pressure — just clear guidance.</p>
+          <h4><?php echo esc_html(hf_pg('brands_ask_h4', $d['brands']['ask_h4'])); ?></h4>
+          <p><?php echo esc_html(hf_pg('brands_ask_p', $d['brands']['ask_p'])); ?></p>
         </div>
-        <a class="btn btn--cta" href="tel:<?php echo esc_attr(hf_phone_link()); ?>">Ask About My Brand</a>
+        <a class="btn btn--cta" href="tel:<?php echo esc_attr($phone_l); ?>"><?php echo esc_html(hf_pg('brands_ask_btn', $d['brands']['ask_btn'])); ?></a>
       </div>
     </div>
   </section>
@@ -224,32 +194,19 @@ get_header();
   <!-- 6 · WHAT TO EXPECT -->
   <section class="s" aria-labelledby="proc-h">
     <div class="s__head">
-      <span class="eyebrow">Simple, clear, stress-free repair</span>
-      <h2 id="proc-h">What to expect when you book service</h2>
-      <p>From your first call to diagnosis and repair, we keep commercial service clear and minimize downtime.</p>
+      <span class="eyebrow"><?php echo esc_html(hf_pg('process_eyebrow', $d['process']['eyebrow'])); ?></span>
+      <h2 id="proc-h"><?php echo esc_html(hf_pg('process_h2', $d['process']['h2'])); ?></h2>
+      <p><?php echo esc_html(hf_pg('process_intro', $d['process']['intro'])); ?></p>
     </div>
     <div class="s__body">
       <div class="proc">
-        <div class="pstep">
-          <h3>Schedule service</h3>
-          <p>Call us or request service online and describe the equipment issue.</p>
-          <div class="tag">Online booking or phone support</div>
-        </div>
-        <div class="pstep">
-          <h3>We confirm the details</h3>
-          <p>We review the equipment type, brand, location, and operating hours.</p>
-          <div class="tag">Clear communication before the visit</div>
-        </div>
-        <div class="pstep">
-          <h3>Diagnosis &amp; clear estimate</h3>
-          <p>A technician checks the equipment, explains the issue, and gives an estimate.</p>
-          <div class="tag">No confusing surprises</div>
-        </div>
-        <div class="pstep">
-          <h3>Repair &amp; back to service</h3>
-          <p>Once approved, we complete the repair when possible to get you running again.</p>
-          <div class="tag">Minimize downtime</div>
-        </div>
+        <?php foreach ($steps as $s) : ?>
+          <div class="pstep">
+            <h3><?php echo esc_html(isset($s['title']) ? $s['title'] : ''); ?></h3>
+            <p><?php echo esc_html(isset($s['desc']) ? $s['desc'] : ''); ?></p>
+            <div class="tag"><?php echo esc_html(isset($s['tag']) ? $s['tag'] : ''); ?></div>
+          </div>
+        <?php endforeach; ?>
       </div>
     </div>
   </section>
@@ -257,41 +214,25 @@ get_header();
   <!-- 7 · LOCAL COVERAGE -->
   <section class="s s--bg" aria-labelledby="areas-h">
     <div class="s__head">
-      <span class="eyebrow">Local coverage</span>
-      <h2 id="areas-h">Commercial appliance repair across Northeast Georgia</h2>
-      <p>HamersFix helps local businesses across Gwinnett, Barrow, Walton, Jackson and Oconee counties get equipment repair support when they need it.</p>
+      <span class="eyebrow"><?php echo esc_html(hf_pg('areas_eyebrow', $d['areas']['eyebrow'])); ?></span>
+      <h2 id="areas-h"><?php echo esc_html(hf_pg('areas_h2', $d['areas']['h2'])); ?></h2>
+      <p><?php echo esc_html(hf_pg('areas_intro', $d['areas']['intro'])); ?></p>
     </div>
     <div class="s__body">
       <div class="areas-list">
-        <a class="area-card" href="<?php echo esc_url(hf_page_url("service-areas")); ?>">
-          <div class="num">Area 1 · HQ region</div>
-          <h4>Bethlehem &amp; Gwinnett Core</h4>
-          <div class="cities">Bethlehem · Lawrenceville · Snellville · Dacula · Grayson · Auburn</div>
-          <div class="arrow"><span>View area</span><span>→</span></div>
-        </a>
-        <a class="area-card" href="<?php echo esc_url(hf_page_url("service-areas")); ?>">
-          <div class="num">Area 2 · Daily routes</div>
-          <h4>Barrow &amp; Jackson</h4>
-          <div class="cities">Winder · Statham · Braselton · Hoschton</div>
-          <div class="arrow"><span>View area</span><span>→</span></div>
-        </a>
-        <a class="area-card" href="<?php echo esc_url(hf_page_url("service-areas")); ?>">
-          <div class="num">Area 3 · Outer ring</div>
-          <h4>Walton &amp; Oconee</h4>
-          <div class="cities">Monroe · Loganville · Bogart · Watkinsville</div>
-          <div class="arrow"><span>View area</span><span>→</span></div>
-        </a>
-        <a class="area-card" href="<?php echo esc_url(hf_page_url("service-areas")); ?>">
-          <div class="num">Area 4 · Full map</div>
-          <h4>14 cities · 18 ZIPs</h4>
-          <div class="cities">Full coverage map with response times by zone</div>
-          <div class="arrow"><span>View map</span><span>→</span></div>
-        </a>
+        <?php foreach ($acards as $a) : ?>
+          <a class="area-card" href="<?php echo esc_url($areas_url); ?>">
+            <div class="num"><?php echo esc_html(isset($a['num']) ? $a['num'] : ''); ?></div>
+            <h4><?php echo esc_html(isset($a['title']) ? $a['title'] : ''); ?></h4>
+            <div class="cities"><?php echo esc_html(isset($a['cities']) ? $a['cities'] : ''); ?></div>
+            <div class="arrow"><span><?php echo esc_html(isset($a['link']) ? $a['link'] : __('View area', 'hamersfix')); ?></span><span>→</span></div>
+          </a>
+        <?php endforeach; ?>
       </div>
 
       <div class="areas-cta">
-        <p><b>Don't see your city?</b> Call us and we'll check availability for your exact location.</p>
-        <a class="btn btn--cta" href="tel:<?php echo esc_attr(hf_phone_link()); ?>">Call <?php echo esc_html(hf_phone_display()); ?></a>
+        <p><b><?php echo esc_html(hf_pg('areas_cta_note', $d['areas']['cta_note'])); ?></b><?php echo esc_html(hf_pg('areas_cta_text', $d['areas']['cta_text'])); ?></p>
+        <a class="btn btn--cta" href="tel:<?php echo esc_attr($phone_l); ?>"><?php echo esc_html($call); ?></a>
       </div>
     </div>
   </section>
@@ -299,36 +240,18 @@ get_header();
   <!-- 8 · FAQ -->
   <section class="s" aria-labelledby="faq-h">
     <div class="s__head">
-      <span class="eyebrow">FAQ</span>
-      <h2 id="faq-h">Questions before you book?</h2>
-      <p>Have questions about scheduling, pricing, brands, or service areas? Here are quick answers to help you feel confident before booking.</p>
+      <span class="eyebrow"><?php echo esc_html(hf_pg('faq_eyebrow', $d['faq']['eyebrow'])); ?></span>
+      <h2 id="faq-h"><?php echo esc_html(hf_pg('faq_h2', $d['faq']['h2'])); ?></h2>
+      <p><?php echo esc_html(hf_pg('faq_intro', $d['faq']['intro'])); ?></p>
     </div>
     <div class="s__body">
       <div class="faq-list">
-        <details open>
-          <summary>Do you service commercial appliances and equipment?</summary>
-          <p>Yes. We service commercial refrigeration, kitchen equipment, and laundry / dishwashing equipment for restaurants, cafés, offices, and local businesses across Northeast Georgia.</p>
-        </details>
-        <details>
-          <summary>How fast can you respond to commercial equipment downtime?</summary>
-          <p>Same-day availability for most commercial calls. After-hours emergency dispatch is available for active commercial accounts — call our line directly and we'll route the closest technician.</p>
-        </details>
-        <details>
-          <summary>What types of commercial refrigeration do you service?</summary>
-          <p>Reach-in coolers and freezers, walk-ins, prep tables, ice makers, undercounter units, display cases, beverage units. We handle compressor work, temperature loss, ice production issues, and electronic controls.</p>
-        </details>
-        <details>
-          <summary>Do you service commercial kitchen and cooking equipment?</summary>
-          <p>Yes — ovens, ranges, grills, fryers, steamers, mixers, and prep equipment. Common issues include heat / ignition problems, electronic controls, and mechanical failures.</p>
-        </details>
-        <details>
-          <summary>How is pricing handled for commercial repair?</summary>
-          <p>We provide a clear estimate after diagnosis. Multi-unit operators and property managers get volume pricing; Net-30 terms available for active commercial accounts.</p>
-        </details>
-        <details>
-          <summary>Do you offer maintenance contracts for restaurants?</summary>
-          <p>Yes. Preventative maintenance contracts are available for restaurants, cafés, and multi-unit operators — quarterly or semi-annual visits to inspect, clean, and replace common wear parts before they fail.</p>
-        </details>
+        <?php foreach ($faqs as $i => $f) { $q = isset($f['q']) ? $f['q'] : ''; if (!$q) continue; ?>
+          <details<?php echo $i === 0 ? ' open' : ''; ?>>
+            <summary><?php echo esc_html($q); ?></summary>
+            <p><?php echo esc_html(isset($f['a']) ? $f['a'] : ''); ?></p>
+          </details>
+        <?php } ?>
       </div>
     </div>
   </section>
@@ -337,19 +260,21 @@ get_header();
   <section class="final-cta" id="book" aria-labelledby="cta-h">
     <div class="final-cta__inner">
       <div>
-        <span class="eyebrow">Ready when you need help</span>
-        <h2 id="cta-h">Let's get your equipment running again.</h2>
-        <p>Tell us what's going on with your equipment. We'll guide you to the right next step for your restaurant, café, or business. Not sure what's wrong? Just describe the symptoms — we'll help guide you.</p>
+        <span class="eyebrow"><?php echo esc_html(hf_pg('final_eyebrow', $d['final']['eyebrow'])); ?></span>
+        <h2 id="cta-h"><?php echo esc_html(hf_pg('final_h2', $d['final']['h2'])); ?></h2>
+        <p><?php echo esc_html(hf_pg('final_intro', $d['final']['intro'])); ?></p>
       </div>
       <div class="phone-card">
-        <div class="lbl">Commercial dispatch</div>
-        <a class="num" href="tel:<?php echo esc_attr(hf_phone_link()); ?>"><svg width="22" height="22" viewBox="0 0 24 24" class="ic-stroke"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg><div><div class="digits"><?php echo esc_html(hf_phone_display()); ?></div><div class="sub">Real person · &lt; 60 sec wait</div></div></a>
-        <div class="or">or</div>
-        <a class="book" href="<?php echo esc_url(hf_booking_url()); ?>">Schedule Service <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-        <div class="hours"><span class="dot"></span>Open now · Mon–Fri 7 AM–9 PM · Sat 8 AM–8 PM · Sun 10 AM–8 PM</div>
+        <div class="lbl"><?php echo esc_html(hf_pg('final_card_lbl', $d['final']['card_lbl'])); ?></div>
+        <a class="num" href="tel:<?php echo esc_attr($phone_l); ?>"><svg width="22" height="22" viewBox="0 0 24 24" class="ic-stroke" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg><div><div class="digits"><?php echo esc_html($phone_d); ?></div><div class="sub"><?php esc_html_e('Real person · < 60 sec wait', 'hamersfix'); ?></div></div></a>
+        <div class="or"><?php esc_html_e('or', 'hamersfix'); ?></div>
+        <a class="book" href="<?php echo esc_url($booking); ?>"><?php echo esc_html(hf_pg('hero_cta_label', $d['hero']['cta_label'])); ?> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        <div class="hours"><span class="dot"></span><?php echo esc_html(hf_hours_short()); ?></div>
       </div>
     </div>
   </section>
 
 </main>
-<?php get_footer();
+
+<?php
+get_footer();

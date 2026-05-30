@@ -36,7 +36,7 @@ add_action('acf/init', function () {
 });
 
 // Field groups defined in code (each self-guards and hooks acf/init).
-foreach (['options-global', 'page-home', 'cpt-service', 'page-service-areas'] as $hf_group) {
+foreach (['options-global', 'page-home', 'cpt-service', 'page-service-areas', 'page-commercial'] as $hf_group) {
   $hf_path = HF_DIR . '/inc/acf-fields/' . $hf_group . '.php';
   if (file_exists($hf_path)) require_once $hf_path;
 }

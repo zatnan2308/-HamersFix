@@ -19,6 +19,7 @@ $hf_includes = [
   'inc/defaults.php',        // design default content (single source of truth)
   'inc/helpers.php',         // ACF-or-default accessors, ZIP/hours/services helpers
   'inc/service-defaults.php',// single-service reference content + accessors
+  'inc/page-defaults.php',   // Commercial/About/Brands/Contact default content
   'inc/setup.php',           // theme supports, menus, image sizes
   'inc/enqueue.php',         // styles, scripts, fonts, HF_ZIP localization
   'inc/cpt.php',             // `service` custom post type
