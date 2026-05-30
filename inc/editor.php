@@ -17,6 +17,23 @@
 
 if (!defined('ABSPATH')) exit;
 
+/**
+ * Fix the admin media uploader failing to open ("wp.media is undefined" /
+ * "Cannot read properties of undefined (reading 'query')") with a 404 on a
+ * JS resource.
+ *
+ * Root cause: WordPress concatenates wp-admin scripts and serves them through
+ * /wp-admin/load-scripts.php. On some hosting (mod_security, server rules, or
+ * the leading-dash repo path) that endpoint 404s, so the media-models/views
+ * bundle never loads and wp.media is undefined. Disabling admin-script
+ * concatenation makes WordPress load each script as its own file, bypassing the
+ * broken endpoint. This runs at theme-load time — before admin scripts print —
+ * so the constant is honoured. Harmless: it just means more, smaller requests.
+ */
+if (is_admin() && !defined('CONCATENATE_SCRIPTS')) {
+  define('CONCATENATE_SCRIPTS', false);
+}
+
 /** @return string[] Page templates that should use the classic editor. */
 function hf_classic_editor_templates() {
   return [
