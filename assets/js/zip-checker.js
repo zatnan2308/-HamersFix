@@ -13,7 +13,9 @@
   if (!input || !msg) return;
 
   var data = window.HF_ZIP || {};
-  var zips = Array.isArray(data.zips) ? data.zips : [];
+  // Force strings so the strict indexOf() match works even if a ZIP arrives as
+  // a number (PHP can emit numeric array keys/values as JSON numbers).
+  var zips = (Array.isArray(data.zips) ? data.zips : []).map(function (z) { return String(z); });
 
   var COPY = {
     success: data.success || "You're covered — earliest slot today, 4–6 PM",

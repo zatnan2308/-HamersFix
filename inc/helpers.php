@@ -147,14 +147,21 @@ function hf_get_service_zips() {
 
 /** Flat, de-duplicated list of valid 5-digit ZIPs. */
 function hf_get_flat_service_zips() {
+  // Collect ZIPs as STRING VALUES (not array keys): PHP casts a numeric string
+  // key like "30666" to int 30666, which JSON then emits as a number and breaks
+  // the JS strict indexOf() match — so every ZIP would read as "not covered".
   $flat = [];
+  $seen = [];
   foreach (hf_get_service_zips() as $row) {
     foreach (preg_split('/[,\s]+/', (string) $row['zips']) as $p) {
       $p = trim($p);
-      if (preg_match('/^\d{5}$/', $p)) $flat[$p] = true;
+      if (preg_match('/^\d{5}$/', $p) && empty($seen[$p])) {
+        $seen[$p] = true;
+        $flat[] = $p;
+      }
     }
   }
-  return array_keys($flat);
+  return $flat;
 }
 
 function hf_count_cities() {

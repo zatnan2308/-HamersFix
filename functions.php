@@ -11,7 +11,7 @@
 
 if (!defined('ABSPATH')) exit;
 
-define('HF_VERSION', '1.0.0');
+define('HF_VERSION', '1.0.1');
 define('HF_DIR', get_template_directory());
 define('HF_URI', get_template_directory_uri());
 
