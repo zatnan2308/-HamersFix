@@ -24,6 +24,17 @@ while (have_posts()) :
   $call    = sprintf(__('Call %s', 'hamersfix'), $phone_d);
   $title   = get_the_title();
   $phone_svg = '<svg width="18" height="18" viewBox="0 0 24 24" class="ic-stroke" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>';
+
+  /* Per-appliance design partials (Problems/Types grids) + headings, keyed by
+     the service icon slug. Each appliance ships verbatim grids extracted from
+     its Claude Design mock; the reference (fridge) uses its own partials. */
+  $hf_slug = '';
+  if (function_exists('get_field')) { $hf_icon = get_field('icon', $pid); if (is_string($hf_icon) && $hf_icon !== '') $hf_slug = $hf_icon; }
+  if ($hf_slug === '' && $is_ref) $hf_slug = 'fridge';
+  $hf_grids     = function_exists('hf_appliance_grids') ? hf_appliance_grids() : [];
+  $hf_gh        = ($hf_slug && isset($hf_grids[$hf_slug])) ? $hf_grids[$hf_slug] : [];
+  $hf_prob_part = $hf_slug ? locate_template('template-parts/svc/problems-' . $hf_slug . '.php') : '';
+  $hf_type_part = $hf_slug ? locate_template('template-parts/svc/types-' . $hf_slug . '.php') : '';
   ?>
 
 <main id="main">
@@ -111,12 +122,15 @@ while (have_posts()) :
   <?php
   /* ── 2 · PROBLEMS WE REPAIR ───────────────────────────────── */
   $prob_rows = hf_svc_rows('problems', [], $pid);
-  if (!empty($prob_rows) || $is_ref) : ?>
+  $hf_pg_eye = $hf_gh ? $hf_gh['problems']['eyebrow'] : $sd['problems']['eyebrow'];
+  $hf_pg_h2  = $hf_gh ? $hf_gh['problems']['h2'] : ($is_ref ? $sd['problems']['h2'] : sprintf(__('%s problems we repair', 'hamersfix'), $title));
+  $hf_pg_in  = $hf_gh ? $hf_gh['problems']['intro'] : $sd['problems']['intro'];
+  if (!empty($prob_rows) || $hf_prob_part || $is_ref) : ?>
     <section class="s" aria-labelledby="prob-h">
       <div class="s__head">
-        <span class="eyebrow"><?php echo esc_html(hf_svc('problems_eyebrow', $sd['problems']['eyebrow'], $pid)); ?></span>
-        <h2 id="prob-h"><?php echo esc_html(hf_svc('problems_h2', ($is_ref ? $sd['problems']['h2'] : sprintf(__('%s problems we repair', 'hamersfix'), $title)), $pid)); ?></h2>
-        <p><?php echo esc_html(hf_svc('problems_intro', $sd['problems']['intro'], $pid)); ?></p>
+        <span class="eyebrow"><?php echo esc_html(hf_svc('problems_eyebrow', $hf_pg_eye, $pid)); ?></span>
+        <h2 id="prob-h"><?php echo esc_html(hf_svc('problems_h2', $hf_pg_h2, $pid)); ?></h2>
+        <p><?php echo esc_html(hf_svc('problems_intro', $hf_pg_in, $pid)); ?></p>
       </div>
       <div class="s__body">
         <?php if (!empty($prob_rows)) : ?>
@@ -130,7 +144,7 @@ while (have_posts()) :
               </a>
             <?php endforeach; ?>
           </div>
-        <?php else : get_template_part('template-parts/svc/problems', 'fridge'); endif; ?>
+        <?php elseif ($hf_prob_part) : load_template($hf_prob_part, false); else : get_template_part('template-parts/svc/problems', 'fridge'); endif; ?>
         <p style="margin-top:24px; text-align:center; color:var(--ink-500); font-size:14.5px;">
           <?php esc_html_e("Don't see your symptom?", 'hamersfix'); ?>
           <a href="tel:<?php echo esc_attr($phone_l); ?>" style="color:var(--brand-700);font-weight:700;"><?php echo esc_html($call); ?></a>
@@ -143,12 +157,15 @@ while (have_posts()) :
   <?php
   /* ── 3 · WHICH TYPE DO YOU HAVE? ──────────────────────────── */
   $type_rows = hf_svc_rows('types', [], $pid);
-  if (!empty($type_rows) || $is_ref) : ?>
+  $hf_ty_eye = $hf_gh ? $hf_gh['types']['eyebrow'] : $sd['types']['eyebrow'];
+  $hf_ty_h2  = $hf_gh ? $hf_gh['types']['h2'] : $sd['types']['h2'];
+  $hf_ty_in  = $hf_gh ? $hf_gh['types']['intro'] : $sd['types']['intro'];
+  if (!empty($type_rows) || $hf_type_part || $is_ref) : ?>
     <section class="s s--bg" aria-labelledby="type-h">
       <div class="s__head">
-        <span class="eyebrow"><?php echo esc_html(hf_svc('types_eyebrow', $sd['types']['eyebrow'], $pid)); ?></span>
-        <h2 id="type-h"><?php echo esc_html(hf_svc('types_h2', $sd['types']['h2'], $pid)); ?></h2>
-        <p><?php echo esc_html(hf_svc('types_intro', $sd['types']['intro'], $pid)); ?></p>
+        <span class="eyebrow"><?php echo esc_html(hf_svc('types_eyebrow', $hf_ty_eye, $pid)); ?></span>
+        <h2 id="type-h"><?php echo esc_html(hf_svc('types_h2', $hf_ty_h2, $pid)); ?></h2>
+        <p><?php echo esc_html(hf_svc('types_intro', $hf_ty_in, $pid)); ?></p>
       </div>
       <div class="s__body">
         <?php if (!empty($type_rows)) : ?>
@@ -168,7 +185,7 @@ while (have_posts()) :
               </div>
             <?php endforeach; ?>
           </div>
-        <?php else : get_template_part('template-parts/svc/types', 'fridge'); endif; ?>
+        <?php elseif ($hf_type_part) : load_template($hf_type_part, false); else : get_template_part('template-parts/svc/types', 'fridge'); endif; ?>
       </div>
     </section>
   <?php endif; ?>

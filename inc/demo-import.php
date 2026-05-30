@@ -240,9 +240,10 @@ function hf_demo_apply($overwrite, &$count) {
             hf_demo_set('problems_eyebrow', $a['problems']['eyebrow'], $pid, $overwrite, $count);
             hf_demo_set('problems_h2',      $a['problems']['h2'],      $pid, $overwrite, $count);
             hf_demo_set('problems_intro',   $a['problems']['intro'],   $pid, $overwrite, $count);
-            if (function_exists('hf_demo_map')) {
-              hf_demo_set('problems', hf_demo_map($a['problems']['items'], ['icon', 'title', 'desc']), $pid, $overwrite, $count);
-            }
+            // NOTE: the Problems GRID itself is now rendered from the verbatim
+            // design partial (template-parts/svc/problems-<slug>.php), so we do
+            // NOT write the 'problems' repeater here — writing rows would make
+            // single-service.php render the generic rows instead of the design.
           }
           if (!empty($a['faq'])) {
             hf_demo_set('faq_eyebrow', $a['faq']['eyebrow'], $pid, $overwrite, $count);

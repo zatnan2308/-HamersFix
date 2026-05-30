@@ -24,3 +24,5 @@ yarn-error.log*
 _*.txt
 hf_*.js
 hf_*.txt
+
+/design2/
