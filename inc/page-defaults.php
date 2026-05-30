@@ -257,3 +257,40 @@ function hf_about_defaults() {
   ];
   return $d;
 }
+
+/** Cached defaults for the Contact page (transcribed verbatim from Contact.html). */
+function hf_contact_defaults() {
+  static $d = null;
+  if ($d !== null) return $d;
+
+  $d = [
+    'hero' => [
+      'eyebrow' => 'Contact HamersFix',
+      'h1'      => 'Talk to a real person about your <em>appliance repair</em>',
+      'lede'    => 'No phone trees, no call centers. Call, text, or book online and reach a real local dispatcher who can schedule your repair — usually same or next day.',
+    ],
+    'reach' => [
+      'eyebrow' => 'Four ways to reach us',
+      'h2'      => "Pick whatever's easiest",
+      'intro'   => 'Phone is fastest for same-day service. For everything else, we answer texts, emails, and online bookings throughout the day.',
+      'cards'   => [
+        ['kind' => 'call',  'primary' => true,  'icon' => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>', 'lbl' => 'Call us', 'ds' => 'Fastest — real dispatcher, < 60-second wait'],
+        ['kind' => 'text',  'primary' => false, 'icon' => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>', 'lbl' => 'Text us', 'ds' => 'Send a photo of the appliance & model sticker'],
+        ['kind' => 'email', 'primary' => false, 'icon' => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>', 'lbl' => 'Email us', 'ds' => 'Best for quotes, invoices & commercial accounts'],
+        ['kind' => 'book',  'primary' => false, 'icon' => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>', 'lbl' => 'Book online', 'val' => 'Schedule a visit', 'ds' => 'Pick your slot — 60-second flow, SMS confirmation'],
+      ],
+    ],
+    'final' => [
+      'eyebrow' => 'Phone is faster than any form',
+      'h2'      => "One call and you're on the schedule.",
+      'intro'   => "Open 7 days a week with a real dispatcher. Tell us the appliance and the symptom — we'll book your window on the spot.",
+      'card_lbl'=> 'Call our dispatcher',
+      'signals' => [
+        ['b' => 'Same-day service', 'sub' => 'Call before noon'],
+        ['b' => '1-year warranty', 'sub' => 'Parts & labor'],
+        ['b' => 'EPA-certified techs', 'sub' => 'Licensed & insured'],
+      ],
+    ],
+  ];
+  return $d;
+}
