@@ -229,6 +229,31 @@ function hf_demo_apply($overwrite, &$count) {
         }
       }
 
+      // Non-reference appliances: fill Problems + FAQ from per-appliance
+      // defaults (the fridge is handled above via $is_ref).
+      if (!$is_ref && function_exists('hf_appliance_defaults')) {
+        $ad  = hf_appliance_defaults();
+        $key = isset($s['icon']) ? $s['icon'] : '';
+        if (isset($ad[$key])) {
+          $a = $ad[$key];
+          if (!empty($a['problems'])) {
+            hf_demo_set('problems_eyebrow', $a['problems']['eyebrow'], $pid, $overwrite, $count);
+            hf_demo_set('problems_h2',      $a['problems']['h2'],      $pid, $overwrite, $count);
+            hf_demo_set('problems_intro',   $a['problems']['intro'],   $pid, $overwrite, $count);
+            if (function_exists('hf_demo_map')) {
+              hf_demo_set('problems', hf_demo_map($a['problems']['items'], ['icon', 'title', 'desc']), $pid, $overwrite, $count);
+            }
+          }
+          if (!empty($a['faq'])) {
+            hf_demo_set('faq_eyebrow', $a['faq']['eyebrow'], $pid, $overwrite, $count);
+            hf_demo_set('faq_h2',      $a['faq']['h2'],      $pid, $overwrite, $count);
+            if (function_exists('hf_demo_map')) {
+              hf_demo_set('faq', hf_demo_map($a['faq']['items'], ['q', 'a']), $pid, $overwrite, $count);
+            }
+          }
+        }
+      }
+
       // Per-service SEO.
       hf_demo_set('seo_title', $s['title'] . ' in Northeast Georgia — Same-Day | HamersFix', $pid, $overwrite, $count);
       hf_demo_set('seo_description', sprintf('EPA-certified technicians repair %s across Northeast Georgia. Flat-rate pricing, a 1-year parts & labor warranty, and same-day service available.', $appl_low), $pid, $overwrite, $count);
