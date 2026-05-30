@@ -29,6 +29,7 @@ $hf_includes = [
   'inc/seo.php',          // title/meta/OG/Twitter (yields to SEO plugins)
   'inc/schema.php',       // JSON-LD: LocalBusiness, FAQPage, Service, Breadcrumbs
   'inc/acf.php',          // ACF detection notice, Options page, field groups
+  'inc/demo-import.php',  // admin "Demo Data" importer (fill-empty / reset)
 ];
 
 foreach ($hf_includes as $hf_file) {
