@@ -1,11 +1,12 @@
 <?php
 /**
- * HamersFix — primary navigation config + Services mega/drawer renderers.
+ * HamersFix — primary navigation config + Residential mega/drawer renderers.
  *
  * The simple nav items are defined here (single source for header + drawer).
- * The "Services" dropdown is generated from the `service` CPT via
- * hf_get_services() (with a fallback to the design's six default services), and
- * its parent links to the Appliance Repair Services landing page.
+ * The "Residential" dropdown is generated from the `service` CPT via
+ * hf_get_services() (with a fallback to the design's six default services); its
+ * parent links to the Appliance Repair Services landing page while still
+ * opening the mega on click/hover.
  *
  * @package HamersFix
  */
@@ -13,13 +14,13 @@
 if (!defined('ABSPATH')) exit;
 
 /**
- * @return array Primary nav item definitions. Header uses short labels (design);
- *               page titles/footer use the full sitemap names.
+ * @return array Primary nav item definitions. Header keeps the design's short
+ *               labels; full sitemap names live in page titles/footer.
  */
 function hf_primary_nav() {
   return [
     ['key' => 'home',          'label' => __('Home', 'hamersfix'),          'url' => home_url('/')],
-    ['key' => 'services',      'label' => __('Services', 'hamersfix'),      'url' => hf_page_url('appliance-repair-services', '#'), 'mega' => true],
+    ['key' => 'services',      'label' => __('Residential', 'hamersfix'),   'url' => hf_page_url('appliance-repair-services', '#'), 'mega' => true],
     ['key' => 'commercial',    'label' => __('Commercial', 'hamersfix'),    'url' => hf_page_url('commercial', '#'), 'badge' => 'B2B · 24/7'],
     ['key' => 'brands',        'label' => __('Brands', 'hamersfix'),        'url' => hf_page_url('brands', '#')],
     ['key' => 'service-areas', 'label' => __('Service Areas', 'hamersfix'), 'url' => hf_page_url('service-areas', '#')],
@@ -42,7 +43,7 @@ function hf_nav_is_current($key) {
 }
 
 /**
- * Render the Services mega-menu panel (desktop).
+ * Render the Residential mega-menu panel (desktop).
  * @return string HTML
  */
 function hf_render_residential_mega() {
@@ -51,7 +52,7 @@ function hf_render_residential_mega() {
   ob_start(); ?>
   <div class="mega mega--services" id="mega-services" role="menu">
     <div>
-      <p class="mega__title"><?php esc_html_e('Appliance repair services', 'hamersfix'); ?></p>
+      <p class="mega__title"><?php esc_html_e('Residential appliance repair', 'hamersfix'); ?></p>
       <div class="mega__grid">
         <?php foreach ($services as $s) : ?>
           <a class="mega__item" href="<?php echo esc_url($s['url']); ?>" role="menuitem">
@@ -83,7 +84,7 @@ function hf_render_residential_mega() {
 }
 
 /**
- * Render the Services accordion for the mobile drawer.
+ * Render the Residential accordion for the mobile drawer.
  * @return string HTML
  */
 function hf_render_residential_drawer() {
@@ -92,7 +93,7 @@ function hf_render_residential_drawer() {
   ob_start(); ?>
   <details class="group" open>
     <summary>
-      <?php esc_html_e('Services', 'hamersfix'); ?>
+      <?php esc_html_e('Residential', 'hamersfix'); ?>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
     </summary>
     <div class="group__body">
