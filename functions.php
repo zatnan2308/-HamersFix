@@ -31,6 +31,7 @@ $hf_includes = [
   'inc/acf.php',          // ACF detection notice, Options page, field groups
   'inc/demo-import.php',  // admin "Demo Data" importer (fill-empty / reset)
   'inc/demo-pages.php',   // demo importer: the 7 section pages
+  'inc/editor.php',       // classic editor for ACF-driven page templates
 ];
 
 foreach ($hf_includes as $hf_file) {
