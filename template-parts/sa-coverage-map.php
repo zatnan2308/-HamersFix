@@ -143,7 +143,7 @@
         <div class="map-callout">
           <div class="lbl">8 vans on the road</div>
           <div class="val">2.4 hr avg arrival</div>
-          <p>Across all 14 cities, 6 days a week. Emergency commercial coverage: 24/7.</p>
+          <p>Across all 14 cities, 6 days a week. After-hours emergency commercial coverage.</p>
         </div>
 
         <div class="map-stat">

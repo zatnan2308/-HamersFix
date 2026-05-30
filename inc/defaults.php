@@ -155,7 +155,7 @@ function hf_defaults() {
       'eyebrow' => 'Commercial appliance repair',
       'h2'      => 'Restaurants, laundromats, prep kitchens — running again, fast.',
       'intro'   => 'After-hours service, maintenance contracts, NSF/health-code compliance, and insurance billing. We work with multi-unit operators and property managers.',
-      'features' => ['24/7 emergency dispatch', 'NSF-compliant repairs', 'Maintenance contracts', 'Multi-unit pricing', 'Insurance & warranty billing', 'Net-30 terms available'],
+      'features' => ['After-hours emergency dispatch', 'NSF-compliant repairs', 'Maintenance contracts', 'Multi-unit pricing', 'Insurance & warranty billing', 'Net-30 terms available'],
       'cta_label' => 'Request a B2B quote — callback in 30 min',
       'cta_url'   => '#',
       'panel_label' => 'Active client snapshot',
@@ -168,7 +168,7 @@ function hf_defaults() {
       ],
     ],
     'faq' => [
-      ['q' => 'Do you offer same-day service?',                       'a' => 'Yes — we offer same-day service across most of our coverage area when you call before 12 PM. After 12 PM we typically book the next morning. Emergency commercial service is available 24/7.'],
+      ['q' => 'Do you offer same-day service?',                       'a' => 'Yes — we offer same-day service across most of our coverage area when you call before 12 PM. After 12 PM we typically book the next morning. Emergency commercial service is available after hours.'],
       ['q' => 'How much does a service call cost?',                   'a' => 'Our diagnostic fee is $89, which is fully waived when you proceed with the repair. We provide a flat-rate quote in writing before any work begins — no surprises.'],
       ['q' => 'What warranty do you provide?',                        'a' => 'All repairs are backed by a 1-year parts & labor warranty. If the same issue returns within 12 months, we return at no charge.'],
       ['q' => 'Which brands are you factory-authorized for?',         'a' => 'We are factory-authorized for Sub-Zero, Wolf, Viking, Thermador, and Dacor. We service all other major brands with manufacturer-spec parts and procedures.'],

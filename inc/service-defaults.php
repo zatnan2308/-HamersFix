@@ -92,7 +92,7 @@ function hf_service_defaults() {
         ['q' => 'Do you carry parts for Sub-Zero on the van?', 'a' => 'The 8 most common Sub-Zero failure parts, yes — fan motors, gaskets, defrost heaters, sensor probes. Sealed-system repairs require ordering from the Sub-Zero distribution center, typically 1–2 days.'],
         ['q' => 'What warranty do you provide?', 'a' => 'All repairs are backed by a 1-year parts & labor warranty. If the same issue returns within 12 months, we return at no charge — including the trip and the diagnosis.'],
         ['q' => 'Will you save the food in my fridge?', 'a' => 'Yes — first thing the tech does on a cooling job is move perishables to a cooler we bring, so you don\'t lose groceries while we work.'],
-        ['q' => 'Do you offer same-day service?', 'a' => 'Yes — same-day across most of our coverage area when you call before 12 PM. After 12 PM we typically book the next morning. Emergency commercial service is 24/7.'],
+        ['q' => 'Do you offer same-day service?', 'a' => 'Yes — same-day across most of our coverage area when you call before 12 PM. After 12 PM we typically book the next morning. Emergency commercial service is available after hours.'],
       ],
     ],
     'final' => [

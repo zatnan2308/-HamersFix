@@ -21,7 +21,7 @@ function hf_primary_nav() {
   return [
     ['key' => 'home',          'label' => __('Home', 'hamersfix'),          'url' => home_url('/')],
     ['key' => 'services',      'label' => __('Residential', 'hamersfix'),   'url' => hf_page_url('appliance-repair-services', '#'), 'mega' => true],
-    ['key' => 'commercial',    'label' => __('Commercial', 'hamersfix'),    'url' => hf_page_url('commercial', '#'), 'badge' => 'B2B · 24/7'],
+    ['key' => 'commercial',    'label' => __('Commercial', 'hamersfix'),    'url' => hf_page_url('commercial', '#'), 'badge' => 'B2B'],
     ['key' => 'brands',        'label' => __('Brands', 'hamersfix'),        'url' => hf_page_url('brands', '#')],
     ['key' => 'service-areas', 'label' => __('Service Areas', 'hamersfix'), 'url' => hf_page_url('service-areas', '#')],
     ['key' => 'reviews',       'label' => __('Reviews', 'hamersfix'),       'url' => hf_page_url('reviews', '#')],

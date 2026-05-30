@@ -38,13 +38,13 @@ $def_zones = [
   ['level' => 'med', 'lbl' => 'Athens corridor · South', 'time' => '3.2', 'suffix' => 'hr', 'area' => 'Lawrenceville, Auburn', 'desc' => 'Slightly longer routing. Call before 11 AM for same-day; after, next morning.', 'bar' => ''],
   ['level' => 'slow', 'lbl' => 'Edge zones', 'time' => 'Next', 'suffix' => 'day', 'area' => 'Outer ring', 'desc' => 'Outside our daily route. We schedule for the following morning at first window.', 'bar' => ''],
 ];
-$def_features = ['24/7 emergency dispatch', 'NSF/health-code compliance', 'Insurance & warranty billing', 'Net-30 terms available', 'Multi-unit volume pricing', 'COI on request'];
+$def_features = ['After-hours emergency dispatch', 'NSF/health-code compliance', 'Insurance & warranty billing', 'Net-30 terms available', 'Multi-unit volume pricing', 'COI on request'];
 $def_comstats = [['Active commercial accounts', '54', ''], ['Avg after-hours response', '2.1', 'hr'], ['Multi-unit property portfolios', '8', ''], ['Repeat-business rate', '92', '%']];
 $def_faq = [
   ['q' => 'Do you charge extra for outer-ring cities?', 'a' => 'No — flat-rate pricing is identical across all 14 cities. The only difference is scheduling: outer-ring areas may be next-day rather than same-day.'],
   ['q' => "What if my city isn't listed?", 'a' => "Call us — we may still cover you, or we'll refer a vetted partner. We're expanding our coverage area regularly."],
   ['q' => 'How fast can you actually get here?', 'a' => 'In our core Gwinnett zone, often within 2 hours. Outer areas, same-day if you call before noon, otherwise next morning.'],
-  ['q' => 'Do you cover commercial accounts everywhere?', 'a' => 'Yes — commercial service covers our entire area with 24/7 emergency dispatch, including the outer ring.'],
+  ['q' => 'Do you cover commercial accounts everywhere?', 'a' => 'Yes — commercial service covers our entire area with after-hours emergency dispatch, including the outer ring.'],
 ];
 $def_signals = [
   ['b' => 'Same-day across 14 cities', 'sub' => 'Call before noon'],
@@ -207,8 +207,8 @@ $signals  = hf_pg_rows('final_signals', array_map(function ($s) { return ['b' =>
       <div class="com-coverage">
         <div>
           <span class="eyebrow"><?php esc_html_e('Commercial · B2B', 'hamersfix'); ?></span>
-          <h2 id="com-h"><?php echo esc_html(hf_pg('com_h2', __('Restaurants & multi-unit property managers — anywhere in our zone, 24/7.', 'hamersfix'))); ?></h2>
-          <p><?php echo esc_html(hf_pg('com_intro', 'Single restaurants, laundromats, multi-family complexes, prep kitchens. Same map, expanded service hours. Emergency dispatch around the clock; maintenance contracts available for recurring portfolios.')); ?></p>
+          <h2 id="com-h"><?php echo esc_html(hf_pg('com_h2', __('Restaurants & multi-unit property managers — anywhere in our zone.', 'hamersfix'))); ?></h2>
+          <p><?php echo esc_html(hf_pg('com_intro', 'Single restaurants, laundromats, multi-family complexes, prep kitchens. Same map, expanded service hours. After-hours emergency dispatch; maintenance contracts available for recurring portfolios.')); ?></p>
           <ul>
             <?php foreach ($features as $f) { $t = is_array($f) ? (isset($f['text']) ? $f['text'] : '') : $f; if (!$t) continue; echo '<li>' . esc_html($t) . '</li>'; } ?>
           </ul>

@@ -42,7 +42,7 @@ function hf_commercial_defaults() {
       'qpills'  => ['Same-day availability', 'Residential & commercial', 'Transparent pricing'],
       'image'   => 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=1100&auto=format&fit=crop&q=80',
       'image_alt' => 'Commercial kitchen with stainless steel appliances',
-      'badge'   => 'B2B · 24/7 emergency',
+      'badge'   => 'B2B · After-hours',
       'tag_lbl' => 'Commercial dispatch',
       'tag_h3'  => 'Restaurants · cafés · laundromats · property managers',
     ],
@@ -276,7 +276,7 @@ function hf_contact_defaults() {
       ['kind' => 'call',       'badge' => 'Fastest', 'badge_style' => '', 'icon' => $svg_phone, 'h3' => 'Call us', 'ds' => 'Real dispatcher, no IVR. Most callers reach a person in under 60 seconds. Best for same-day & emergency.', 'action' => '', 'primary' => true],
       ['kind' => 'book',       'badge' => '', 'badge_style' => '', 'icon' => '<svg viewBox="0 0 24 24" class="ic-stroke"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/></svg>', 'h3' => 'Book online', 'ds' => '6-step flow takes about 60 seconds. Pick appliance, brand, symptom, ZIP, slot. SMS confirmation immediately.', 'action' => 'Start booking', 'primary' => false],
       ['kind' => 'email',      'badge' => '', 'badge_style' => '', 'icon' => '<svg viewBox="0 0 24 24" class="ic-stroke"><path d="M4 6l8 6 8-6M4 6v12h16V6"/></svg>', 'h3' => 'Email us', 'ds' => "Quotes, brand-specific questions, warranty paperwork, anything that isn't urgent. We reply within 2 business hours.", 'action' => 'Send an email', 'primary' => false],
-      ['kind' => 'commercial', 'badge' => 'B2B · 24/7', 'badge_style' => 'cta', 'icon' => '<svg viewBox="0 0 24 24" class="ic-stroke"><path d="M3 21l3-3M21 21l-3-3M5 18h14M7 6h10v12H7zM10 6V3M14 6V3"/></svg>', 'h3' => 'Commercial line', 'ds' => 'Restaurants, laundromats, property managers. Emergency dispatch around the clock. Dedicated account manager.', 'action' => 'Call the B2B line', 'primary' => false],
+      ['kind' => 'commercial', 'badge' => 'B2B', 'badge_style' => 'cta', 'icon' => '<svg viewBox="0 0 24 24" class="ic-stroke"><path d="M3 21l3-3M21 21l-3-3M5 18h14M7 6h10v12H7zM10 6V3M14 6V3"/></svg>', 'h3' => 'Commercial line', 'ds' => 'Restaurants, laundromats, property managers. After-hours emergency dispatch. Dedicated account manager.', 'action' => 'Call the B2B line', 'primary' => false],
     ],
     // Section 3: reach card (links) + info stack.
     'reach' => [
@@ -285,7 +285,7 @@ function hf_contact_defaults() {
       'sub'     => 'No forms on our site — we route everything through real people or our scheduling platform. Pick what works.',
       'links'   => [
         ['kind' => 'call',  'cls' => '--cta', 'ttl' => 'Residential dispatch', 'val' => '', 'ds' => 'Real person · < 60-second wait · 7 days a week'],
-        ['kind' => 'call',  'cls' => '', 'ttl' => 'Commercial line · 24/7', 'val' => '', 'ds' => 'B2B emergency dispatch · property managers · restaurants'],
+        ['kind' => 'call',  'cls' => '', 'ttl' => 'Commercial line', 'val' => '', 'ds' => 'B2B emergency dispatch · property managers · restaurants'],
         ['kind' => 'book',  'cls' => '--g', 'ttl' => 'Open booking form ↗', 'val' => 'Schedule online', 'ds' => '60-second flow on our scheduling platform · opens new tab'],
         ['kind' => 'email', 'cls' => '', 'ttl' => 'Email · non-urgent', 'val' => '', 'ds' => 'Quotes, warranty docs, brand-specific questions · 2-hr reply'],
       ],
@@ -293,7 +293,7 @@ function hf_contact_defaults() {
     ],
     'info' => [
       'hours_h3'   => 'Hours of operation',
-      'hours_note' => 'Commercial (B2B): 24/7 emergency dispatch for active accounts.',
+      'hours_note' => 'Commercial (B2B): after-hours emergency dispatch for active accounts.',
       'addr_h3'    => 'Address & service area',
       'addr_note'  => "Office is by appointment only — we're a service company, not a storefront. Tech & van dispatch happens here.",
       'addr_link'  => 'See full service area map →',
@@ -398,7 +398,7 @@ function hf_brands_defaults() {
       'promo_eyebrow' => 'Commercial repair',
       'promo_h3'   => 'Same-day. After-hours. Net-30.',
       'promo_p'    => "We work with multi-unit operators, single restaurants, laundromats, and property managers. A broken cooler at 11 PM doesn't wait for a 9–5 service window.",
-      'promo_list' => ['24/7 emergency dispatch', 'NSF/health-code-compliant work', 'Insurance & warranty billing', 'Maintenance contracts', 'Multi-unit volume pricing', 'COI on request'],
+      'promo_list' => ['After-hours emergency dispatch', 'NSF/health-code-compliant work', 'Insurance & warranty billing', 'Maintenance contracts', 'Multi-unit volume pricing', 'COI on request'],
       'promo_cta'  => 'Request a B2B quote',
       'brands_h3'  => 'Commercial brands we service',
       'brands_meta'=> '14+ makers across refrigeration, cooking, & laundry',

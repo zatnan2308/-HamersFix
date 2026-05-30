@@ -146,7 +146,7 @@ function hf_ch_href($kind, $phone_l, $booking) {
           <h3><span class="ic"><svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2z"/></svg></span><?php echo esc_html(hf_pg('info_lines_h3', $d['info']['lines_h3'])); ?></h3>
           <p class="nap-block">
             <b><?php esc_html_e('Residential:', 'hamersfix'); ?></b> <a href="tel:<?php echo esc_attr($phone_l); ?>"><?php echo esc_html($phone_d); ?></a><br>
-            <b><?php esc_html_e('Commercial (24/7):', 'hamersfix'); ?></b> <a href="tel:<?php echo esc_attr($phone_l); ?>"><?php echo esc_html($phone_d); ?></a><br><br>
+            <b><?php esc_html_e('Commercial:', 'hamersfix'); ?></b> <a href="tel:<?php echo esc_attr($phone_l); ?>"><?php echo esc_html($phone_d); ?></a><br><br>
             <b><?php esc_html_e('Email:', 'hamersfix'); ?></b> <a href="mailto:<?php echo esc_attr($email); ?>"><?php echo esc_html($email); ?></a>
           </p>
         </div>

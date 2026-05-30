@@ -227,7 +227,7 @@ get_header();
           <h3>Same-day. After-hours. Net-30.</h3>
           <p>We work with multi-unit operators, single restaurants, laundromats, and property managers. A broken cooler at 11 PM doesn't wait for a 9–5 service window.</p>
           <ul>
-            <li>24/7 emergency dispatch</li>
+            <li>After-hours emergency dispatch</li>
             <li>NSF/health-code-compliant work</li>
             <li>Insurance &amp; warranty billing</li>
             <li>Maintenance contracts</li>
