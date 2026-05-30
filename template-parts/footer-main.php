@@ -6,9 +6,59 @@
 if (!defined('ABSPATH')) exit;
 
 $d            = hf_defaults();
-$hf_services  = hf_opt_rows('footer_services', $d['footer']['services']);
-$hf_company   = hf_opt_rows('footer_company', $d['footer']['company']);
-$hf_legal     = hf_opt_rows('footer_legal_links', $d['footer']['legal']);
+
+/*
+ * Footer link columns must point to REAL pages. The design defaults were '#'
+ * placeholders (and a demo import may have stored '#' into the ACF options),
+ * which left the footer with dead links. So: use the ACF rows ONLY where they
+ * carry a usable (non-empty, non-'#') URL; otherwise build the links live from
+ * the Services CPT and the section pages. Still fully overridable in admin.
+ */
+$hf_usable = function ($rows) {
+  if (!is_array($rows)) return [];
+  $out = [];
+  foreach ($rows as $r) {
+    if (!is_array($r)) continue;
+    $l = isset($r['label']) ? trim((string) $r['label']) : '';
+    $u = isset($r['url']) ? trim((string) $r['url']) : '';
+    if ($l !== '' && $u !== '' && $u !== '#') $out[] = ['label' => $l, 'url' => $u];
+  }
+  return $out;
+};
+
+// Services column → the six service CPT entries + Commercial.
+$hf_services = $hf_usable(function_exists('get_field') ? get_field('footer_services', 'option') : null);
+if (!$hf_services) {
+  $hf_services = [];
+  foreach (hf_get_services() as $s) {
+    if (!empty($s['title']) && !empty($s['url']) && $s['url'] !== '#') {
+      $hf_services[] = ['label' => $s['title'], 'url' => $s['url']];
+    }
+  }
+  $hf_services[] = ['label' => __('Commercial appliance', 'hamersfix'), 'url' => hf_page_url('commercial')];
+}
+
+// Company column → the section pages.
+$hf_company = $hf_usable(function_exists('get_field') ? get_field('footer_company', 'option') : null);
+if (!$hf_company) {
+  $hf_company = [
+    ['label' => __('About us', 'hamersfix'),         'url' => hf_page_url('about')],
+    ['label' => __('Reviews', 'hamersfix'),          'url' => hf_page_url('reviews')],
+    ['label' => __('Brands serviced', 'hamersfix'),  'url' => hf_page_url('brands')],
+    ['label' => __('Service areas', 'hamersfix'),    'url' => hf_page_url('service-areas')],
+    ['label' => __('Contact', 'hamersfix'),          'url' => hf_page_url('contact')],
+  ];
+}
+
+// Legal row: keep usable ACF rows; otherwise wire what we can (Privacy, Sitemap)
+// and drop the rest so there are no dead links.
+$hf_legal = $hf_usable(function_exists('get_field') ? get_field('footer_legal_links', 'option') : null);
+if (!$hf_legal) {
+  $hf_legal = [];
+  $hf_privacy = function_exists('get_privacy_policy_url') ? get_privacy_policy_url() : '';
+  if ($hf_privacy) $hf_legal[] = ['label' => __('Privacy Policy', 'hamersfix'), 'url' => $hf_privacy];
+  $hf_legal[] = ['label' => __('Sitemap', 'hamersfix'), 'url' => home_url('/wp-sitemap.xml')];
+}
 $hf_zips      = hf_get_service_zips();
 $hf_phone_l   = hf_phone_link();
 $hf_phone_d   = hf_phone_display();

@@ -13,6 +13,25 @@ if (!defined('ABSPATH')) exit;
 
 add_action('after_switch_theme', 'hf_seed_all');
 
+/**
+ * Safety re-seed of the section pages.
+ *
+ * hf_seed_all() only runs on theme activation. If the theme was first activated
+ * before the later pages existed (Appliance Repair Services, Reviews), those
+ * pages were never created — so menu/footer links to them fell back to '#'.
+ * This re-runs the idempotent page seeder once, gated by a version flag, so
+ * every section page exists and its template is assigned, and hf_page_url()
+ * resolves real permalinks.
+ */
+add_action('admin_init', function () {
+  if (get_option('hf_pages_seed_v') === '3') return;
+  if (function_exists('hf_seed_pages')) {
+    hf_seed_pages();
+    flush_rewrite_rules();
+  }
+  update_option('hf_pages_seed_v', '3');
+});
+
 function hf_seed_all() {
   hf_seed_services();
   hf_seed_pages();
