@@ -73,6 +73,8 @@ function hf_seed_pages() {
     ['title' => 'About',         'slug' => 'about',         'tpl' => 'template-about.php'],
     ['title' => 'Brands',        'slug' => 'brands',        'tpl' => 'template-brands.php'],
     ['title' => 'Contact',       'slug' => 'contact',       'tpl' => 'template-contact.php'],
+    ['title' => 'Appliance Repair Services', 'slug' => 'appliance-repair-services', 'tpl' => 'template-services.php'],
+    ['title' => 'Reviews',       'slug' => 'reviews',       'tpl' => 'template-reviews.php'],
   ];
   foreach ($pages as $p) {
     $existing = get_page_by_path($p['slug']);

@@ -20,10 +20,10 @@ $hf_phone_d = hf_phone_display();
         $is_current = hf_nav_is_current($item['key']);
         if (!empty($item['mega'])) : ?>
           <div class="nav-item" data-menu="services">
-            <button class="nav-item__link" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="mega-services">
+            <a class="nav-item__link" href="<?php echo esc_url($item['url']); ?>" aria-haspopup="true" aria-expanded="false" aria-controls="mega-services"<?php echo $is_current ? ' aria-current="page"' : ''; ?>>
               <?php echo esc_html($item['label']); ?>
               <svg class="chev" viewBox="0 0 12 12" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 4.5 6 7.5 9 4.5"/></svg>
-            </button>
+            </a>
             <?php echo hf_render_residential_mega(); /* trusted markup */ ?>
           </div>
         <?php else : ?>

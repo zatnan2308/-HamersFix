@@ -38,6 +38,10 @@
       item.addEventListener('mouseenter', open);
       item.addEventListener('mouseleave', closeWithDelay);
       btn.addEventListener('click', function (e) {
+        var href = btn.getAttribute('href');
+        // Anchor parent with a real href navigates (to the Services landing);
+        // a button parent toggles the mega instead.
+        if (btn.tagName === 'A' && href && href !== '#') return;
         e.preventDefault();
         item.classList.contains('is-open') ? close() : open();
       });

@@ -463,3 +463,56 @@ function hf_brands_defaults() {
   ];
   return $d;
 }
+
+/** Cached defaults for the Appliance Repair Services landing page. */
+function hf_services_page_defaults() {
+  static $d = null;
+  if ($d !== null) return $d;
+  $home = hf_defaults()['home'];
+  $d = [
+    'hero' => [
+      'eyebrow' => 'Residential appliance repair',
+      'h1'      => 'Appliance repair services for <em>every room</em>',
+      'lede'    => 'Refrigerators, washers, dryers, dishwashers, ovens and cooktops — fixed right, often the same day. EPA-certified technicians, flat-rate pricing, and a 1-year parts & labor warranty on every repair.',
+      'book_label' => 'Book online →',
+    ],
+    'services' => [
+      'eyebrow' => $home['services_eyebrow'],
+      'h2'      => $home['services_h2'],
+      'intro'   => 'Kitchen and laundry, mainstream and high-end. Pick your appliance for the problems we repair, the brands we service, and same-day booking.',
+    ],
+    'steps' => [
+      'eyebrow' => $home['steps_eyebrow'],
+      'h2'      => $home['steps_h2'],
+      'intro'   => $home['steps_intro'],
+    ],
+    'cta' => [
+      'eyebrow' => $home['cta_eyebrow'],
+      'h2'      => $home['cta_h2'],
+      'intro'   => $home['cta_intro'],
+    ],
+  ];
+  return $d;
+}
+
+/** Cached defaults for the Reviews page. */
+function hf_reviews_defaults() {
+  static $d = null;
+  if ($d !== null) return $d;
+  $D = hf_defaults();
+  $d = [
+    'hero' => [
+      'eyebrow' => 'Verified reviews',
+      'h1'      => 'What <em>Northeast Georgia</em> says about us',
+      'lede'    => 'Real reviews from real neighbors across Google, BBB, Yelp, and HomeAdvisor — refrigerators to ranges, homes to restaurants. No curated highlight reel.',
+    ],
+    'agg'     => $D['reviews_agg'],   // score / stars / title / sources
+    'reviews' => $D['reviews'],       // testimonials (add more in the admin)
+    'cta' => [
+      'eyebrow' => $D['home']['cta_eyebrow'],
+      'h2'      => $D['home']['cta_h2'],
+      'intro'   => $D['home']['cta_intro'],
+    ],
+  ];
+  return $d;
+}

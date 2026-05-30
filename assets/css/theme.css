@@ -44,3 +44,14 @@ body.admin-bar .site-hd { top: 32px; }
 
 /* ---- Admin editor note for placeholder/marketing fields ------- */
 .acf-field .hf-note { color: var(--cta-700, #c7501a); font-weight: 600; }
+
+/* ---- "View all services" link inside the Services mega-menu ---- */
+.mega__all {
+  display: inline-block;
+  margin-top: 12px;
+  font: 700 13px/1 var(--ff-sans);
+  color: var(--brand-700);
+  text-decoration: none;
+}
+.mega__all:hover { text-decoration: underline; }
+
