@@ -473,7 +473,7 @@ if (!$hero_url) $hero_url = $d['hero']['image'];
 
         <details>
           <summary>Do you charge more for premium brands?</summary>
-          <p>The diagnostic fee is the same ($89, waived with repair). Parts cost more on luxury brands — a Sub-Zero compressor is genuinely more expensive than a Whirlpool — but the labor flat-rate is consistent with what the brand publishes.</p>
+          <p>Labor is billed at the same flat-rate regardless of brand. Parts cost more on luxury brands — a Sub-Zero compressor is genuinely more expensive than a Whirlpool — but the labor flat-rate is consistent with what the brand publishes.</p>
         </details>
 
         <details>
@@ -535,7 +535,7 @@ if (!$hero_url) $hero_url = $d['hero']['image'];
           </div>
           <div class="sig">
             <div class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
-            <div class="tx"><b>$89 diagnostic</b>Waived with repair</div>
+            <div class="tx"><b>Upfront quote</b>Approved before we start</div>
           </div>
         </div>
       </div>

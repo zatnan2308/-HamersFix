@@ -86,7 +86,7 @@ function hf_service_defaults() {
       'h2'      => 'Questions before you book?',
       'items' => [
         ['q' => 'Is it worth fixing a 10-year-old refrigerator?', 'a' => 'Usually yes — if the repair is under 50% of replacement cost. Modern fridges last 14–17 years on average; many Sub-Zero units last 20+. We\'ll be honest if a repair doesn\'t make sense.'],
-        ['q' => 'How much does a service call cost?', 'a' => 'Our diagnostic fee is $89 and is waived when you proceed with the repair. We provide a flat-rate written quote before any work begins — no surprise math.'],
+        ['q' => 'How much does a service call cost?', 'a' => 'We provide a flat-rate written quote before any work begins, so you approve the price before we start — no surprise math.'],
         ['q' => 'Why is EPA Section 608 certification important?', 'a' => 'Federal law requires certification to handle refrigerant. Without 608, a technician cannot legally open the sealed system on your fridge. Many small operators don\'t have it; we always do.'],
         ['q' => 'How long does a typical fridge repair take?', 'a' => 'Most repairs are completed in 45–90 minutes. If a part needs to be ordered, we typically return within 24–48 hours.'],
         ['q' => 'Do you carry parts for Sub-Zero on the van?', 'a' => 'The 8 most common Sub-Zero failure parts, yes — fan motors, gaskets, defrost heaters, sensor probes. Sealed-system repairs require ordering from the Sub-Zero distribution center, typically 1–2 days.'],
@@ -103,7 +103,7 @@ function hf_service_defaults() {
         ['title' => 'EPA 608 certified', 'sub' => 'Sealed-system repairs by law'],
         ['title' => '1-year warranty',   'sub' => 'Parts & labor, in writing'],
         ['title' => 'Flat-rate pricing', 'sub' => 'No hourly. No surprises.'],
-        ['title' => '$89 diagnostic',    'sub' => 'Waived when you repair'],
+        ['title' => 'Vetted technicians', 'sub' => 'W-2, background-checked'],
       ],
     ],
   ];

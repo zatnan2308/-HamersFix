@@ -439,7 +439,7 @@ function hf_brands_defaults() {
       'h2'      => 'Questions before you book?',
       'items'   => [
         ['q' => 'What does "factory-authorized" actually mean?', 'a' => "It means the manufacturer has certified our technicians, audited our procedures, and granted us access to their OEM parts distribution. For Sub-Zero, Wolf, Viking, Thermador, Miele, Dacor, and Fisher & Paykel, we're on the brand's official service-network roster — which protects your warranty."],
-        ['q' => 'Do you charge more for premium brands?', 'a' => 'The diagnostic fee is the same ($89, waived with repair). Parts cost more on luxury brands — a Sub-Zero compressor is genuinely more expensive than a Whirlpool — but the labor flat-rate is consistent with what the brand publishes.'],
+        ['q' => 'Do you charge more for premium brands?', 'a' => 'Labor is billed at the same flat-rate regardless of brand. Parts cost more on luxury brands — a Sub-Zero compressor is genuinely more expensive than a Whirlpool — but the labor flat-rate is consistent with what the brand publishes.'],
         ['q' => 'My fridge is from a brand not on your list — can you still fix it?', 'a' => 'Probably yes. We service 25+ residential brands and 14+ commercial makers, but our parts network extends further. Call us with the make and model — most lesser-known brands are rebadged from a major maker, and we can usually source parts in 1–2 days.'],
         ['q' => "Why won't generic shops touch my Sub-Zero?", 'a' => "Sub-Zero sealed-system work requires EPA Section 608 certification (a federal license) plus brand-specific training. Without authorization, shops can't source OEM parts and can't legally open the refrigerant system. Working without 608 is a federal violation."],
         ['q' => 'Can you service smart appliances (Wi-Fi connected)?', 'a' => "Yes — Samsung SmartThings, LG ThinQ, GE SmartHQ, Bosch Home Connect, and Whirlpool's smart line. Our diagnostic tablets pair directly with these systems to read error codes and run remote tests."],
@@ -457,7 +457,7 @@ function hf_brands_defaults() {
         ['b' => 'Factory-authorized', 'sub' => '7 premium brands'],
         ['b' => '100% OEM parts', 'sub' => 'No aftermarket'],
         ['b' => '1-year warranty', 'sub' => 'Parts & labor'],
-        ['b' => '$89 diagnostic', 'sub' => 'Waived with repair'],
+        ['b' => 'Upfront quote', 'sub' => 'Approved before we start'],
       ],
     ],
   ];

@@ -84,7 +84,7 @@ function hf_defaults() {
     ],
     'icons' => $icons,
     'services' => [
-      ['slug' => 'fridge',     'icon' => 'fridge',     'title' => 'Refrigerator Repair', 'short_desc' => 'Not cooling · ice maker · leaking',            'long_desc' => 'Not cooling · ice maker · leaking water · loud noise · frost build-up · door seal · compressor.', 'price_note' => '$89 diagnostic — waived with repair', 'job_count' => '318 jobs', 'url' => '#'],
+      ['slug' => 'fridge',     'icon' => 'fridge',     'title' => 'Refrigerator Repair', 'short_desc' => 'Not cooling · ice maker · leaking',            'long_desc' => 'Not cooling · ice maker · leaking water · loud noise · frost build-up · door seal · compressor.', 'price_note' => 'EPA-certified · same-day', 'job_count' => '318 jobs', 'url' => '#'],
       ['slug' => 'washer',     'icon' => 'washer',     'title' => 'Washer Repair',       'short_desc' => 'Won\'t drain · won\'t spin · leaks',           'long_desc' => 'Won\'t drain · won\'t spin · leaking · vibration · door lock · error codes · belt & pump.',         'price_note' => 'Top & front-load',                   'job_count' => '241 jobs', 'url' => '#'],
       ['slug' => 'dryer',      'icon' => 'dryer',      'title' => 'Dryer Repair',        'short_desc' => 'Not heating · vent clog · belt',              'long_desc' => 'Not heating · won\'t tumble · long dry time · noisy · vent clog · thermal fuse · belt replacement.', 'price_note' => 'Gas & electric',                     'job_count' => '196 jobs', 'url' => '#'],
       ['slug' => 'dishwasher', 'icon' => 'dishwasher', 'title' => 'Dishwasher Repair',   'short_desc' => 'Not draining · poor cleaning',                'long_desc' => 'Won\'t drain · not cleaning · leaking · door latch · soap dispenser · sprayer arm.',                'price_note' => 'Built-in & portable',                'job_count' => '174 jobs', 'url' => '#'],
@@ -169,7 +169,7 @@ function hf_defaults() {
     ],
     'faq' => [
       ['q' => 'Do you offer same-day service?',                       'a' => 'Yes — we offer same-day service across most of our coverage area when you call before 12 PM. After 12 PM we typically book the next morning. Emergency commercial service is available after hours.'],
-      ['q' => 'How much does a service call cost?',                   'a' => 'Our diagnostic fee is $89, which is fully waived when you proceed with the repair. We provide a flat-rate quote in writing before any work begins — no surprises.'],
+      ['q' => 'How much does a service call cost?',                   'a' => 'We provide a flat-rate quote in writing before any work begins, so you approve the price before we start — no surprises.'],
       ['q' => 'What warranty do you provide?',                        'a' => 'All repairs are backed by a 1-year parts & labor warranty. If the same issue returns within 12 months, we return at no charge.'],
       ['q' => 'Which brands are you factory-authorized for?',         'a' => 'We are factory-authorized for Sub-Zero, Wolf, Viking, Thermador, and Dacor. We service all other major brands with manufacturer-spec parts and procedures.'],
       ['q' => 'Are your technicians background-checked and insured?', 'a' => 'Yes — every technician is W-2 employed (not subcontracted), background-checked, drug-tested, and covered under our $2M general liability + workers\' comp policies.'],
