@@ -7,6 +7,21 @@
  */
 if ( ! defined( 'ABSPATH' ) ) exit;
 get_header();
+
+/* Hero image: ACF image field (array/id/url) → design default fallback. */
+$d        = function_exists('hf_brands_defaults') ? hf_brands_defaults() : ['hero' => ['image' => '', 'image_alt' => '']];
+$hero_img = hf_pg('hero_image', '');
+$hero_alt = hf_pg('hero_image_alt', $d['hero']['image_alt']);
+$hero_url = '';
+if (is_array($hero_img) && !empty($hero_img['url'])) {
+  $hero_url = $hero_img['url'];
+  if (!empty($hero_img['alt'])) $hero_alt = $hero_img['alt'];
+} elseif (is_numeric($hero_img)) {
+  $hero_url = wp_get_attachment_image_url((int) $hero_img, 'hf-hero');
+} elseif (is_string($hero_img) && $hero_img) {
+  $hero_url = $hero_img;
+}
+if (!$hero_url) $hero_url = $d['hero']['image'];
 ?>
 <main id="main">
 
