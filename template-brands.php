@@ -42,10 +42,10 @@ get_header();
       </div>
 
       <figure class="logo-cluster" aria-hidden="false" style="padding:0">
-        <img src="https://images.unsplash.com/photo-1556911220-bff31c812dba?w=1100&auto=format&fit=crop&q=80"
-             alt="Premium kitchen appliances — refrigerator, range, and oven"
+        <img src="<?php echo esc_url($hero_url); ?>"
+             alt="<?php echo esc_attr($hero_alt); ?>"
              style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"
-             loading="eager">
+             loading="eager" fetchpriority="high">
         <span class="badge-top" style="z-index:2">25+ brands</span>
         <div style="position:absolute;left:24px;bottom:24px;z-index:2;background:rgba(6,43,87,.92);color:#fff;padding:16px 20px;border-radius:12px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);max-width:300px;">
           <div style="font:700 11px/1 var(--ff-mono);letter-spacing:.12em;color:var(--cta-500);text-transform:uppercase">Factory-authorized</div>
