@@ -263,33 +263,47 @@ function hf_contact_defaults() {
   static $d = null;
   if ($d !== null) return $d;
 
+  $svg_phone = '<svg viewBox="0 0 24 24" class="ic-stroke" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>';
+
   $d = [
     'hero' => [
-      'eyebrow' => 'Contact HamersFix',
-      'h1'      => 'Talk to a real person about your <em>appliance repair</em>',
-      'lede'    => 'No phone trees, no call centers. Call, text, or book online and reach a real local dispatcher who can schedule your repair — usually same or next day.',
+      'eyebrow' => 'Open now · < 60-second wait',
+      'h1'      => 'Get in touch — <em>four ways</em>, your call.',
+      'lede'    => 'Phone is fastest. Booking online is most accurate. Forms are for non-urgent stuff. Pick what fits.',
     ],
+    // Section 2: the four channel cards. kind=call|book|email|commercial resolves the href.
+    'channels' => [
+      ['kind' => 'call',       'badge' => 'Fastest', 'badge_style' => '', 'icon' => $svg_phone, 'h3' => 'Call us', 'ds' => 'Real dispatcher, no IVR. Most callers reach a person in under 60 seconds. Best for same-day & emergency.', 'action' => '', 'primary' => true],
+      ['kind' => 'book',       'badge' => '', 'badge_style' => '', 'icon' => '<svg viewBox="0 0 24 24" class="ic-stroke"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/></svg>', 'h3' => 'Book online', 'ds' => '6-step flow takes about 60 seconds. Pick appliance, brand, symptom, ZIP, slot. SMS confirmation immediately.', 'action' => 'Start booking', 'primary' => false],
+      ['kind' => 'email',      'badge' => '', 'badge_style' => '', 'icon' => '<svg viewBox="0 0 24 24" class="ic-stroke"><path d="M4 6l8 6 8-6M4 6v12h16V6"/></svg>', 'h3' => 'Email us', 'ds' => "Quotes, brand-specific questions, warranty paperwork, anything that isn't urgent. We reply within 2 business hours.", 'action' => 'Send an email', 'primary' => false],
+      ['kind' => 'commercial', 'badge' => 'B2B · 24/7', 'badge_style' => 'cta', 'icon' => '<svg viewBox="0 0 24 24" class="ic-stroke"><path d="M3 21l3-3M21 21l-3-3M5 18h14M7 6h10v12H7zM10 6V3M14 6V3"/></svg>', 'h3' => 'Commercial line', 'ds' => 'Restaurants, laundromats, property managers. Emergency dispatch around the clock. Dedicated account manager.', 'action' => 'Call the B2B line', 'primary' => false],
+    ],
+    // Section 3: reach card (links) + info stack.
     'reach' => [
-      'eyebrow' => 'Four ways to reach us',
-      'h2'      => "Pick whatever's easiest",
-      'intro'   => 'Phone is fastest for same-day service. For everything else, we answer texts, emails, and online bookings throughout the day.',
-      'cards'   => [
-        ['kind' => 'call',  'primary' => true,  'icon' => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>', 'lbl' => 'Call us', 'ds' => 'Fastest — real dispatcher, < 60-second wait'],
-        ['kind' => 'text',  'primary' => false, 'icon' => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>', 'lbl' => 'Text us', 'ds' => 'Send a photo of the appliance & model sticker'],
-        ['kind' => 'email', 'primary' => false, 'icon' => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>', 'lbl' => 'Email us', 'ds' => 'Best for quotes, invoices & commercial accounts'],
-        ['kind' => 'book',  'primary' => false, 'icon' => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>', 'lbl' => 'Book online', 'val' => 'Schedule a visit', 'ds' => 'Pick your slot — 60-second flow, SMS confirmation'],
+      'eyebrow' => 'Choose your channel',
+      'h2'      => 'Four ways to reach us',
+      'sub'     => 'No forms on our site — we route everything through real people or our scheduling platform. Pick what works.',
+      'links'   => [
+        ['kind' => 'call',  'cls' => '--cta', 'ttl' => 'Residential dispatch', 'val' => '', 'ds' => 'Real person · < 60-second wait · 7 days a week'],
+        ['kind' => 'call',  'cls' => '', 'ttl' => 'Commercial line · 24/7', 'val' => '', 'ds' => 'B2B emergency dispatch · property managers · restaurants'],
+        ['kind' => 'book',  'cls' => '--g', 'ttl' => 'Open booking form ↗', 'val' => 'Schedule online', 'ds' => '60-second flow on our scheduling platform · opens new tab'],
+        ['kind' => 'email', 'cls' => '', 'ttl' => 'Email · non-urgent', 'val' => '', 'ds' => 'Quotes, warranty docs, brand-specific questions · 2-hr reply'],
       ],
+      'note'    => "<b>Why no contact form?</b> We've found phone &amp; SMS get you to a real dispatcher 10× faster than a form lying in someone's inbox. For scheduling, our external platform handles SMS confirmations &amp; calendar add — better than an HTML form can.",
+    ],
+    'info' => [
+      'hours_h3'   => 'Hours of operation',
+      'hours_note' => 'Commercial (B2B): 24/7 emergency dispatch for active accounts.',
+      'addr_h3'    => 'Address & service area',
+      'addr_note'  => "Office is by appointment only — we're a service company, not a storefront. Tech & van dispatch happens here.",
+      'addr_link'  => 'See full service area map →',
+      'lines_h3'   => 'Two phone lines',
     ],
     'final' => [
-      'eyebrow' => 'Phone is faster than any form',
-      'h2'      => "One call and you're on the schedule.",
-      'intro'   => "Open 7 days a week with a real dispatcher. Tell us the appliance and the symptom — we'll book your window on the spot.",
+      'eyebrow' => 'Still here?',
+      'h2'      => 'Phone is faster than any form.',
+      'intro'   => 'Real dispatcher, no IVR. Average wait under 60 seconds. We answer 7 days a week. Try us.',
       'card_lbl'=> 'Call our dispatcher',
-      'signals' => [
-        ['b' => 'Same-day service', 'sub' => 'Call before noon'],
-        ['b' => '1-year warranty', 'sub' => 'Parts & labor'],
-        ['b' => 'EPA-certified techs', 'sub' => 'Licensed & insured'],
-      ],
     ],
   ];
   return $d;
