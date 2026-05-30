@@ -308,3 +308,158 @@ function hf_contact_defaults() {
   ];
   return $d;
 }
+
+/** Cached defaults for the Brands page (transcribed verbatim from Brands.html). */
+function hf_brands_defaults() {
+  static $d = null;
+  if ($d !== null) return $d;
+
+  // Scope-card icons (bespoke).
+  $sc = [
+    'chart' => '<svg width="22" height="22" viewBox="0 0 24 24" class="ic-stroke" aria-hidden="true"><path d="M3 12l3-9 4 6 4-3 4 9 3-3"/></svg>',
+    'star'  => '<svg width="22" height="22" viewBox="0 0 24 24" class="ic-stroke" aria-hidden="true"><polygon points="12 2 15 9 22 10 17 15 18 22 12 18 6 22 7 15 2 10 9 9 12 2"/></svg>',
+    'rack'  => '<svg width="22" height="22" viewBox="0 0 24 24" class="ic-stroke" aria-hidden="true"><rect x="3" y="6" width="18" height="14" rx="2"/><path d="M3 12h18M8 6V4M16 6V4"/></svg>',
+    'check' => '<svg width="22" height="22" viewBox="0 0 24 24" class="ic-stroke" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg>',
+  ];
+  // Matrix appliance icons (reuse appliance set).
+  $mi = [
+    'fridge'     => '<svg viewBox="0 0 32 32" class="ic-stroke"><rect x="7" y="3" width="18" height="26" rx="2"/><line x1="7" y1="13" x2="25" y2="13"/></svg>',
+    'washer'     => '<svg viewBox="0 0 32 32" class="ic-stroke"><rect x="6" y="4" width="20" height="24" rx="2"/><circle cx="16" cy="18" r="6"/></svg>',
+    'oven'       => '<svg viewBox="0 0 32 32" class="ic-stroke"><rect x="5" y="5" width="22" height="22" rx="2"/><rect x="9" y="10" width="14" height="13" rx="1"/></svg>',
+    'dishwasher' => '<svg viewBox="0 0 32 32" class="ic-stroke"><rect x="6" y="5" width="20" height="22" rx="2"/><path d="M10 11h12M10 17h12"/></svg>',
+    'cooktop'    => '<svg viewBox="0 0 32 32" class="ic-stroke"><circle cx="10" cy="11" r="3.5"/><circle cx="22" cy="11" r="3.5"/><circle cx="10" cy="22" r="3.5"/><circle cx="22" cy="22" r="3.5"/></svg>',
+  ];
+
+  $d = [
+    'hero' => [
+      'eyebrow' => 'Factory-authorized · OEM parts only',
+      'h1'      => 'Appliance brands <em>homes &amp; businesses</em> rely on.',
+      'lede'    => 'We service 25+ residential brands and 14+ commercial equipment makers across Northeast Georgia. Factory-authorized on premium, OEM-certified on mainstream — every repair backed by a 1-year warranty.',
+      'image'   => 'https://images.unsplash.com/photo-1556911220-bff31c812dba?w=1100&auto=format&fit=crop&q=80',
+      'image_alt' => 'Premium kitchen appliances — refrigerator, range, and oven',
+      'badge'   => '25+ brands',
+      'overlay_lbl' => 'Factory-authorized',
+      'overlay_txt' => 'Sub-Zero · Wolf · Viking · Thermador · Miele',
+      'stats'   => [
+        ['n' => '25', 'sup' => '+', 'l' => 'Residential brands'],
+        ['n' => '7', 'sup' => '', 'l' => 'Factory-authorized'],
+        ['n' => '14', 'sup' => '+', 'l' => 'Commercial makers'],
+      ],
+    ],
+    'scope' => [
+      'eyebrow' => 'Our scope',
+      'h2'      => 'Brands we repair',
+      'intro'   => "Every brand we work on is covered by genuine OEM parts, manufacturer procedures, and our 1-year parts &amp; labor warranty. Here's what that scope looks like in practice.",
+      'cards'   => [
+        ['icon' => $sc['chart'], 'n' => '25', 'sup' => '+', 'l' => 'Residential brands', 'p' => 'From Whirlpool and GE to Bosch and KitchenAid — every major maker sold in U.S. homes.'],
+        ['icon' => $sc['star'], 'n' => '7', 'sup' => '', 'l' => 'Factory-authorized', 'p' => 'Direct certification from Sub-Zero, Wolf, Viking, Thermador, Miele, Dacor, and Fisher & Paykel.'],
+        ['icon' => $sc['rack'], 'n' => '14', 'sup' => '+', 'l' => 'Commercial makers', 'p' => 'True, Hoshizaki, Vulcan, Hobart, and more — for restaurants, laundromats, and prep kitchens.'],
+        ['icon' => $sc['check'], 'n' => '100', 'sup' => '%', 'l' => 'OEM parts', 'p' => "We never use aftermarket parts. Always genuine, always with the manufacturer's spec sheet."],
+      ],
+    ],
+    'home' => [
+      'eyebrow' => 'Tier 2 · Mainstream',
+      'h2'      => 'Home appliance brands',
+      'intro'   => "The brands you'll find in most American kitchens and laundry rooms. We carry common-failure parts for the top 12 on every service van — meaning most repairs happen on the first visit.",
+      'cards'   => [
+        ['nm' => 'Whirlpool', 'ds' => 'U.S. mainstream leader. Solid parts availability. Strong on top-load washers and side-by-side fridges.', 'tags' => 'Fridge, Washer, Dryer, +3'],
+        ['nm' => 'KitchenAid', 'ds' => "Whirlpool's premium label. Built-in dishwashers, French-door fridges, gas ranges.", 'tags' => 'Fridge, Dishwasher, Range, +3'],
+        ['nm' => 'GE Appliances', 'ds' => 'Smart connectivity, Profile sub-line for high-end. Watch for control-board failures on 2015+ models.', 'tags' => 'Fridge, Range, Washer, +4'],
+        ['nm' => 'Samsung', 'ds' => 'Strong on smart fridges and front-load washers. Common: ice-maker, control board, drain pump.', 'tags' => 'Fridge, Washer, Dryer, +3'],
+        ['nm' => 'LG', 'ds' => 'Direct-drive washers, ThinQ smart line, French-door fridges. Common: linear compressor, board.', 'tags' => 'Fridge, Washer, Dryer, +3'],
+        ['nm' => 'Bosch', 'ds' => 'German engineering, quiet dishwashers, 800 Series and benchmark fridges. OEM parts only.', 'tags' => 'Dishwasher, Fridge, Cooktop, +2'],
+        ['nm' => 'Maytag', 'ds' => 'Whirlpool sub-brand. Heavy-duty washers/dryers. Famous Maytag Man = our entire crew.', 'tags' => 'Washer, Dryer, Fridge, +2'],
+        ['nm' => 'Frigidaire', 'ds' => 'Electrolux subsidiary. Affordable mainstream. Common: defrost system, water valve, control board.', 'tags' => 'Fridge, Range, Dishwasher, +2'],
+        ['nm' => 'Electrolux', 'ds' => 'European-style design, IQ-Touch controls. Service-friendly with modular sub-assemblies.', 'tags' => 'Fridge, Washer, Dryer, +2'],
+        ['nm' => 'Kenmore', 'ds' => 'Sears-era OEM-rebadged units. We identify the actual manufacturer (Whirlpool, LG, Samsung) and parts.', 'tags' => 'Fridge, Washer, Dryer, +2'],
+        ['nm' => 'Amana', 'ds' => 'Whirlpool budget label. Top-load washers, basic fridges. Very repairable, parts plentiful.', 'tags' => 'Fridge, Washer, Range'],
+        ['nm' => 'Hisense', 'ds' => 'Newer entrant in U.S. mainstream. Compact fridges, induction ranges. Parts via authorized distributor.', 'tags' => 'Fridge, Range, Cooktop'],
+      ],
+    ],
+    'prem' => [
+      'eyebrow' => 'Tier 1 · Factory-authorized',
+      'h2'      => 'Premium kitchen brands',
+      'intro'   => "Luxury and built-in appliances require manufacturer-trained technicians and OEM parts sourced directly from the brand's distribution center. We hold factory authorization on all seven.",
+      'cards'   => [
+        ['seal' => 'Factory-authorized', 'nm' => 'Sub-Zero', 'ds' => 'The benchmark for built-in refrigeration. Dual-compressor sealed systems, 20+ year service life.', 'focus' => 'Specialty: refrigeration · wine'],
+        ['seal' => 'Factory-authorized', 'nm' => 'Wolf', 'ds' => 'Pro-grade ranges, dual-fuel ovens, signature red knobs. Owned by Sub-Zero Group.', 'focus' => 'Specialty: ranges · ovens'],
+        ['seal' => 'Factory-authorized', 'nm' => 'Viking', 'ds' => 'Commercial-style pro ranges, built-in fridges, range hoods. Old-school robust.', 'focus' => 'Specialty: ranges · refrigeration'],
+        ['seal' => 'Factory-authorized', 'nm' => 'Thermador', 'ds' => 'BSH luxury sub-brand. Star-burner cooktops, Freedom induction, French-door fridges.', 'focus' => 'Specialty: cooktops · ovens'],
+        ['seal' => 'Factory-authorized', 'nm' => 'Miele', 'ds' => 'German engineering top-tier. Dishwashers, coffee systems, washers, ovens. 20-year design spec.', 'focus' => 'Specialty: dishwashers · laundry'],
+        ['seal' => 'Factory-authorized', 'nm' => 'Dacor', 'ds' => 'Now part of Samsung. Pro-style luxury ranges and built-in refrigeration with smart connectivity.', 'focus' => 'Specialty: ranges · fridges'],
+        ['seal' => 'Factory-authorized', 'nm' => 'Fisher & Paykel', 'ds' => 'New Zealand brand. DishDrawer dishwashers, Active Smart refrigeration, ergonomic French-door units.', 'focus' => 'Specialty: refrigeration · dishwashers'],
+        ['seal' => 'Authorized parts', 'nm' => 'JennAir', 'ds' => "Whirlpool's luxury label. Downdraft cooktops, wall ovens, refrigerated columns. Distinct silver finish.", 'focus' => 'Specialty: cooktops · wall ovens'],
+      ],
+    ],
+    'com' => [
+      'eyebrow' => 'B2B · Commercial',
+      'h2'      => 'Commercial equipment brands',
+      'intro'   => 'For restaurants, laundromats, multi-family property managers, and prep kitchens. NSF-compliant repairs, insurance billing, and Net-30 terms available.',
+      'promo_eyebrow' => 'Commercial repair',
+      'promo_h3'   => 'Same-day. After-hours. Net-30.',
+      'promo_p'    => "We work with multi-unit operators, single restaurants, laundromats, and property managers. A broken cooler at 11 PM doesn't wait for a 9–5 service window.",
+      'promo_list' => ['24/7 emergency dispatch', 'NSF/health-code-compliant work', 'Insurance & warranty billing', 'Maintenance contracts', 'Multi-unit volume pricing', 'COI on request'],
+      'promo_cta'  => 'Request a B2B quote',
+      'brands_h3'  => 'Commercial brands we service',
+      'brands_meta'=> '14+ makers across refrigeration, cooking, & laundry',
+      'cats' => [
+        ['h4' => 'Refrigeration & ice', 'list' => 'True, Hoshizaki, Manitowoc, Continental, Traulsen, Beverage-Air, Turbo Air, Scotsman'],
+        ['h4' => 'Cooking equipment', 'list' => 'Vulcan, Garland, Hobart, Pitco, Frymaster, Wolf Range, Imperial, Southbend'],
+        ['h4' => 'Commercial laundry', 'list' => 'Speed Queen, Huebsch, UniMac, Continental Girbau, Wascomat'],
+      ],
+    ],
+    'matrix' => [
+      'eyebrow' => 'Cross-reference',
+      'h2'      => 'Find brands by the appliance you need repaired',
+      'intro'   => "Pick your appliance type — we'll show you every brand we service in that category. Dark-blue chips are factory-authorized; the rest are OEM-certified.",
+      'hd_appl' => 'Appliance',
+      'hd_brands' => 'Brands we repair',
+      // Brand chips: lines starting "*" = factory-authorized (★), "+" = "more" link, else normal.
+      'rows'    => [
+        ['icon' => $mi['fridge'], 'nm' => 'Refrigerator', 'ct' => '21 brands', 'href' => 'service:refrigerator-repair', 'brands' => "*Sub-Zero\n*Viking\n*Thermador\n*Miele\n*Dacor\n*Fisher & Paykel\nWhirlpool\nKitchenAid\nGE\nSamsung\nLG\nBosch\nMaytag\nFrigidaire\n+7 more"],
+        ['icon' => $mi['washer'], 'nm' => 'Washer', 'ct' => '13 brands', 'href' => '', 'brands' => "*Miele\nWhirlpool\nMaytag\nGE\nSamsung\nLG\nBosch\nFrigidaire\nElectrolux\nSpeed Queen\nAmana\nKenmore\n+1 more"],
+        ['icon' => $mi['washer'], 'nm' => 'Dryer', 'ct' => '11 brands', 'href' => '', 'brands' => "*Miele\nWhirlpool\nMaytag\nGE\nSamsung\nLG\nBosch\nElectrolux\nFrigidaire\nSpeed Queen\nKenmore"],
+        ['icon' => $mi['dishwasher'], 'nm' => 'Dishwasher', 'ct' => '14 brands', 'href' => '', 'brands' => "*Miele\n*Thermador\n*Fisher & Paykel\nBosch\nKitchenAid\nWhirlpool\nGE\nSamsung\nLG\nMaytag\nFrigidaire\nJennAir\n+2 more"],
+        ['icon' => $mi['oven'], 'nm' => 'Oven / Range', 'ct' => '16 brands', 'href' => '', 'brands' => "*Wolf\n*Viking\n*Thermador\n*Miele\n*Dacor\nKitchenAid\nGE Profile\nWhirlpool\nSamsung\nLG\nBosch\nFrigidaire\n+4 more"],
+        ['icon' => $mi['cooktop'], 'nm' => 'Cooktop', 'ct' => '12 brands', 'href' => '', 'brands' => "*Wolf\n*Thermador\n*Viking\n*Miele\nBosch\nGE\nKitchenAid\nWhirlpool\nSamsung\nJennAir\n+2 more"],
+      ],
+    ],
+    'why' => [
+      'eyebrow' => 'How brand repair works at HamersFix',
+      'h2'      => 'Appliance brand repair',
+      'intro'   => "Generic repair shops can't legally — or skillfully — touch a Sub-Zero sealed system or a Miele control board. Here's what proper brand-specific repair actually looks like.",
+      'cards'   => [
+        ['num' => '1', 'h3' => 'Brand-trained technicians', 'p' => "Our techs go through factory training programs for each premium brand we service. That's how Sub-Zero, Wolf, Viking, Thermador, Miele, Dacor, and Fisher & Paykel authorize us — they trained us first.", 'list' => ['Annual recertification with factory updates', 'Brand-specific diagnostic tooling on every van', 'Direct manufacturer tech-support line']],
+        ['num' => '2', 'h3' => 'Genuine OEM parts only', 'p' => 'Aftermarket parts are cheaper — and they void manufacturer warranties, fail faster, and damage adjacent components. We source parts directly from manufacturer distribution centers.', 'list' => ['Common-failure parts stocked on every van', 'Specialty parts ordered same-day from distributor', 'Original spec sheets followed for every install']],
+        ['num' => '3', 'h3' => 'Warranty-friendly procedures', 'p' => "If your appliance is still under manufacturer warranty, we follow their service protocol so coverage isn't voided. We also handle the paperwork on extended warranties and home-protection plans.", 'list' => ['Authorized service for AHS, Choice, Sears', 'Manufacturer warranty work direct-billed', '1-year HamersFix warranty stacks on top']],
+      ],
+    ],
+    'faq' => [
+      'eyebrow' => 'FAQ',
+      'h2'      => 'Questions before you book?',
+      'items'   => [
+        ['q' => 'What does "factory-authorized" actually mean?', 'a' => "It means the manufacturer has certified our technicians, audited our procedures, and granted us access to their OEM parts distribution. For Sub-Zero, Wolf, Viking, Thermador, Miele, Dacor, and Fisher & Paykel, we're on the brand's official service-network roster — which protects your warranty."],
+        ['q' => 'Do you charge more for premium brands?', 'a' => 'The diagnostic fee is the same ($89, waived with repair). Parts cost more on luxury brands — a Sub-Zero compressor is genuinely more expensive than a Whirlpool — but the labor flat-rate is consistent with what the brand publishes.'],
+        ['q' => 'My fridge is from a brand not on your list — can you still fix it?', 'a' => 'Probably yes. We service 25+ residential brands and 14+ commercial makers, but our parts network extends further. Call us with the make and model — most lesser-known brands are rebadged from a major maker, and we can usually source parts in 1–2 days.'],
+        ['q' => "Why won't generic shops touch my Sub-Zero?", 'a' => "Sub-Zero sealed-system work requires EPA Section 608 certification (a federal license) plus brand-specific training. Without authorization, shops can't source OEM parts and can't legally open the refrigerant system. Working without 608 is a federal violation."],
+        ['q' => 'Can you service smart appliances (Wi-Fi connected)?', 'a' => "Yes — Samsung SmartThings, LG ThinQ, GE SmartHQ, Bosch Home Connect, and Whirlpool's smart line. Our diagnostic tablets pair directly with these systems to read error codes and run remote tests."],
+        ['q' => 'What if my appliance is under manufacturer warranty?', 'a' => 'Bring it up when you call. For factory-authorized brands we can perform warranty work direct-billed to the manufacturer. For others, we can perform repairs the manufacturer recommends, with you handling the reimbursement.'],
+        ['q' => 'Do you work with home warranty companies?', 'a' => "Yes — we're an approved technician for American Home Shield, Choice Home Warranty, Sears Home Services, and several smaller plans. We'll coordinate with your warranty company directly."],
+        ['q' => 'Will using your repair void my appliance warranty?', 'a' => "No. Magnuson-Moss Warranty Act protects your right to use independent service without voiding the warranty, as long as parts and procedures are manufacturer-spec — which ours always are. For factory-authorized brands, we're literally the manufacturer's chosen service network."],
+      ],
+    ],
+    'final' => [
+      'eyebrow' => 'Ready when you are',
+      'h2'      => "Let's get your appliance working again.",
+      'intro'   => "One call, technician at your door today. We're open 7 days a week. Real dispatcher answers — every brand we listed is in our daily rotation.",
+      'card_lbl'=> 'Call our dispatcher',
+      'signals' => [
+        ['b' => 'Factory-authorized', 'sub' => '7 premium brands'],
+        ['b' => '100% OEM parts', 'sub' => 'No aftermarket'],
+        ['b' => '1-year warranty', 'sub' => 'Parts & labor'],
+        ['b' => '$89 diagnostic', 'sub' => 'Waived with repair'],
+      ],
+    ],
+  ];
+  return $d;
+}
