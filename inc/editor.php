@@ -42,29 +42,22 @@ add_filter('use_block_editor_for_post', function ($use_block_editor, $post) {
 }, 10, 2);
 
 /**
- * Belt-and-suspenders: make sure the WordPress media uploader (wp.media) is
- * present on the edit screens of our ACF-driven page templates. ACF normally
- * enqueues it itself, but on the classic-editor screen for a page that relies
- * entirely on ACF, this guarantees the image-field "Add Image" button can open
- * the media modal even if another plugin/cache interfered with the load order.
+ * Belt-and-suspenders: guarantee the WordPress media library JS (wp.media and
+ * its models/views — the `media-models`/`media-views`/`media-editor` bundle) is
+ * present on every classic post/page edit screen.
+ *
+ * Symptom this fixes: ACF image fields throw
+ *   "Uncaught TypeError: Cannot read properties of undefined (reading 'query')"
+ *   in acf-input.min.js (newMediaPopup → addFrameStates), and the "Add Image"
+ *   button does nothing — because wp.media.query is missing when the media
+ *   backbone never loaded. Calling wp_enqueue_media() on the edit screen forces
+ *   that bundle to load. Not gated on the page template (that gate proved too
+ *   fragile); harmless where media is already present.
  */
 add_action('admin_enqueue_scripts', function ($hook) {
   if ($hook !== 'post.php' && $hook !== 'post-new.php') return;
-
-  $post_id = 0;
-  if (isset($_GET['post'])) {
-    $post_id = (int) $_GET['post'];
-  } elseif (isset($GLOBALS['post']) && $GLOBALS['post'] instanceof WP_Post) {
-    $post_id = (int) $GLOBALS['post']->ID;
+  if (function_exists('wp_enqueue_media')) {
+    wp_enqueue_media();
   }
-  if (!$post_id) return;
-  if (get_post_type($post_id) !== 'page') return;
-
-  $tpl = get_page_template_slug($post_id);
-  if ($tpl && in_array($tpl, hf_classic_editor_templates(), true)) {
-    if (function_exists('wp_enqueue_media')) {
-      wp_enqueue_media();
-    }
-  }
-});
+}, 5);
 
