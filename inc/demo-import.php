@@ -166,16 +166,72 @@ function hf_demo_apply($overwrite, &$count) {
 
   /* ===== Services (CPT) ===== */
   if (post_type_exists('service')) {
+    $sd = function_exists('hf_service_defaults') ? hf_service_defaults() : [];
     foreach ($d['services'] as $s) {
       $slug = sanitize_title($s['title']);
       $post = get_page_by_path($slug, OBJECT, 'service');
       if (!$post) continue;
       $pid = $post->ID;
+
+      // Card / menu basics.
       hf_demo_set('icon',       $s['icon'],       $pid, $overwrite, $count);
       hf_demo_set('short_desc', $s['short_desc'], $pid, $overwrite, $count);
       hf_demo_set('long_desc',  $s['long_desc'],  $pid, $overwrite, $count);
       hf_demo_set('price_note', $s['price_note'], $pid, $overwrite, $count);
       hf_demo_set('job_count',  $s['job_count'],  $pid, $overwrite, $count);
+
+      $is_ref   = (isset($s['icon']) && $s['icon'] === 'fridge');
+      $appl     = trim(preg_replace('/\s*Repair\s*$/i', '', $s['title'])); // "Refrigerator"
+      $appl_low = strtolower($appl);
+
+      // Hero (all services) — keeps the edit screen populated.
+      hf_demo_set('hero_eyebrow', 'EPA-certified · Same-day available', $pid, $overwrite, $count);
+      hf_demo_set('hero_h1', $is_ref ? 'Refrigerator repair across Northeast Georgia' : ($s['title'] . ' across Northeast Georgia'), $pid, $overwrite, $count);
+      hf_demo_set('hero_lede', ($is_ref && isset($sd['hero']['lede']))
+        ? $sd['hero']['lede']
+        : sprintf('Our EPA-certified, licensed technicians repair %s across Northeast Georgia — flat-rate pricing and a 1-year parts & labor warranty, often the same day.', $appl_low), $pid, $overwrite, $count);
+      hf_demo_set('hero_badge_text', 'EPA-Certified Tech On Call', $pid, $overwrite, $count);
+      hf_demo_set('hero_tag_text',   $appl . ' repair across Northeast GA', $pid, $overwrite, $count);
+
+      // Reference service (refrigerator) ships full section content. Its
+      // problems/types grids render from verbatim partials, so only the
+      // section headings are stored; reviews/FAQ are real repeaters.
+      if ($is_ref) {
+        hf_demo_set('epa_badge', true, $pid, $overwrite, $count);
+        if (isset($sd['hero']['epa_text'])) hf_demo_set('epa_text', $sd['hero']['epa_text'], $pid, $overwrite, $count);
+
+        if (!empty($sd['problems'])) {
+          hf_demo_set('problems_eyebrow', $sd['problems']['eyebrow'], $pid, $overwrite, $count);
+          hf_demo_set('problems_h2',      $sd['problems']['h2'],      $pid, $overwrite, $count);
+          hf_demo_set('problems_intro',   $sd['problems']['intro'],   $pid, $overwrite, $count);
+        }
+        if (!empty($sd['types'])) {
+          hf_demo_set('types_eyebrow', $sd['types']['eyebrow'], $pid, $overwrite, $count);
+          hf_demo_set('types_h2',      $sd['types']['h2'],      $pid, $overwrite, $count);
+          hf_demo_set('types_intro',   $sd['types']['intro'],   $pid, $overwrite, $count);
+        }
+        if (!empty($sd['reviews'])) {
+          hf_demo_set('reviews_eyebrow', $sd['reviews']['eyebrow'], $pid, $overwrite, $count);
+          hf_demo_set('reviews_h2',      $sd['reviews']['h2'],      $pid, $overwrite, $count);
+          hf_demo_set('reviews_intro',   $sd['reviews']['intro'],   $pid, $overwrite, $count);
+          hf_demo_set('review_score',    $sd['reviews']['agg']['score'], $pid, $overwrite, $count);
+          hf_demo_set('review_title',    $sd['reviews']['agg']['title'], $pid, $overwrite, $count);
+          if (function_exists('hf_demo_map')) {
+            hf_demo_set('reviews', hf_demo_map($sd['reviews']['items'], ['initials', 'source', 'text', 'name', 'meta']), $pid, $overwrite, $count);
+          }
+        }
+        if (!empty($sd['faq'])) {
+          hf_demo_set('faq_eyebrow', $sd['faq']['eyebrow'], $pid, $overwrite, $count);
+          hf_demo_set('faq_h2',      $sd['faq']['h2'],      $pid, $overwrite, $count);
+          if (function_exists('hf_demo_map')) {
+            hf_demo_set('faq', hf_demo_map($sd['faq']['items'], ['q', 'a']), $pid, $overwrite, $count);
+          }
+        }
+      }
+
+      // Per-service SEO.
+      hf_demo_set('seo_title', $s['title'] . ' in Northeast Georgia — Same-Day | HamersFix', $pid, $overwrite, $count);
+      hf_demo_set('seo_description', sprintf('EPA-certified technicians repair %s across Northeast Georgia. Flat-rate pricing, a 1-year parts & labor warranty, and same-day service available.', $appl_low), $pid, $overwrite, $count);
     }
   }
 
@@ -221,6 +277,10 @@ function hf_demo_apply($overwrite, &$count) {
     hf_demo_set('com_cta_label',   $cm['cta_label'],   $home_id, $overwrite, $count);
     hf_demo_set('com_panel_label', $cm['panel_label'], $home_id, $overwrite, $count);
     hf_demo_set('com_stats',       $cm['stats'],       $home_id, $overwrite, $count); // label/value
+
+    // Home SEO.
+    hf_demo_set('seo_title', 'HamersFix — Same-Day Appliance Repair in Northeast Georgia', $home_id, $overwrite, $count);
+    hf_demo_set('seo_description', 'Same-day refrigerator, washer, dryer, dishwasher, oven and cooktop repair across Northeast Georgia. EPA-certified, licensed & insured, flat-rate pricing, 1-year warranty.', $home_id, $overwrite, $count);
   }
 
   /* ===== Section pages (Commercial/About/Brands/Contact/Services/Reviews/Service Areas) ===== */

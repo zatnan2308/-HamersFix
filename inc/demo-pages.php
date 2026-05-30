@@ -373,4 +373,40 @@ function hf_demo_apply_pages($overwrite, &$count) {
     hf_demo_set('final_intro', $d['final_intro'], $pid, $overwrite, $count);
     hf_demo_set('final_signals', hf_demo_map($d['final_signals'], ['b', 'sub']), $pid, $overwrite, $count);
   }
+
+  /* ===== Per-page SEO (title + description) ===== */
+  hf_demo_apply_seo($overwrite, $count);
+}
+
+/** Fill seo_title / seo_description on the seven section pages. */
+function hf_demo_apply_seo($overwrite, &$count) {
+  $seo = [
+    ['template-commercial.php', 'commercial',
+      'Commercial Appliance Repair in Northeast Georgia | HamersFix',
+      'Commercial refrigeration, kitchen and laundry equipment repair for restaurants, cafés and property managers across Northeast Georgia. After-hours dispatch, NSF-compliant.'],
+    ['template-about.php', 'about',
+      'About HamersFix — Local Appliance Repair in Northeast Georgia',
+      'Locally owned, licensed and insured appliance repair serving Northeast Georgia. Clear communication, flat-rate pricing, and a 1-year warranty on every repair.'],
+    ['template-brands.php', 'brands',
+      'Appliance Brands We Repair — Sub-Zero to Whirlpool | HamersFix',
+      'Factory-authorized on Sub-Zero, Wolf, Viking, Thermador and Miele; OEM-certified on 25+ mainstream brands. Genuine parts and a 1-year warranty across Northeast Georgia.'],
+    ['template-contact.php', 'contact',
+      'Contact HamersFix — Call, Book or Email | Northeast Georgia',
+      'Reach HamersFix appliance repair: call our dispatcher, book online, or email. Real person, under-60-second wait, serving Northeast Georgia seven days a week.'],
+    ['template-service-areas.php', 'service-areas',
+      'Service Areas — 14 Cities in Northeast Georgia | HamersFix',
+      'HamersFix covers 14 cities across Gwinnett, Barrow and the Athens area — Bethlehem, Lawrenceville, Winder, Monroe and more. Same-day appliance repair, flat-rate pricing.'],
+    ['template-services.php', 'appliance-repair-services',
+      'Appliance Repair Services in Northeast Georgia | HamersFix',
+      'We repair refrigerators, washers, dryers, dishwashers, ovens and cooktops across Northeast Georgia. Same-day service, flat-rate pricing, a 1-year parts & labor warranty.'],
+    ['template-reviews.php', 'reviews',
+      'Reviews — Appliance Repair in Northeast Georgia | HamersFix',
+      'Read verified customer reviews of HamersFix appliance repair across Google, BBB, Yelp and HomeAdvisor. Honest pricing, on-time service, and warranty-backed repairs.'],
+  ];
+  foreach ($seo as $row) {
+    $pid = hf_demo_page_id($row[0], $row[1]);
+    if (!$pid) continue;
+    hf_demo_set('seo_title',       $row[2], $pid, $overwrite, $count);
+    hf_demo_set('seo_description', $row[3], $pid, $overwrite, $count);
+  }
 }
