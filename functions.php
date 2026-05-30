@@ -30,6 +30,7 @@ $hf_includes = [
   'inc/schema.php',       // JSON-LD: LocalBusiness, FAQPage, Service, Breadcrumbs
   'inc/acf.php',          // ACF detection notice, Options page, field groups
   'inc/demo-import.php',  // admin "Demo Data" importer (fill-empty / reset)
+  'inc/demo-pages.php',   // demo importer: the 7 section pages
 ];
 
 foreach ($hf_includes as $hf_file) {

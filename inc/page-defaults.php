@@ -516,3 +516,71 @@ function hf_reviews_defaults() {
   ];
   return $d;
 }
+
+/**
+ * Cached defaults for the Service Areas page.
+ *
+ * Mirrors the inline defaults in template-service-areas.php so the Demo Data
+ * importer can populate the page's ACF fields with the exact same content the
+ * template renders by default. hero_eyebrow is computed from the live ZIP list.
+ */
+function hf_service_areas_defaults() {
+  static $d = null;
+  if ($d !== null) return $d;
+
+  $cities = function_exists('hf_count_cities') ? hf_count_cities() : 14;
+  $zips   = function_exists('hf_count_zips') ? hf_count_zips() : 18;
+
+  $d = [
+    'hero_eyebrow' => sprintf('%1$d cities · %2$d ZIPs · same-day', $cities, $zips),
+    'hero_h1'      => 'Serving the <em>Northeast Georgia</em> — 14 cities, one local team.',
+    'hero_lede'    => 'We cover the Gwinnett, Barrow and Athens area end-to-end. 8 service vans on the road, 6 days a week, with parts for the top 12 brands stocked on every truck.',
+    'book_h2'      => 'Ready to book?',
+    'book_p'       => "You're on our coverage page — pick the option that fits. Booking takes about a minute through our scheduler.",
+    'stat_arrival' => '2.4',
+    'stat_vans'    => '8',
+    'stat_ontime'  => '96',
+    'map_h2'       => "Where you'll find our vans",
+    'map_intro'    => 'Gwinnett and Athens corridor — across Gwinnett, Barrow, Walton, Jackson and Oconee — from Lawrenceville east to Statham, north through Hoschton and Braselton, south to Monroe and Loganville. Beyond? We refer to vetted partners.',
+    'cities_h2'    => 'Cities we serve, grouped by region',
+    'cities_intro' => 'Click your city for hyper-local info — local technician profiles, response time, top brands serviced in that ZIP cluster.',
+    'regions' => [
+      ['pill' => 'Tier 1 · Same-day priority', 'featured' => true, 'pill_cta' => false, 'title' => 'Gwinnett · Core', 'meta' => '6 cities · HQ region',
+       'cities' => ['Bethlehem', 'Braselton', 'Snellville', 'Monroe', 'Grayson', 'Statham', 'Watkinsville', 'Loganville'],
+       'stats' => [['Avg arrival', '1.8 hr'], ['Same-day rate', '94%'], ['Jobs/month', '410']]],
+      ['pill' => 'Tier 1 · Same-day', 'featured' => false, 'pill_cta' => false, 'title' => 'Barrow & Jackson · North', 'meta' => '4 cities · daily routes',
+       'cities' => ['Lawrenceville', 'Winder', 'Statham', 'Braselton', 'Hoschton', 'Auburn'],
+       'stats' => [['Avg arrival', '2.4 hr'], ['Same-day rate', '88%'], ['Jobs/month', '295']]],
+      ['pill' => 'Tier 2 · By appointment', 'featured' => false, 'pill_cta' => true, 'title' => 'Walton & Oconee · Outer ring', 'meta' => '4 cities · ~25 min from HQ',
+       'cities' => ['Monroe', 'Loganville', 'Bogart', 'Watkinsville'],
+       'stats' => [['Avg arrival', '3.2 hr'], ['Same-day rate', '72%'], ['Jobs/month', '180']]],
+    ],
+    'resp_h2'    => 'Response time by zone',
+    'resp_intro' => 'Real arrival data from the past 12 months. We track every call from booking to the tech ringing the doorbell — and we publish it.',
+    'zones' => [
+      ['level' => 'fast', 'lbl' => 'Gwinnett · Core', 'time' => '1.8', 'suffix' => 'hr', 'area' => 'Bethlehem & ring', 'desc' => 'From booking to doorbell. HQ proximity + dense routes keep this zone fastest.', 'bar' => ''],
+      ['level' => 'fast', 'lbl' => 'Barrow & Jackson · North', 'time' => '2.4', 'suffix' => 'hr', 'area' => 'Lawrenceville, Winder', 'desc' => 'Two dedicated vans cover this zone all day; same-day in 88% of cases.', 'bar' => '85%'],
+      ['level' => 'med', 'lbl' => 'Athens corridor · South', 'time' => '3.2', 'suffix' => 'hr', 'area' => 'Lawrenceville, Auburn', 'desc' => 'Slightly longer routing. Call before 11 AM for same-day; after, next morning.', 'bar' => ''],
+      ['level' => 'slow', 'lbl' => 'Edge zones', 'time' => 'Next', 'suffix' => 'day', 'area' => 'Outer ring', 'desc' => 'Outside our daily route. We schedule for the following morning at first window.', 'bar' => ''],
+    ],
+    'com_h2'    => 'Restaurants & multi-unit property managers — anywhere in our zone.',
+    'com_intro' => 'Single restaurants, laundromats, multi-family complexes, prep kitchens. Same map, expanded service hours. After-hours emergency dispatch; maintenance contracts available for recurring portfolios.',
+    'com_features' => ['After-hours emergency dispatch', 'NSF/health-code compliance', 'Insurance & warranty billing', 'Net-30 terms available', 'Multi-unit volume pricing', 'COI on request'],
+    'com_stats' => [['Active commercial accounts', '54', ''], ['Avg after-hours response', '2.1', 'hr'], ['Multi-unit property portfolios', '8', ''], ['Repeat-business rate', '92', '%']],
+    'faq_h2' => 'Questions about coverage',
+    'faq' => [
+      ['q' => 'Do you charge extra for outer-ring cities?', 'a' => 'No — flat-rate pricing is identical across all 14 cities. The only difference is scheduling: outer-ring areas may be next-day rather than same-day.'],
+      ['q' => "What if my city isn't listed?", 'a' => "Call us — we may still cover you, or we'll refer a vetted partner. We're expanding our coverage area regularly."],
+      ['q' => 'How fast can you actually get here?', 'a' => 'In our core Gwinnett zone, often within 2 hours. Outer areas, same-day if you call before noon, otherwise next morning.'],
+      ['q' => 'Do you cover commercial accounts everywhere?', 'a' => 'Yes — commercial service covers our entire area with after-hours emergency dispatch, including the outer ring.'],
+    ],
+    'final_h2'    => 'Tech at your door. Today, most likely.',
+    'final_intro' => "One call to a real dispatcher. Tell us your city and the appliance — we'll quote a flat rate and an arrival window on the spot.",
+    'final_signals' => [
+      ['b' => 'Same-day across 14 cities', 'sub' => 'Call before noon'],
+      ['b' => '1-year warranty', 'sub' => 'Parts & labor'],
+      ['b' => 'Flat-rate pricing', 'sub' => 'All 14 cities'],
+    ],
+  ];
+  return $d;
+}

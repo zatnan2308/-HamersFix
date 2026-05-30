@@ -222,4 +222,9 @@ function hf_demo_apply($overwrite, &$count) {
     hf_demo_set('com_panel_label', $cm['panel_label'], $home_id, $overwrite, $count);
     hf_demo_set('com_stats',       $cm['stats'],       $home_id, $overwrite, $count); // label/value
   }
+
+  /* ===== Section pages (Commercial/About/Brands/Contact/Services/Reviews/Service Areas) ===== */
+  if (function_exists('hf_demo_apply_pages')) {
+    hf_demo_apply_pages($overwrite, $count);
+  }
 }

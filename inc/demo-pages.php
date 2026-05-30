@@ -1,0 +1,376 @@
+<?php
+/**
+ * HamersFix — Demo Data importer: section pages.
+ *
+ * Extends the importer (inc/demo-import.php) to populate the seven section-page
+ * templates (Commercial, About, Brands, Contact, Appliance Repair Services,
+ * Reviews, Service Areas) so NO ACF field is empty in the admin after an
+ * import. The front end already renders these from design defaults; this just
+ * mirrors the same defaults into the editable fields.
+ *
+ * Called from hf_demo_apply() (inc/demo-import.php). Reuses hf_demo_set() and
+ * hf_demo_rows() defined there.
+ *
+ * @package HamersFix
+ */
+
+if (!defined('ABSPATH')) exit;
+
+/** Resolve a section page by its template, falling back to its slug. */
+function hf_demo_page_id($template, $slug) {
+  $q = get_posts([
+    'post_type'   => 'page',
+    'post_status' => 'any',
+    'numberposts' => 1,
+    'fields'      => 'ids',
+    'meta_key'    => '_wp_page_template',
+    'meta_value'  => $template,
+    'no_found_rows' => true,
+  ]);
+  if (!empty($q)) return (int) $q[0];
+  $p = get_page_by_path($slug);
+  return $p ? (int) $p->ID : 0;
+}
+
+/** Map an array of associative rows to only the given subkeys (in order). */
+function hf_demo_map($rows, $keys) {
+  $out = [];
+  foreach ((array) $rows as $r) {
+    $row = [];
+    foreach ($keys as $k) $row[$k] = isset($r[$k]) ? $r[$k] : '';
+    $out[] = $row;
+  }
+  return $out;
+}
+
+/** Join a flat list into a newline string (for ACF textarea subfields). */
+function hf_demo_lines($list) {
+  return implode("\n", array_map('strval', (array) $list));
+}
+
+/** Populate all seven section pages. */
+function hf_demo_apply_pages($overwrite, &$count) {
+
+  /* ===== Commercial ===== */
+  $pid = hf_demo_page_id('template-commercial.php', 'commercial');
+  if ($pid) {
+    $d = hf_commercial_defaults();
+    $h = $d['hero'];
+    hf_demo_set('hero_eyebrow',   $h['eyebrow'],   $pid, $overwrite, $count);
+    hf_demo_set('hero_h1',        $h['h1'],        $pid, $overwrite, $count);
+    hf_demo_set('hero_lede',      $h['lede'],      $pid, $overwrite, $count);
+    hf_demo_set('hero_issues',    hf_demo_rows($h['issues'], 'text'), $pid, $overwrite, $count);
+    hf_demo_set('hero_cta_label', $h['cta_label'], $pid, $overwrite, $count);
+    hf_demo_set('hero_note',      $h['note'],      $pid, $overwrite, $count);
+    hf_demo_set('hero_qpills',    hf_demo_rows($h['qpills'], 'text'), $pid, $overwrite, $count);
+    hf_demo_set('hero_image_alt', $h['image_alt'], $pid, $overwrite, $count);
+    hf_demo_set('hero_badge',     $h['badge'],     $pid, $overwrite, $count);
+    hf_demo_set('hero_tag_lbl',   $h['tag_lbl'],   $pid, $overwrite, $count);
+    hf_demo_set('hero_tag_h3',    $h['tag_h3'],    $pid, $overwrite, $count);
+
+    hf_demo_set('services_eyebrow', $d['services']['eyebrow'], $pid, $overwrite, $count);
+    hf_demo_set('services_h2',      $d['services']['h2'],      $pid, $overwrite, $count);
+    hf_demo_set('services_intro',   $d['services']['intro'],   $pid, $overwrite, $count);
+    $svc = [];
+    foreach ($d['services']['cards'] as $c) {
+      $svc[] = ['gradient' => $c['gradient'], 'icon' => $c['icon'], 'title' => $c['title'], 'desc' => $c['desc'], 'chips' => hf_demo_rows($c['chips'], 'text')];
+    }
+    hf_demo_set('com_services', $svc, $pid, $overwrite, $count);
+
+    hf_demo_set('downtime_eyebrow', $d['downtime']['eyebrow'], $pid, $overwrite, $count);
+    hf_demo_set('downtime_h2',      $d['downtime']['h2'],      $pid, $overwrite, $count);
+    hf_demo_set('downtime_intro',   $d['downtime']['intro'],   $pid, $overwrite, $count);
+    hf_demo_set('downtime', hf_demo_map($d['downtime']['cards'], ['icon', 'title', 'desc']), $pid, $overwrite, $count);
+
+    hf_demo_set('trust_eyebrow', $d['trust']['eyebrow'], $pid, $overwrite, $count);
+    hf_demo_set('trust_h2',      $d['trust']['h2'],      $pid, $overwrite, $count);
+    hf_demo_set('trust_intro',   $d['trust']['intro'],   $pid, $overwrite, $count);
+    hf_demo_set('trust_pillars', hf_demo_map($d['trust']['pillars'], ['icon', 'val', 'lbl', 'sub']), $pid, $overwrite, $count);
+
+    hf_demo_set('brands_eyebrow',   $d['brands']['eyebrow'],   $pid, $overwrite, $count);
+    hf_demo_set('brands_h2',        $d['brands']['h2'],        $pid, $overwrite, $count);
+    hf_demo_set('brands_intro',     $d['brands']['intro'],     $pid, $overwrite, $count);
+    hf_demo_set('brands_card_h3',   $d['brands']['card_h3'],   $pid, $overwrite, $count);
+    hf_demo_set('brands_card_meta', $d['brands']['card_meta'], $pid, $overwrite, $count);
+    hf_demo_set('brand_list',       hf_demo_rows($d['brands']['list'], 'name'), $pid, $overwrite, $count);
+    hf_demo_set('brands_footnote',  $d['brands']['footnote'],  $pid, $overwrite, $count);
+    hf_demo_set('brands_ask_h4',    $d['brands']['ask_h4'],    $pid, $overwrite, $count);
+    hf_demo_set('brands_ask_p',     $d['brands']['ask_p'],     $pid, $overwrite, $count);
+    hf_demo_set('brands_ask_btn',   $d['brands']['ask_btn'],   $pid, $overwrite, $count);
+
+    hf_demo_set('process_eyebrow', $d['process']['eyebrow'], $pid, $overwrite, $count);
+    hf_demo_set('process_h2',      $d['process']['h2'],      $pid, $overwrite, $count);
+    hf_demo_set('process_intro',   $d['process']['intro'],   $pid, $overwrite, $count);
+    hf_demo_set('process_steps', hf_demo_map($d['process']['steps'], ['title', 'desc', 'tag']), $pid, $overwrite, $count);
+
+    hf_demo_set('areas_eyebrow', $d['areas']['eyebrow'], $pid, $overwrite, $count);
+    hf_demo_set('areas_h2',      $d['areas']['h2'],      $pid, $overwrite, $count);
+    hf_demo_set('areas_intro',   $d['areas']['intro'],   $pid, $overwrite, $count);
+    hf_demo_set('area_cards', hf_demo_map($d['areas']['cards'], ['num', 'title', 'cities', 'link']), $pid, $overwrite, $count);
+    hf_demo_set('areas_cta_note', $d['areas']['cta_note'], $pid, $overwrite, $count);
+    hf_demo_set('areas_cta_text', $d['areas']['cta_text'], $pid, $overwrite, $count);
+
+    hf_demo_set('faq_eyebrow', $d['faq']['eyebrow'], $pid, $overwrite, $count);
+    hf_demo_set('faq_h2',      $d['faq']['h2'],      $pid, $overwrite, $count);
+    hf_demo_set('faq_intro',   $d['faq']['intro'],   $pid, $overwrite, $count);
+    hf_demo_set('faq', hf_demo_map($d['faq']['items'], ['q', 'a']), $pid, $overwrite, $count);
+
+    hf_demo_set('final_eyebrow',  $d['final']['eyebrow'],  $pid, $overwrite, $count);
+    hf_demo_set('final_h2',       $d['final']['h2'],       $pid, $overwrite, $count);
+    hf_demo_set('final_intro',    $d['final']['intro'],    $pid, $overwrite, $count);
+    hf_demo_set('final_card_lbl', $d['final']['card_lbl'], $pid, $overwrite, $count);
+  }
+
+  /* ===== About ===== */
+  $pid = hf_demo_page_id('template-about.php', 'about');
+  if ($pid) {
+    $d = hf_about_defaults();
+    $h = $d['hero'];
+    hf_demo_set('hero_eyebrow',   $h['eyebrow'],   $pid, $overwrite, $count);
+    hf_demo_set('hero_h1',        $h['h1'],        $pid, $overwrite, $count);
+    hf_demo_set('hero_lede',      $h['lede'],      $pid, $overwrite, $count);
+    hf_demo_set('hero_cta_label', $h['cta_label'], $pid, $overwrite, $count);
+
+    $w = $d['who'];
+    hf_demo_set('who_eyebrow', $w['eyebrow'], $pid, $overwrite, $count);
+    hf_demo_set('who_h2',      $w['h2'],      $pid, $overwrite, $count);
+    hf_demo_set('who_paras',   hf_demo_rows($w['paras'], 'text'), $pid, $overwrite, $count);
+    hf_demo_set('who_tags',    hf_demo_rows($w['tags'], 'text'),  $pid, $overwrite, $count);
+    hf_demo_set('who_vis_lbl', $w['vis_lbl'], $pid, $overwrite, $count);
+    hf_demo_set('who_vis_h3',  $w['vis_h3'],  $pid, $overwrite, $count);
+    hf_demo_set('who_items',   hf_demo_map($w['items'], ['icon', 'title', 'sub']), $pid, $overwrite, $count);
+
+    hf_demo_set('values_eyebrow', $d['values']['eyebrow'], $pid, $overwrite, $count);
+    hf_demo_set('values_h2',      $d['values']['h2'],      $pid, $overwrite, $count);
+    hf_demo_set('values_intro',   $d['values']['intro'],   $pid, $overwrite, $count);
+    hf_demo_set('value_cards', hf_demo_map($d['values']['cards'], ['icon', 'h3', 'p']), $pid, $overwrite, $count);
+
+    hf_demo_set('trust_eyebrow', $d['trust']['eyebrow'], $pid, $overwrite, $count);
+    hf_demo_set('trust_h2',      $d['trust']['h2'],      $pid, $overwrite, $count);
+    hf_demo_set('trust_intro',   $d['trust']['intro'],   $pid, $overwrite, $count);
+    hf_demo_set('trust_pillars', hf_demo_map($d['trust']['pillars'], ['icon', 'val', 'lbl', 'sub']), $pid, $overwrite, $count);
+
+    hf_demo_set('hb_eyebrow', $d['hb']['eyebrow'], $pid, $overwrite, $count);
+    hf_demo_set('hb_h2',      $d['hb']['h2'],      $pid, $overwrite, $count);
+    hf_demo_set('hb_intro',   $d['hb']['intro'],   $pid, $overwrite, $count);
+    $hb = [];
+    foreach ($d['hb']['cards'] as $c) {
+      $hb[] = ['kind' => $c['kind'], 'eyebrow' => $c['eyebrow'], 'h3' => $c['h3'], 'p' => $c['p'], 'items' => hf_demo_lines($c['items']), 'link' => $c['link'], 'url_key' => $c['url_key']];
+    }
+    hf_demo_set('hb_cards', $hb, $pid, $overwrite, $count);
+
+    hf_demo_set('promise_eyebrow', $d['promise']['eyebrow'], $pid, $overwrite, $count);
+    hf_demo_set('promise_h2',      $d['promise']['h2'],      $pid, $overwrite, $count);
+    hf_demo_set('promise_intro',   $d['promise']['intro'],   $pid, $overwrite, $count);
+    hf_demo_set('promise_steps', hf_demo_map($d['promise']['steps'], ['h3', 'p']), $pid, $overwrite, $count);
+
+    hf_demo_set('areas_eyebrow', $d['areas']['eyebrow'], $pid, $overwrite, $count);
+    hf_demo_set('areas_h2',      $d['areas']['h2'],      $pid, $overwrite, $count);
+    hf_demo_set('areas_intro',   $d['areas']['intro'],   $pid, $overwrite, $count);
+    hf_demo_set('area_cards', hf_demo_map($d['areas']['cards'], ['num', 'title', 'cities', 'link']), $pid, $overwrite, $count);
+    hf_demo_set('areas_cta_note', $d['areas']['cta_note'], $pid, $overwrite, $count);
+    hf_demo_set('areas_cta_text', $d['areas']['cta_text'], $pid, $overwrite, $count);
+
+    hf_demo_set('brands_eyebrow', $d['brands']['eyebrow'], $pid, $overwrite, $count);
+    hf_demo_set('brands_h2',      $d['brands']['h2'],      $pid, $overwrite, $count);
+    hf_demo_set('brands_intro',   $d['brands']['intro'],   $pid, $overwrite, $count);
+    $cols = [];
+    foreach ($d['brands']['cols'] as $c) {
+      $cols[] = ['h3' => $c['h3'], 'sub' => $c['sub'], 'prem' => !empty($c['prem']), 'list' => hf_demo_lines($c['list'])];
+    }
+    hf_demo_set('brand_cols', $cols, $pid, $overwrite, $count);
+    hf_demo_set('brands_cta_label', $d['brands']['cta_label'], $pid, $overwrite, $count);
+    hf_demo_set('brands_footnote',  $d['brands']['footnote'],  $pid, $overwrite, $count);
+
+    hf_demo_set('friendly_eyebrow',    $d['friendly']['eyebrow'],    $pid, $overwrite, $count);
+    hf_demo_set('friendly_h2',         $d['friendly']['h2'],         $pid, $overwrite, $count);
+    hf_demo_set('friendly_intro',      $d['friendly']['intro'],      $pid, $overwrite, $count);
+    hf_demo_set('friendly_stamp_nm',   $d['friendly']['stamp_nm'],   $pid, $overwrite, $count);
+    hf_demo_set('friendly_stamp_role', $d['friendly']['stamp_role'], $pid, $overwrite, $count);
+    hf_demo_set('friendly_items', hf_demo_rows($d['friendly']['items'], 'text'), $pid, $overwrite, $count);
+
+    hf_demo_set('final_eyebrow',  $d['final']['eyebrow'],  $pid, $overwrite, $count);
+    hf_demo_set('final_h2',       $d['final']['h2'],       $pid, $overwrite, $count);
+    hf_demo_set('final_intro',    $d['final']['intro'],    $pid, $overwrite, $count);
+    hf_demo_set('final_card_lbl', $d['final']['card_lbl'], $pid, $overwrite, $count);
+  }
+
+  /* ===== Brands ===== */
+  $pid = hf_demo_page_id('template-brands.php', 'brands');
+  if ($pid) {
+    $d = hf_brands_defaults();
+    $h = $d['hero'];
+    hf_demo_set('hero_eyebrow',     $h['eyebrow'],     $pid, $overwrite, $count);
+    hf_demo_set('hero_h1',          $h['h1'],          $pid, $overwrite, $count);
+    hf_demo_set('hero_lede',        $h['lede'],        $pid, $overwrite, $count);
+    hf_demo_set('hero_image_alt',   $h['image_alt'],   $pid, $overwrite, $count);
+    hf_demo_set('hero_badge',       $h['badge'],       $pid, $overwrite, $count);
+    hf_demo_set('hero_overlay_lbl', $h['overlay_lbl'], $pid, $overwrite, $count);
+    hf_demo_set('hero_overlay_txt', $h['overlay_txt'], $pid, $overwrite, $count);
+    hf_demo_set('hero_stats', hf_demo_map($h['stats'], ['n', 'sup', 'l']), $pid, $overwrite, $count);
+
+    hf_demo_set('scope_eyebrow', $d['scope']['eyebrow'], $pid, $overwrite, $count);
+    hf_demo_set('scope_h2',      $d['scope']['h2'],      $pid, $overwrite, $count);
+    hf_demo_set('scope_intro',   $d['scope']['intro'],   $pid, $overwrite, $count);
+    hf_demo_set('scope_cards', hf_demo_map($d['scope']['cards'], ['icon', 'n', 'sup', 'l', 'p']), $pid, $overwrite, $count);
+
+    hf_demo_set('home_eyebrow', $d['home']['eyebrow'], $pid, $overwrite, $count);
+    hf_demo_set('home_h2',      $d['home']['h2'],      $pid, $overwrite, $count);
+    hf_demo_set('home_intro',   $d['home']['intro'],   $pid, $overwrite, $count);
+    hf_demo_set('home_cards', hf_demo_map($d['home']['cards'], ['nm', 'ds', 'tags']), $pid, $overwrite, $count);
+
+    hf_demo_set('prem_eyebrow', $d['prem']['eyebrow'], $pid, $overwrite, $count);
+    hf_demo_set('prem_h2',      $d['prem']['h2'],      $pid, $overwrite, $count);
+    hf_demo_set('prem_intro',   $d['prem']['intro'],   $pid, $overwrite, $count);
+    hf_demo_set('prem_cards', hf_demo_map($d['prem']['cards'], ['seal', 'nm', 'ds', 'focus']), $pid, $overwrite, $count);
+
+    hf_demo_set('com_eyebrow',       $d['com']['eyebrow'],       $pid, $overwrite, $count);
+    hf_demo_set('com_h2',            $d['com']['h2'],            $pid, $overwrite, $count);
+    hf_demo_set('com_intro',         $d['com']['intro'],         $pid, $overwrite, $count);
+    hf_demo_set('com_promo_eyebrow', $d['com']['promo_eyebrow'], $pid, $overwrite, $count);
+    hf_demo_set('com_promo_h3',      $d['com']['promo_h3'],      $pid, $overwrite, $count);
+    hf_demo_set('com_promo_p',       $d['com']['promo_p'],       $pid, $overwrite, $count);
+    hf_demo_set('com_promo_list', hf_demo_rows($d['com']['promo_list'], 'text'), $pid, $overwrite, $count);
+    hf_demo_set('com_promo_cta',     $d['com']['promo_cta'],     $pid, $overwrite, $count);
+    hf_demo_set('com_brands_h3',     $d['com']['brands_h3'],     $pid, $overwrite, $count);
+    hf_demo_set('com_brands_meta',   $d['com']['brands_meta'],   $pid, $overwrite, $count);
+    $cats = [];
+    foreach ($d['com']['cats'] as $c) $cats[] = ['h4' => $c['h4'], 'list' => $c['list']];
+    hf_demo_set('com_cats', $cats, $pid, $overwrite, $count);
+
+    hf_demo_set('matrix_eyebrow', $d['matrix']['eyebrow'], $pid, $overwrite, $count);
+    hf_demo_set('matrix_h2',      $d['matrix']['h2'],      $pid, $overwrite, $count);
+    hf_demo_set('matrix_intro',   $d['matrix']['intro'],   $pid, $overwrite, $count);
+    hf_demo_set('matrix_rows', hf_demo_map($d['matrix']['rows'], ['icon', 'nm', 'ct', 'brands']), $pid, $overwrite, $count);
+
+    hf_demo_set('why_eyebrow', $d['why']['eyebrow'], $pid, $overwrite, $count);
+    hf_demo_set('why_h2',      $d['why']['h2'],      $pid, $overwrite, $count);
+    hf_demo_set('why_intro',   $d['why']['intro'],   $pid, $overwrite, $count);
+    $why = [];
+    foreach ($d['why']['cards'] as $c) {
+      $why[] = ['num' => $c['num'], 'h3' => $c['h3'], 'p' => $c['p'], 'list' => hf_demo_lines($c['list'])];
+    }
+    hf_demo_set('why_cards', $why, $pid, $overwrite, $count);
+
+    hf_demo_set('faq_eyebrow', $d['faq']['eyebrow'], $pid, $overwrite, $count);
+    hf_demo_set('faq_h2',      $d['faq']['h2'],      $pid, $overwrite, $count);
+    hf_demo_set('faq', hf_demo_map($d['faq']['items'], ['q', 'a']), $pid, $overwrite, $count);
+
+    hf_demo_set('final_eyebrow',  $d['final']['eyebrow'],  $pid, $overwrite, $count);
+    hf_demo_set('final_h2',       $d['final']['h2'],       $pid, $overwrite, $count);
+    hf_demo_set('final_intro',    $d['final']['intro'],    $pid, $overwrite, $count);
+    hf_demo_set('final_card_lbl', $d['final']['card_lbl'], $pid, $overwrite, $count);
+    hf_demo_set('final_signals', hf_demo_map($d['final']['signals'], ['b', 'sub']), $pid, $overwrite, $count);
+  }
+
+  /* ===== Contact ===== */
+  $pid = hf_demo_page_id('template-contact.php', 'contact');
+  if ($pid) {
+    $d = hf_contact_defaults();
+    hf_demo_set('hero_eyebrow', $d['hero']['eyebrow'], $pid, $overwrite, $count);
+    hf_demo_set('hero_h1',      $d['hero']['h1'],      $pid, $overwrite, $count);
+    hf_demo_set('hero_lede',    $d['hero']['lede'],    $pid, $overwrite, $count);
+    hf_demo_set('channels', hf_demo_map($d['channels'], ['kind', 'primary', 'badge', 'badge_style', 'icon', 'h3', 'ds', 'action']), $pid, $overwrite, $count);
+
+    $r = $d['reach'];
+    hf_demo_set('reach_eyebrow', $r['eyebrow'], $pid, $overwrite, $count);
+    hf_demo_set('reach_h2',      $r['h2'],      $pid, $overwrite, $count);
+    hf_demo_set('reach_sub',     $r['sub'],     $pid, $overwrite, $count);
+    hf_demo_set('reach_links', hf_demo_map($r['links'], ['kind', 'cls', 'ttl', 'val', 'ds']), $pid, $overwrite, $count);
+    hf_demo_set('reach_note',    $r['note'],    $pid, $overwrite, $count);
+
+    $i = $d['info'];
+    hf_demo_set('info_hours_h3',   $i['hours_h3'],   $pid, $overwrite, $count);
+    hf_demo_set('info_hours_note', $i['hours_note'], $pid, $overwrite, $count);
+    hf_demo_set('info_addr_h3',    $i['addr_h3'],    $pid, $overwrite, $count);
+    hf_demo_set('info_addr_note',  $i['addr_note'],  $pid, $overwrite, $count);
+    hf_demo_set('info_addr_link',  $i['addr_link'],  $pid, $overwrite, $count);
+    hf_demo_set('info_lines_h3',   $i['lines_h3'],   $pid, $overwrite, $count);
+
+    hf_demo_set('final_eyebrow',  $d['final']['eyebrow'],  $pid, $overwrite, $count);
+    hf_demo_set('final_h2',       $d['final']['h2'],       $pid, $overwrite, $count);
+    hf_demo_set('final_intro',    $d['final']['intro'],    $pid, $overwrite, $count);
+    hf_demo_set('final_card_lbl', $d['final']['card_lbl'], $pid, $overwrite, $count);
+  }
+
+  /* ===== Appliance Repair Services (landing) ===== */
+  $pid = hf_demo_page_id('template-services.php', 'appliance-repair-services');
+  if ($pid) {
+    $d = hf_services_page_defaults();
+    hf_demo_set('hero_eyebrow',    $d['hero']['eyebrow'],    $pid, $overwrite, $count);
+    hf_demo_set('hero_h1',         $d['hero']['h1'],         $pid, $overwrite, $count);
+    hf_demo_set('hero_lede',       $d['hero']['lede'],       $pid, $overwrite, $count);
+    hf_demo_set('hero_book_label', $d['hero']['book_label'], $pid, $overwrite, $count);
+    hf_demo_set('services_eyebrow', $d['services']['eyebrow'], $pid, $overwrite, $count);
+    hf_demo_set('services_h2',      $d['services']['h2'],      $pid, $overwrite, $count);
+    hf_demo_set('services_intro',   $d['services']['intro'],   $pid, $overwrite, $count);
+    hf_demo_set('steps_eyebrow', $d['steps']['eyebrow'], $pid, $overwrite, $count);
+    hf_demo_set('steps_h2',      $d['steps']['h2'],      $pid, $overwrite, $count);
+    hf_demo_set('steps_intro',   $d['steps']['intro'],   $pid, $overwrite, $count);
+    hf_demo_set('steps', hf_demo_map(hf_defaults()['steps'], ['num', 'title', 'desc', 'time']), $pid, $overwrite, $count);
+    hf_demo_set('cta_eyebrow', $d['cta']['eyebrow'], $pid, $overwrite, $count);
+    hf_demo_set('cta_h2',      $d['cta']['h2'],      $pid, $overwrite, $count);
+    hf_demo_set('cta_intro',   $d['cta']['intro'],   $pid, $overwrite, $count);
+  }
+
+  /* ===== Reviews ===== */
+  $pid = hf_demo_page_id('template-reviews.php', 'reviews');
+  if ($pid) {
+    $d = hf_reviews_defaults();
+    hf_demo_set('hero_eyebrow', $d['hero']['eyebrow'], $pid, $overwrite, $count);
+    hf_demo_set('hero_h1',      $d['hero']['h1'],      $pid, $overwrite, $count);
+    hf_demo_set('hero_lede',    $d['hero']['lede'],    $pid, $overwrite, $count);
+    hf_demo_set('review_score',   $d['agg']['score'], $pid, $overwrite, $count);
+    hf_demo_set('review_title',   $d['agg']['title'], $pid, $overwrite, $count);
+    hf_demo_set('review_sources', hf_demo_map($d['agg']['sources'], ['name', 'value']), $pid, $overwrite, $count);
+    hf_demo_set('reviews', hf_demo_map($d['reviews'], ['initials', 'source', 'text', 'name', 'meta']), $pid, $overwrite, $count);
+    hf_demo_set('cta_eyebrow', $d['cta']['eyebrow'], $pid, $overwrite, $count);
+    hf_demo_set('cta_h2',      $d['cta']['h2'],      $pid, $overwrite, $count);
+    hf_demo_set('cta_intro',   $d['cta']['intro'],   $pid, $overwrite, $count);
+  }
+
+  /* ===== Service Areas ===== */
+  $pid = hf_demo_page_id('template-service-areas.php', 'service-areas');
+  if ($pid) {
+    $d = hf_service_areas_defaults();
+    hf_demo_set('hero_eyebrow', $d['hero_eyebrow'], $pid, $overwrite, $count);
+    hf_demo_set('hero_h1',      $d['hero_h1'],      $pid, $overwrite, $count);
+    hf_demo_set('hero_lede',    $d['hero_lede'],    $pid, $overwrite, $count);
+    hf_demo_set('book_h2',      $d['book_h2'],      $pid, $overwrite, $count);
+    hf_demo_set('book_p',       $d['book_p'],       $pid, $overwrite, $count);
+    hf_demo_set('stat_arrival', $d['stat_arrival'], $pid, $overwrite, $count);
+    hf_demo_set('stat_vans',    $d['stat_vans'],    $pid, $overwrite, $count);
+    hf_demo_set('stat_ontime',  $d['stat_ontime'],  $pid, $overwrite, $count);
+    hf_demo_set('map_h2',       $d['map_h2'],       $pid, $overwrite, $count);
+    hf_demo_set('map_intro',    $d['map_intro'],    $pid, $overwrite, $count);
+    hf_demo_set('cities_h2',    $d['cities_h2'],    $pid, $overwrite, $count);
+    hf_demo_set('cities_intro', $d['cities_intro'], $pid, $overwrite, $count);
+
+    $regions = [];
+    foreach ($d['regions'] as $r) {
+      $regions[] = [
+        'pill' => $r['pill'], 'featured' => !empty($r['featured']), 'pill_cta' => !empty($r['pill_cta']),
+        'title' => $r['title'], 'meta' => $r['meta'],
+        'cities' => hf_demo_lines($r['cities']),
+        'stats' => hf_demo_map(array_map(function ($s) { return ['label' => $s[0], 'value' => $s[1]]; }, $r['stats']), ['label', 'value']),
+      ];
+    }
+    hf_demo_set('regions', $regions, $pid, $overwrite, $count);
+
+    hf_demo_set('resp_h2',    $d['resp_h2'],    $pid, $overwrite, $count);
+    hf_demo_set('resp_intro', $d['resp_intro'], $pid, $overwrite, $count);
+    hf_demo_set('zones', hf_demo_map($d['zones'], ['level', 'lbl', 'time', 'suffix', 'area', 'desc', 'bar']), $pid, $overwrite, $count);
+
+    hf_demo_set('com_h2',       $d['com_h2'],    $pid, $overwrite, $count);
+    hf_demo_set('com_intro',    $d['com_intro'], $pid, $overwrite, $count);
+    hf_demo_set('com_features', hf_demo_rows($d['com_features'], 'text'), $pid, $overwrite, $count);
+    hf_demo_set('com_stats', hf_demo_map(array_map(function ($s) { return ['k' => $s[0], 'v' => $s[1], 'suffix' => $s[2]]; }, $d['com_stats']), ['k', 'v', 'suffix']), $pid, $overwrite, $count);
+
+    hf_demo_set('faq_h2', $d['faq_h2'], $pid, $overwrite, $count);
+    hf_demo_set('faq', hf_demo_map($d['faq'], ['q', 'a']), $pid, $overwrite, $count);
+
+    hf_demo_set('final_h2',    $d['final_h2'],    $pid, $overwrite, $count);
+    hf_demo_set('final_intro', $d['final_intro'], $pid, $overwrite, $count);
+    hf_demo_set('final_signals', hf_demo_map($d['final_signals'], ['b', 'sub']), $pid, $overwrite, $count);
+  }
+}
