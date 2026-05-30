@@ -20,6 +20,7 @@ $hf_includes = [
   'inc/helpers.php',         // ACF-or-default accessors, ZIP/hours/services helpers
   'inc/service-defaults.php',// single-service reference content + accessors
   'inc/appliance-defaults.php',// per-appliance Problems/FAQ (washer…cooktop)
+  'inc/appliance-grids.php', // per-appliance Problems/Types section headings
   'inc/page-defaults.php',   // Commercial/About/Brands/Contact default content
   'inc/setup.php',           // theme supports, menus, image sizes
   'inc/enqueue.php',         // styles, scripts, fonts, HF_ZIP localization
