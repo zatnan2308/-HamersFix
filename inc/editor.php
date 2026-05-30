@@ -34,6 +34,47 @@ if (is_admin() && !defined('CONCATENATE_SCRIPTS')) {
   define('CONCATENATE_SCRIPTS', false);
 }
 
+/**
+ * Safety net: never let a textarea field receive an array value.
+ *
+ * Root cause of a fatal 500 on the Brands edit screen:
+ *   PHP Fatal error: htmlspecialchars(): Argument #1 must be string, array
+ *   given … esc_textarea() … acf_get_textarea_input()
+ * A textarea sub-field (e.g. a repeater "list"/"items"/"cities" column) held an
+ * array in the database (written by an earlier demo-import build), so when ACF
+ * rendered the edit screen it passed that array to esc_textarea() and the whole
+ * page 500'd — which in turn aborted the media JS, so the image button died too.
+ *
+ * Coercing array → newline-joined string on load makes the edit screen (and the
+ * front end) resilient to any such legacy value, with no DB surgery or re-import
+ * required. Applies to subfields too (ACF loads each subfield value through
+ * acf/load_value). Scalars pass through untouched.
+ */
+add_filter('acf/load_value/type=textarea', function ($value) {
+  if (is_array($value)) {
+    $flat = [];
+    array_walk_recursive($value, function ($v) use (&$flat) {
+      if (is_scalar($v)) $flat[] = (string) $v;
+    });
+    return implode("\n", $flat);
+  }
+  return $value;
+}, 5);
+
+/**
+ * Same guard for plain text fields (defensive; cheap).
+ */
+add_filter('acf/load_value/type=text', function ($value) {
+  if (is_array($value)) {
+    $flat = [];
+    array_walk_recursive($value, function ($v) use (&$flat) {
+      if (is_scalar($v)) $flat[] = (string) $v;
+    });
+    return implode(', ', $flat);
+  }
+  return $value;
+}, 5);
+
 /** @return string[] Page templates that should use the classic editor. */
 function hf_classic_editor_templates() {
   return [
