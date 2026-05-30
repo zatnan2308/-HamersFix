@@ -19,3 +19,8 @@ yarn-error.log*
 
 # Logs / misc
 *.log
+
+# Local QA/audit scratch files
+_*.txt
+hf_*.js
+hf_*.txt
