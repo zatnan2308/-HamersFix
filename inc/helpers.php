@@ -206,16 +206,44 @@ function hf_get_services() {
       'no_found_rows'  => true,
     ]);
     if (!empty($posts)) {
+      // Per-field fallback to the design defaults (matched by title), so a
+      // service post with empty ACF fields still shows the full design content
+      // instead of blank cards / a placeholder icon.
+      $by_title = [];
+      foreach (hf_defaults()['services'] as $def) {
+        if (!empty($def['title'])) $by_title[$def['title']] = $def;
+      }
+
       $out = [];
       foreach ($posts as $p) {
+        $title = get_the_title($p);
+        $def   = isset($by_title[$title]) ? $by_title[$title] : [];
+
         $icon = hf_field('icon', '', $p->ID);
+        if (!$icon) $icon = !empty($def['icon']) ? $def['icon'] : 'fridge';
+
+        $short = hf_field('short_desc', '', $p->ID);
+        if (!$short) $short = isset($def['short_desc']) ? $def['short_desc'] : '';
+
+        $long = hf_field('long_desc', '', $p->ID);
+        if (!$long) {
+          $ex   = wp_strip_all_tags(get_the_excerpt($p));
+          $long = $ex !== '' ? $ex : (isset($def['long_desc']) ? $def['long_desc'] : '');
+        }
+
+        $price = hf_field('price_note', '', $p->ID);
+        if (!$price) $price = isset($def['price_note']) ? $def['price_note'] : '';
+
+        $jobs = hf_field('job_count', '', $p->ID);
+        if (!$jobs) $jobs = isset($def['job_count']) ? $def['job_count'] : '';
+
         $out[] = [
-          'title'      => get_the_title($p),
-          'icon'       => $icon ? $icon : 'fridge',
-          'short_desc' => hf_field('short_desc', '', $p->ID),
-          'long_desc'  => hf_field('long_desc', wp_strip_all_tags(get_the_excerpt($p)), $p->ID),
-          'price_note' => hf_field('price_note', '', $p->ID),
-          'job_count'  => hf_field('job_count', '', $p->ID),
+          'title'      => $title,
+          'icon'       => $icon,
+          'short_desc' => $short,
+          'long_desc'  => $long,
+          'price_note' => $price,
+          'job_count'  => $jobs,
           'url'        => get_permalink($p),
         ];
       }
