@@ -27,10 +27,15 @@ $hf_phone_d = hf_phone_display();
       <div class="hours"><span class="dot"></span><?php echo esc_html(hf_hours_short()); ?></div>
     </div>
 
-    <?php echo hf_render_residential_drawer(); /* trusted markup */ ?>
-
     <?php foreach ($hf_nav as $item) :
-      if ($item['key'] === 'home' || !empty($item['mega'])) continue; ?>
+      if ($item['key'] === 'home') continue;
+      if (!empty($item['mega'])) :
+        // Render the matching drawer accordion for each mega.
+        if ($item['mega'] === 'services')         echo hf_render_residential_drawer();   /* trusted */
+        elseif ($item['mega'] === 'maintenance')  echo hf_render_maintenance_drawer();   /* trusted */
+        elseif ($item['mega'] === 'about')        echo hf_render_about_drawer();         /* trusted */
+        continue;
+      endif; ?>
       <a class="group" href="<?php echo esc_url($item['url']); ?>" style="display:flex;justify-content:space-between;padding:16px 4px;font-weight:700;text-decoration:none;color:var(--ink-900)">
         <?php echo esc_html($item['label']); ?>
         <?php if (!empty($item['badge'])) : ?><span style="color:var(--cta-700);font:700 11px/1 var(--ff-mono);letter-spacing:.08em;text-transform:uppercase;background:var(--cta-100);padding:4px 8px;border-radius:4px"><?php echo esc_html($item['badge']); ?></span><?php endif; ?>

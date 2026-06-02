@@ -158,6 +158,25 @@
   position: relative;
 }
 
+/* Maintenance mega — cleaning services */
+.mega--maint {
+  width: 560px;
+  display: grid; grid-template-columns: 1.5fr 1fr; gap: 20px;
+}
+.mega--maint .mega__grid { grid-template-columns: 1fr; gap: 4px; }
+
+/* About dropdown — compact link list, anchored to right edge */
+.mega--about {
+  width: 320px;
+  left: auto; right: 0;
+  display: flex; flex-direction: column; gap: 2px;
+  padding: 14px;
+}
+.mega--about::before { left: auto; right: 28px; }
+.mega--about .mega__item { padding: 11px 12px; }
+.mega--about .mega__item .ic { width: 36px; height: 36px; }
+.mega--about .mega__item .ic svg { width: 19px; height: 19px; }
+
 /* Brands mega — Tier columns */
 .mega--brands {
   width: 640px;

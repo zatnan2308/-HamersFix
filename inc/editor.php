@@ -85,6 +85,8 @@ function hf_classic_editor_templates() {
     'template-service-areas.php',
     'template-services.php',
     'template-reviews.php',
+    'template-deep-cleaning.php',
+    'template-air-vent.php',
   ];
 }
 

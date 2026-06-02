@@ -24,12 +24,12 @@ add_action('after_switch_theme', 'hf_seed_all');
  * resolves real permalinks.
  */
 add_action('admin_init', function () {
-  if (get_option('hf_pages_seed_v') === '3') return;
+  if (get_option('hf_pages_seed_v') === '4') return;
   if (function_exists('hf_seed_pages')) {
     hf_seed_pages();
     flush_rewrite_rules();
   }
-  update_option('hf_pages_seed_v', '3');
+  update_option('hf_pages_seed_v', '4');
 });
 
 function hf_seed_all() {
@@ -94,6 +94,8 @@ function hf_seed_pages() {
     ['title' => 'Contact',       'slug' => 'contact',       'tpl' => 'template-contact.php'],
     ['title' => 'Appliance Repair Services', 'slug' => 'appliance-repair-services', 'tpl' => 'template-services.php'],
     ['title' => 'Reviews',       'slug' => 'reviews',       'tpl' => 'template-reviews.php'],
+    ['title' => 'Appliance Deep Cleaning', 'slug' => 'appliance-deep-cleaning', 'tpl' => 'template-deep-cleaning.php'],
+    ['title' => 'Air Vent Cleaning',       'slug' => 'air-vent-cleaning',       'tpl' => 'template-air-vent.php'],
   ];
   foreach ($pages as $p) {
     $existing = get_page_by_path($p['slug']);

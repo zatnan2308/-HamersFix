@@ -36,6 +36,13 @@ if (!$hf_services) {
     }
   }
   $hf_services[] = ['label' => __('Commercial appliance', 'hamersfix'), 'url' => hf_page_url('commercial')];
+  foreach ([
+    ['label' => __('Appliance deep cleaning', 'hamersfix'), 'slug' => 'appliance-deep-cleaning'],
+    ['label' => __('Air vent cleaning', 'hamersfix'),       'slug' => 'air-vent-cleaning'],
+  ] as $hf_m) {
+    $hf_m_url = hf_page_url($hf_m['slug'], '#');
+    if ($hf_m_url !== '#') $hf_services[] = ['label' => $hf_m['label'], 'url' => $hf_m_url];
+  }
 }
 
 // Company column → the section pages.

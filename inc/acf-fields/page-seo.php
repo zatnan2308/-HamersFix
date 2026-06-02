@@ -24,6 +24,8 @@ add_action('acf/init', function () {
     'template-service-areas.php',
     'template-services.php',
     'template-reviews.php',
+    'template-deep-cleaning.php',
+    'template-air-vent.php',
   ];
   // ACF location: OR-group — match any of the section page templates.
   $location = [];

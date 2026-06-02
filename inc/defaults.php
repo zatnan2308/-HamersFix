@@ -26,6 +26,11 @@ function hf_defaults() {
     'dishwasher' => '<svg viewBox="0 0 32 32" class="ic-stroke" aria-hidden="true"><rect x="6" y="5" width="20" height="22" rx="2"/><path d="M10 11h12M10 17h12"/></svg>',
     'oven'       => '<svg viewBox="0 0 32 32" class="ic-stroke" aria-hidden="true"><rect x="5" y="5" width="22" height="22" rx="2"/><rect x="9" y="10" width="14" height="13" rx="1"/><circle cx="11" cy="8" r=".8"/><circle cx="16" cy="8" r=".8"/><circle cx="21" cy="8" r=".8"/></svg>',
     'cooktop'    => '<svg viewBox="0 0 32 32" class="ic-stroke" aria-hidden="true"><circle cx="10" cy="11" r="3.5"/><circle cx="22" cy="11" r="3.5"/><circle cx="10" cy="22" r="3.5"/><circle cx="22" cy="22" r="3.5"/></svg>',
+    'clean'      => '<svg viewBox="0 0 32 32" class="ic-stroke" aria-hidden="true"><path d="M12 4l1.6 4.4L18 10l-4.4 1.6L12 16l-1.6-4.4L6 10l4.4-1.6z"/><path d="M22 18l.9 2.4L25 21l-2.1.6L22 24l-.9-2.4L19 21l2.1-.6z"/></svg>',
+    'vent'       => '<svg viewBox="0 0 32 32" class="ic-stroke" aria-hidden="true"><rect x="5" y="6" width="22" height="20" rx="2"/><path d="M5 11h22M5 16h22M5 21h22"/></svg>',
+    'about'      => '<svg viewBox="0 0 32 32" class="ic-stroke" aria-hidden="true"><path d="M16 4l11 5v6c0 7-5 11-11 13C10 26 5 22 5 15V9z"/><path d="M12 16l3 3 6-6"/></svg>',
+    'brands'     => '<svg viewBox="0 0 32 32" class="ic-stroke" aria-hidden="true"><path d="M5 5h11l11 11-11 11L5 16z"/><circle cx="11" cy="11" r="1.6"/></svg>',
+    'areas'      => '<svg viewBox="0 0 32 32" class="ic-stroke" aria-hidden="true"><path d="M16 28s9-7.5 9-15a9 9 0 0 0-18 0c0 7.5 9 15 9 15z"/><circle cx="16" cy="13" r="3.2"/></svg>',
   ];
 
   $d = [

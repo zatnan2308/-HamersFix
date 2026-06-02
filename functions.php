@@ -22,6 +22,7 @@ $hf_includes = [
   'inc/appliance-defaults.php',// per-appliance Problems/FAQ (washer…cooktop)
   'inc/appliance-grids.php', // per-appliance Problems/Types section headings
   'inc/page-defaults.php',   // Commercial/About/Brands/Contact default content
+  'inc/maintenance-defaults.php', // Deep Cleaning + Air Vent page default content
   'inc/setup.php',           // theme supports, menus, image sizes
   'inc/enqueue.php',         // styles, scripts, fonts, HF_ZIP localization
   'inc/cpt.php',             // `service` custom post type
