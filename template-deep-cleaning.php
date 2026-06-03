@@ -135,6 +135,9 @@ $dot_class = ['g' => '', 'o' => ' dot--o', 'b' => ' dot--b'];
             <span class="svc-block__eyebrow"><?php echo esc_html(isset($b['eyebrow']) ? $b['eyebrow'] : ''); ?></span>
             <h2><?php echo esc_html(isset($b['h2']) ? $b['h2'] : ''); ?></h2>
             <p class="sub"><?php echo esc_html(isset($b['sub']) ? $b['sub'] : ''); ?></p>
+            <?php if (!empty($b['price'])) : ?>
+              <p class="svc-block__price"><?php echo esc_html($b['price']); ?></p>
+            <?php endif; ?>
             <ul class="checklist">
               <?php foreach ((array) $items as $it) :
                 $it = trim((string) (is_array($it) ? (isset($it['text']) ? $it['text'] : '') : $it));
@@ -156,6 +159,9 @@ $dot_class = ['g' => '', 'o' => ' dot--o', 'b' => ' dot--b'];
         <div class="combo__main">
           <span class="combo__badge"><?php echo esc_html(hf_pg('combo_badge', $d['combo']['badge'])); ?></span>
           <h2 id="combo-h"><?php echo esc_html(hf_pg('combo_h2', $d['combo']['h2'])); ?></h2>
+          <?php $hf_combo_price = hf_pg('combo_price', $d['combo']['price']); if ($hf_combo_price) : ?>
+            <p class="combo__price"><?php echo esc_html($hf_combo_price); ?></p>
+          <?php endif; ?>
           <p><?php echo esc_html(hf_pg('combo_intro', $d['combo']['intro'])); ?></p>
           <div class="ctas">
             <a class="btn btn--cta btn--lg" href="<?php echo esc_url($booking); ?>"><?php esc_html_e('Book the combo →', 'hamersfix'); ?></a>

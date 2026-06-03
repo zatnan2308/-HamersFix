@@ -49,6 +49,7 @@ function hf_deep_cleaning_defaults() {
           'eyebrow'  => 'Refrigerator deep cleaning',
           'h2'       => 'Refrigerator deep cleaning',
           'sub'      => 'Professional refrigerator cleaning service',
+          'price'    => 'From $265',
           'chip'     => 'Refrigerator deep clean',
           'cta'      => 'Book refrigerator cleaning →',
           'items' => [
@@ -66,6 +67,7 @@ function hf_deep_cleaning_defaults() {
           'eyebrow'  => 'Oven deep cleaning',
           'h2'       => 'Oven deep cleaning',
           'sub'      => 'Professional oven cleaning service',
+          'price'    => 'From $199',
           'chip'     => 'Oven deep clean',
           'cta'      => 'Book oven cleaning →',
           'items' => [
@@ -83,6 +85,7 @@ function hf_deep_cleaning_defaults() {
       'badge'  => 'Combo special',
       'h2'     => 'Refrigerator + oven deep cleaning',
       'intro'  => 'Save time and money by scheduling both services together. One visit, one appointment, two appliances left spotless, sanitary, and running efficiently.',
+      'price'  => 'From $430',
       'panel_title' => 'Both appliances, one visit',
       'panel_meta'  => 'Everything included',
       'rows' => [

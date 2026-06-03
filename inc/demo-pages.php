@@ -400,7 +400,7 @@ function hf_demo_apply_pages($overwrite, &$count) {
     foreach ($s['blocks'] as $b) {
       $blocks[] = [
         'id' => $b['id'], 'media' => $b['media'], 'eyebrow' => $b['eyebrow'],
-        'h2' => $b['h2'], 'sub' => $b['sub'], 'chip' => $b['chip'],
+        'h2' => $b['h2'], 'sub' => $b['sub'], 'price' => isset($b['price']) ? $b['price'] : '', 'chip' => $b['chip'],
         'items' => hf_demo_rows($b['items'], 'text'), 'cta' => $b['cta'],
       ];
     }
@@ -409,6 +409,7 @@ function hf_demo_apply_pages($overwrite, &$count) {
     $cb = $d['combo'];
     hf_demo_set('combo_badge',       $cb['badge'],       $pid, $overwrite, $count);
     hf_demo_set('combo_h2',          $cb['h2'],          $pid, $overwrite, $count);
+    hf_demo_set('combo_price',       $cb['price'],       $pid, $overwrite, $count);
     hf_demo_set('combo_intro',       $cb['intro'],       $pid, $overwrite, $count);
     hf_demo_set('combo_panel_title', $cb['panel_title'], $pid, $overwrite, $count);
     hf_demo_set('combo_panel_meta',  $cb['panel_meta'],  $pid, $overwrite, $count);

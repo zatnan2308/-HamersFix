@@ -49,6 +49,7 @@ add_action('acf/init', function () {
         ['key' => 'field_hf_dc_b_eyebrow', 'label' => 'Eyebrow', 'name' => 'eyebrow', 'type' => 'text'],
         ['key' => 'field_hf_dc_b_h2', 'label' => 'Heading', 'name' => 'h2', 'type' => 'text'],
         ['key' => 'field_hf_dc_b_sub', 'label' => 'Subheading', 'name' => 'sub', 'type' => 'text'],
+        ['key' => 'field_hf_dc_b_price', 'label' => 'Price', 'name' => 'price', 'type' => 'text', 'instructions' => 'e.g. “From $265”. Leave empty to hide.'],
         ['key' => 'field_hf_dc_b_chip', 'label' => 'Chip text', 'name' => 'chip', 'type' => 'text'],
         ['key' => 'field_hf_dc_b_items', 'label' => 'Checklist', 'name' => 'items', 'type' => 'repeater', 'layout' => 'table', 'button_label' => 'Add item', 'sub_fields' => [
           ['key' => 'field_hf_dc_b_item', 'label' => 'Text', 'name' => 'text', 'type' => 'text'],
@@ -59,6 +60,7 @@ add_action('acf/init', function () {
       ['key' => 'field_hf_dc_tab_combo', 'label' => 'Combo', 'type' => 'tab'],
       ['key' => 'field_hf_dc_combo_badge', 'label' => 'Badge', 'name' => 'combo_badge', 'type' => 'text', 'placeholder' => $d['combo']['badge']],
       ['key' => 'field_hf_dc_combo_h2', 'label' => 'Heading', 'name' => 'combo_h2', 'type' => 'text', 'placeholder' => $d['combo']['h2']],
+      ['key' => 'field_hf_dc_combo_price', 'label' => 'Price', 'name' => 'combo_price', 'type' => 'text', 'placeholder' => $d['combo']['price'], 'instructions' => 'e.g. “From $430”. Leave empty to hide.'],
       ['key' => 'field_hf_dc_combo_intro', 'label' => 'Intro', 'name' => 'combo_intro', 'type' => 'textarea', 'rows' => 3],
       ['key' => 'field_hf_dc_combo_ptitle', 'label' => 'Panel title', 'name' => 'combo_panel_title', 'type' => 'text', 'placeholder' => $d['combo']['panel_title']],
       ['key' => 'field_hf_dc_combo_pmeta', 'label' => 'Panel meta', 'name' => 'combo_panel_meta', 'type' => 'text', 'placeholder' => $d['combo']['panel_meta']],
