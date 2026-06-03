@@ -55,3 +55,35 @@ body.admin-bar .site-hd { top: 32px; }
 }
 .mega__all:hover { text-decoration: underline; }
 
+/* ---- Veteran/senior discount in the topline ------------------- */
+.topline__offer { font-weight: 700; color: var(--cta-500, #ff8a4c); }
+/* The design hides the right topline group on mobile; keep the offer
+   visible there (it's a promo) and drop only the license line instead. */
+@media (max-width: 700px) {
+  .topline .grp:last-child { display: inline-flex; }
+  .topline .grp:last-child > span:not(.topline__offer):not(.sep) { display: none; }
+  .topline .grp:last-child .sep { display: none; }
+}
+
+/* ---- Veteran/senior discount line in the home hero ------------ */
+.hero__offer {
+  display: inline-flex; align-items: center; gap: 8px;
+  margin: 18px 0 0; padding: 9px 14px;
+  background: var(--cta-100, #fdece1); color: var(--cta-700, #c7501a);
+  border: 1px solid #f8d4bf; border-radius: 999px;
+  font: 700 13.5px/1.3 var(--ff-sans); max-width: max-content;
+}
+.hero__offer-ic { font-size: 15px; line-height: 1; }
+
+/* ---- Diagnostic pricing note under the service-hero CTAs ------- */
+.diag-note {
+  margin-top: 18px; display: flex; flex-direction: column; gap: 6px;
+  font: 600 14px/1.4 var(--ff-sans); color: var(--ink-700);
+}
+.diag-note__row { display: inline-flex; align-items: center; gap: 9px; }
+.diag-note__ic { font-size: 15px; line-height: 1; }
+.diag-note__row--combo {
+  color: var(--cta-700, #c7501a); font-weight: 700;
+  padding-left: 24px; font-size: 13.5px;
+}
+

@@ -51,6 +51,15 @@ function hf_defaults() {
       'google_reviews_url'     => '',
     ],
     'hours_short' => 'Open today · 7 AM – 9 PM',
+    // Offers / pricing — editable in Theme Settings → Offers.
+    'offers' => [
+      'discount_text'      => '10% off repairs for veterans & seniors',
+      'discount_text_long' => 'Veterans & seniors get 10% off the repair total — just ask when you book.',
+      'diag_price'         => '$89',
+      'diag_combo_price'   => '$139',
+      'diag_note'          => 'Diagnostic %s — waived when you repair.',
+      'warranty_text'      => '3-month parts & labor warranty',
+    ],
     'hours' => [
       ['label' => 'Monday – Friday', 'open' => '7 AM',  'close' => '9 PM', 'closed' => false],
       ['label' => 'Saturday',        'open' => '8 AM',  'close' => '8 PM', 'closed' => false],
@@ -99,7 +108,7 @@ function hf_defaults() {
     'home' => [
       'hero_eyebrow'       => 'Same-day service available today',
       'hero_h1'            => 'Appliance repair, <em>done right</em> — same day.',
-      'hero_lede'          => 'EPA-certified technicians. Licensed & insured. Flat-rate pricing — no surprises. Every repair is backed by a 1-year parts & labor warranty.',
+      'hero_lede'          => 'EPA-certified technicians. Licensed & insured. Flat-rate pricing — no surprises. Every repair is backed by a 3-month parts & labor warranty.',
       'hero_book_label'    => 'Book online →',
       'hero_image'         => 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=1100&auto=format&fit=crop&q=80',
       'hero_image_alt'     => 'Bright modern kitchen with refrigerator, range, and dishwasher',
@@ -137,7 +146,7 @@ function hf_defaults() {
     'steps' => [
       ['num' => '1', 'title' => 'Call or book online',  'desc' => 'Tell us the appliance and the symptom. We confirm your ZIP, your slot, and the technician assigned — by name.',                 'time' => '≈ 4 min'],
       ['num' => '2', 'title' => 'On-site diagnosis',    'desc' => 'Your technician arrives in the booked window, diagnoses the issue, and gives you a flat-rate written quote on the spot.',         'time' => '≈ 20 min'],
-      ['num' => '3', 'title' => 'Repair & warranty',    'desc' => 'If you approve, we repair — often during the same visit, using OEM parts. You get a 1-year parts & labor warranty in writing.',   'time' => 'avg. 45 min'],
+      ['num' => '3', 'title' => 'Repair & warranty',    'desc' => 'If you approve, we repair — often during the same visit, using OEM parts. You get a 3-month parts & labor warranty in writing.',   'time' => 'avg. 45 min'],
     ],
     'brands' => ['Sub-Zero', 'Wolf', 'Viking', 'Thermador', 'Miele', 'Dacor', 'KitchenAid', 'Whirlpool', 'GE', 'Samsung', 'LG', 'Bosch', 'Maytag', 'Frigidaire', 'Electrolux', 'Kenmore', 'JennAir', 'F&P'],
     'reviews_agg' => [
@@ -175,7 +184,7 @@ function hf_defaults() {
     'faq' => [
       ['q' => 'Do you offer same-day service?',                       'a' => 'Yes — we offer same-day service across most of our coverage area when you call before 12 PM. After 12 PM we typically book the next morning. Emergency commercial service is available after hours.'],
       ['q' => 'How much does a service call cost?',                   'a' => 'We provide a flat-rate quote in writing before any work begins, so you approve the price before we start — no surprises.'],
-      ['q' => 'What warranty do you provide?',                        'a' => 'All repairs are backed by a 1-year parts & labor warranty. If the same issue returns within 12 months, we return at no charge.'],
+      ['q' => 'What warranty do you provide?',                        'a' => 'All repairs are backed by a 3-month parts & labor warranty. If the same issue returns within 3 months, we return at no charge.'],
       ['q' => 'Which brands are you factory-authorized for?',         'a' => 'We are factory-authorized for Sub-Zero, Wolf, Viking, Thermador, and Dacor. We service all other major brands with manufacturer-spec parts and procedures.'],
       ['q' => 'Are your technicians background-checked and insured?', 'a' => 'Yes — every technician is W-2 employed (not subcontracted), background-checked, drug-tested, and covered under our $2M general liability + workers\' comp policies.'],
       ['q' => 'Do you offer financing?',                             'a' => 'Yes — we offer financing through Synchrony and Wisetack with same-as-cash terms on qualifying repairs over $400.'],

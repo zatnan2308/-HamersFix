@@ -32,7 +32,7 @@ function hf_service_defaults() {
         ['ic' => 'A+', 'style' => 'green',   'label' => 'BBB Accredited'],
         ['ic' => '✓',  'style' => 'green',   'label' => 'Sub-Zero / Wolf factory-authorized'],
         ['ic' => '★',  'style' => 'default', 'label' => '4.9 · 318 fridge reviews'],
-        ['ic' => '1y', 'style' => 'default', 'label' => 'Parts & labor warranty'],
+        ['ic' => '3mo', 'style' => 'default', 'label' => 'Parts & labor warranty'],
       ],
     ],
     'problems' => [
@@ -56,7 +56,7 @@ function hf_service_defaults() {
     'areas' => [
       'eyebrow' => 'Areas we service',
       'h2'      => 'Serving homes & businesses nearby',
-      'intro'   => 'Residential and commercial — same flat-rate pricing, same 1-year warranty.',
+      'intro'   => 'Residential and commercial — same flat-rate pricing, same 3-month warranty.',
       'side_h3' => 'Cities we cover',
       'side_meta' => 'Click your city for local info',
       'side_note' => 'we may still cover you, and if not we\'ll refer a trusted partner.',
@@ -90,7 +90,7 @@ function hf_service_defaults() {
         ['q' => 'Why is EPA Section 608 certification important?', 'a' => 'Federal law requires certification to handle refrigerant. Without 608, a technician cannot legally open the sealed system on your fridge. Many small operators don\'t have it; we always do.'],
         ['q' => 'How long does a typical fridge repair take?', 'a' => 'Most repairs are completed in 45–90 minutes. If a part needs to be ordered, we typically return within 24–48 hours.'],
         ['q' => 'Do you carry parts for Sub-Zero on the van?', 'a' => 'The 8 most common Sub-Zero failure parts, yes — fan motors, gaskets, defrost heaters, sensor probes. Sealed-system repairs require ordering from the Sub-Zero distribution center, typically 1–2 days.'],
-        ['q' => 'What warranty do you provide?', 'a' => 'All repairs are backed by a 1-year parts & labor warranty. If the same issue returns within 12 months, we return at no charge — including the trip and the diagnosis.'],
+        ['q' => 'What warranty do you provide?', 'a' => 'All repairs are backed by a 3-month parts & labor warranty. If the same issue returns within 3 months, we return at no charge — including the trip and the diagnosis.'],
         ['q' => 'Will you save the food in my fridge?', 'a' => 'Yes — first thing the tech does on a cooling job is move perishables to a cooler we bring, so you don\'t lose groceries while we work.'],
         ['q' => 'Do you offer same-day service?', 'a' => 'Yes — same-day across most of our coverage area when you call before 12 PM. After 12 PM we typically book the next morning. Emergency commercial service is available after hours.'],
       ],
@@ -101,7 +101,7 @@ function hf_service_defaults() {
       'intro'   => 'One call, technician at your door today. We\'re open 7 days a week, real dispatcher answers in under 60 seconds.',
       'signals' => [
         ['title' => 'EPA 608 certified', 'sub' => 'Sealed-system repairs by law'],
-        ['title' => '1-year warranty',   'sub' => 'Parts & labor, in writing'],
+        ['title' => '3-month warranty',   'sub' => 'Parts & labor, in writing'],
         ['title' => 'Flat-rate pricing', 'sub' => 'No hourly. No surprises.'],
         ['title' => 'Vetted technicians', 'sub' => 'W-2, background-checked'],
       ],

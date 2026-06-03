@@ -53,6 +53,60 @@ function hf_license_text() { return hf_opt('license_text', hf_d('identity', 'lic
 function hf_serving_area() { return hf_opt('serving_area', hf_d('identity', 'serving_area')); }
 function hf_email()        { return hf_opt('email', hf_d('contact', 'email')); }
 
+/* ----------------------------------------------------------------
+ * Offers — veteran/senior discount, diagnostic pricing, warranty
+ * (editable in Theme Settings → Offers; fall back to design defaults)
+ * ---------------------------------------------------------------- */
+
+/** Short discount line for the topline. */
+function hf_discount_text() { return hf_opt('discount_text', hf_d('offers', 'discount_text')); }
+
+/** Longer discount line for the home hero. */
+function hf_discount_text_long() { return hf_opt('discount_text_long', hf_d('offers', 'discount_text_long')); }
+
+/** Our HamersFix repair warranty (e.g. "3-month parts & labor warranty"). */
+function hf_warranty_text() { return hf_opt('warranty_text', hf_d('offers', 'warranty_text')); }
+
+/** Base diagnostic price (e.g. "$89"). */
+function hf_diag_price()       { return hf_opt('diag_price', hf_d('offers', 'diag_price')); }
+/** Combo diagnostic price (e.g. "$139"). */
+function hf_diag_combo_price() { return hf_opt('diag_combo_price', hf_d('offers', 'diag_combo_price')); }
+
+/**
+ * Combo diagnostic label for a given appliance slug, or '' if none.
+ * Per the price sheet: Stackable Washer/Dryer (washer, dryer) and
+ * Microwave/Oven (oven) carry the higher combo diagnostic fee.
+ */
+function hf_diag_combo_label($slug) {
+  $map = [
+    'washer' => 'Stackable Washer/Dryer combo',
+    'dryer'  => 'Stackable Washer/Dryer combo',
+    'oven'   => 'Microwave/Oven combo',
+  ];
+  return isset($map[$slug]) ? $map[$slug] : '';
+}
+
+/**
+ * Diagnostic-pricing lines for a service hero, keyed by appliance slug.
+ * Returns ['base' => 'Diagnostic $89 — waived when you repair', 'combo' => '...' | '']
+ */
+function hf_diagnostic_lines($slug = '') {
+  $price = hf_diag_price();
+  $note  = hf_opt('diag_note', hf_d('offers', 'diag_note')); // contains a %s for the price
+  $base  = trim(sprintf($note, $price));
+  $combo = '';
+  $combo_label = hf_diag_combo_label($slug);
+  if ($combo_label) {
+    $combo = sprintf(
+      /* translators: 1: combo name, 2: combo price */
+      __('%1$s diagnostic %2$s.', 'hamersfix'),
+      $combo_label,
+      hf_diag_combo_price()
+    );
+  }
+  return ['base' => $base, 'combo' => $combo];
+}
+
 function hf_phone_display() { return hf_opt('phone_display', hf_d('contact', 'phone_display')); }
 
 /** tel: target — explicit option, then default, then derived from display. */

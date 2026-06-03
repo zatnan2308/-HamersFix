@@ -48,7 +48,7 @@ $def_faq = [
 ];
 $def_signals = [
   ['b' => 'Same-day across 14 cities', 'sub' => 'Call before noon'],
-  ['b' => '1-year warranty', 'sub' => 'Parts & labor'],
+  ['b' => '3-month warranty', 'sub' => 'Parts & labor'],
   ['b' => 'Flat-rate pricing', 'sub' => 'All 14 cities'],
 ];
 

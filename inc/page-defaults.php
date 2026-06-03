@@ -164,7 +164,7 @@ function hf_about_defaults() {
       'items'   => [
         ['icon' => '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l3-9 4 6 4-3 4 9 3-3"/></svg>', 'title' => 'Same-day service available', 'sub' => 'Most ZIPs · book before noon'],
         ['icon' => '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-7 8-13a8 8 0 10-16 0c0 6 8 13 8 13z"/><circle cx="12" cy="9" r="3"/></svg>', 'title' => '14 cities · 18 ZIPs', 'sub' => 'Gwinnett, Barrow & Athens area'],
-        ['icon' => '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>', 'title' => '1-year parts & labor warranty', 'sub' => 'On every completed repair'],
+        ['icon' => '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>', 'title' => '3-month parts & labor warranty', 'sub' => 'On every completed repair'],
         ['icon' => '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>', 'title' => 'Open 7 days a week', 'sub' => 'Mon–Fri 7 AM–9 PM · weekends too'],
       ],
     ],
@@ -334,7 +334,7 @@ function hf_brands_defaults() {
     'hero' => [
       'eyebrow' => 'Factory-authorized · OEM parts only',
       'h1'      => 'Appliance brands <em>homes &amp; businesses</em> rely on.',
-      'lede'    => 'We service 25+ residential brands and 14+ commercial equipment makers across Northeast Georgia. Factory-authorized on premium, OEM-certified on mainstream — every repair backed by a 1-year warranty.',
+      'lede'    => 'We service 25+ residential brands and 14+ commercial equipment makers across Northeast Georgia. Factory-authorized on premium, OEM-certified on mainstream — every repair backed by a 3-month warranty.',
       'image'   => 'https://images.unsplash.com/photo-1556911220-bff31c812dba?w=1100&auto=format&fit=crop&q=80',
       'image_alt' => 'Premium kitchen appliances — refrigerator, range, and oven',
       'badge'   => '25+ brands',
@@ -349,7 +349,7 @@ function hf_brands_defaults() {
     'scope' => [
       'eyebrow' => 'Our scope',
       'h2'      => 'Brands we repair',
-      'intro'   => "Every brand we work on is covered by genuine OEM parts, manufacturer procedures, and our 1-year parts &amp; labor warranty. Here's what that scope looks like in practice.",
+      'intro'   => "Every brand we work on is covered by genuine OEM parts, manufacturer procedures, and our 3-month parts &amp; labor warranty. Here's what that scope looks like in practice.",
       'cards'   => [
         ['icon' => $sc['chart'], 'n' => '25', 'sup' => '+', 'l' => 'Residential brands', 'p' => 'From Whirlpool and GE to Bosch and KitchenAid — every major maker sold in U.S. homes.'],
         ['icon' => $sc['star'], 'n' => '7', 'sup' => '', 'l' => 'Factory-authorized', 'p' => 'Direct certification from Sub-Zero, Wolf, Viking, Thermador, Miele, Dacor, and Fisher & Paykel.'],
@@ -431,7 +431,7 @@ function hf_brands_defaults() {
       'cards'   => [
         ['num' => '1', 'h3' => 'Brand-trained technicians', 'p' => "Our techs go through factory training programs for each premium brand we service. That's how Sub-Zero, Wolf, Viking, Thermador, Miele, Dacor, and Fisher & Paykel authorize us — they trained us first.", 'list' => ['Annual recertification with factory updates', 'Brand-specific diagnostic tooling on every van', 'Direct manufacturer tech-support line']],
         ['num' => '2', 'h3' => 'Genuine OEM parts only', 'p' => 'Aftermarket parts are cheaper — and they void manufacturer warranties, fail faster, and damage adjacent components. We source parts directly from manufacturer distribution centers.', 'list' => ['Common-failure parts stocked on every van', 'Specialty parts ordered same-day from distributor', 'Original spec sheets followed for every install']],
-        ['num' => '3', 'h3' => 'Warranty-friendly procedures', 'p' => "If your appliance is still under manufacturer warranty, we follow their service protocol so coverage isn't voided. We also handle the paperwork on extended warranties and home-protection plans.", 'list' => ['Authorized service for AHS, Choice, Sears', 'Manufacturer warranty work direct-billed', '1-year HamersFix warranty stacks on top']],
+        ['num' => '3', 'h3' => 'Warranty-friendly procedures', 'p' => "If your appliance is still under manufacturer warranty, we follow their service protocol so coverage isn't voided. We also handle the paperwork on extended warranties and home-protection plans.", 'list' => ['Authorized service for AHS, Choice, Sears', 'Manufacturer warranty work direct-billed', '3-month HamersFix warranty stacks on top']],
       ],
     ],
     'faq' => [
@@ -456,7 +456,7 @@ function hf_brands_defaults() {
       'signals' => [
         ['b' => 'Factory-authorized', 'sub' => '7 premium brands'],
         ['b' => '100% OEM parts', 'sub' => 'No aftermarket'],
-        ['b' => '1-year warranty', 'sub' => 'Parts & labor'],
+        ['b' => '3-month warranty', 'sub' => 'Parts & labor'],
         ['b' => 'Upfront quote', 'sub' => 'Approved before we start'],
       ],
     ],
@@ -473,7 +473,7 @@ function hf_services_page_defaults() {
     'hero' => [
       'eyebrow' => 'Residential appliance repair',
       'h1'      => 'Appliance repair services for <em>every room</em>',
-      'lede'    => 'Refrigerators, washers, dryers, dishwashers, ovens and cooktops — fixed right, often the same day. EPA-certified technicians, flat-rate pricing, and a 1-year parts & labor warranty on every repair.',
+      'lede'    => 'Refrigerators, washers, dryers, dishwashers, ovens and cooktops — fixed right, often the same day. EPA-certified technicians, flat-rate pricing, and a 3-month parts & labor warranty on every repair.',
       'book_label' => 'Book online →',
     ],
     'services' => [
@@ -578,7 +578,7 @@ function hf_service_areas_defaults() {
     'final_intro' => "One call to a real dispatcher. Tell us your city and the appliance — we'll quote a flat rate and an arrival window on the spot.",
     'final_signals' => [
       ['b' => 'Same-day across 14 cities', 'sub' => 'Call before noon'],
-      ['b' => '1-year warranty', 'sub' => 'Parts & labor'],
+      ['b' => '3-month warranty', 'sub' => 'Parts & labor'],
       ['b' => 'Flat-rate pricing', 'sub' => 'All 14 cities'],
     ],
   ];

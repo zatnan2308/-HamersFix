@@ -42,6 +42,10 @@ if (!$hf_hero_url) $hf_hero_url = $h['hero_image'];
         <a class="btn btn--ghost btn--lg" href="<?php echo esc_url($hf_booking); ?>"><?php echo esc_html($hf_book_label); ?></a>
       </div>
 
+      <?php $hf_discount_long = hf_discount_text_long(); if ($hf_discount_long) : ?>
+        <p class="hero__offer"><span class="hero__offer-ic">🎖️</span><?php echo esc_html($hf_discount_long); ?></p>
+      <?php endif; ?>
+
       <?php get_template_part('template-parts/section/zip-checker'); ?>
 
       <ul class="trust-row" aria-label="<?php esc_attr_e('Credentials', 'hamersfix'); ?>">

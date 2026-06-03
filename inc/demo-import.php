@@ -189,7 +189,7 @@ function hf_demo_apply($overwrite, &$count) {
       hf_demo_set('hero_h1', $is_ref ? 'Refrigerator repair across Northeast Georgia' : ($s['title'] . ' across Northeast Georgia'), $pid, $overwrite, $count);
       hf_demo_set('hero_lede', ($is_ref && isset($sd['hero']['lede']))
         ? $sd['hero']['lede']
-        : sprintf('Our EPA-certified, licensed technicians repair %s across Northeast Georgia — flat-rate pricing and a 1-year parts & labor warranty, often the same day.', $appl_low), $pid, $overwrite, $count);
+        : sprintf('Our EPA-certified, licensed technicians repair %s across Northeast Georgia — flat-rate pricing and a 3-month parts & labor warranty, often the same day.', $appl_low), $pid, $overwrite, $count);
       hf_demo_set('hero_badge_text', 'EPA-Certified Tech On Call', $pid, $overwrite, $count);
       hf_demo_set('hero_tag_text',   $appl . ' repair across Northeast GA', $pid, $overwrite, $count);
 
@@ -257,7 +257,7 @@ function hf_demo_apply($overwrite, &$count) {
 
       // Per-service SEO.
       hf_demo_set('seo_title', $s['title'] . ' in Northeast Georgia — Same-Day | HamersFix', $pid, $overwrite, $count);
-      hf_demo_set('seo_description', sprintf('EPA-certified technicians repair %s across Northeast Georgia. Flat-rate pricing, a 1-year parts & labor warranty, and same-day service available.', $appl_low), $pid, $overwrite, $count);
+      hf_demo_set('seo_description', sprintf('EPA-certified technicians repair %s across Northeast Georgia. Flat-rate pricing, a 3-month parts & labor warranty, and same-day service available.', $appl_low), $pid, $overwrite, $count);
     }
   }
 
@@ -306,7 +306,7 @@ function hf_demo_apply($overwrite, &$count) {
 
     // Home SEO.
     hf_demo_set('seo_title', 'HamersFix — Same-Day Appliance Repair in Northeast Georgia', $home_id, $overwrite, $count);
-    hf_demo_set('seo_description', 'Same-day refrigerator, washer, dryer, dishwasher, oven and cooktop repair across Northeast Georgia. EPA-certified, licensed & insured, flat-rate pricing, 1-year warranty.', $home_id, $overwrite, $count);
+    hf_demo_set('seo_description', 'Same-day refrigerator, washer, dryer, dishwasher, oven and cooktop repair across Northeast Georgia. EPA-certified, licensed & insured, flat-rate pricing, 3-month warranty.', $home_id, $overwrite, $count);
   }
 
   /* ===== Section pages (Commercial/About/Brands/Contact/Services/Reviews/Service Areas) ===== */

@@ -80,6 +80,16 @@ add_action('acf/init', function () {
       ['key' => 'field_hf_mega_promo_title', 'label' => 'Mega promo title', 'name' => 'mega_promo_title', 'type' => 'text', 'default_value' => "Not sure what's broken?"],
       ['key' => 'field_hf_mega_promo_text',  'label' => 'Mega promo text', 'name' => 'mega_promo_text', 'type' => 'textarea', 'rows' => 2, 'default_value' => "Call our dispatcher. We'll triage your appliance and quote a flat-rate diagnostic in under 60 seconds."],
 
+      /* ---- Offers (discount / diagnostic / warranty) ---- */
+      ['key' => 'field_hf_tab_offers', 'label' => 'Offers', 'type' => 'tab'],
+      ['key' => 'field_hf_offer_note', 'label' => '', 'type' => 'message', 'message' => 'Veteran/senior discount, diagnostic pricing and the repair-warranty wording. These appear in the topline, the home hero and the service-page heroes.'],
+      ['key' => 'field_hf_discount_text',  'label' => 'Discount — short (topline)', 'name' => 'discount_text', 'type' => 'text', 'default_value' => $d['offers']['discount_text'], 'instructions' => 'Shown in the top bar on every page. Leave empty to hide.'],
+      ['key' => 'field_hf_discount_long',  'label' => 'Discount — long (home hero)', 'name' => 'discount_text_long', 'type' => 'text', 'default_value' => $d['offers']['discount_text_long'], 'instructions' => 'Shown under the buttons in the home hero. Leave empty to hide.'],
+      ['key' => 'field_hf_diag_price',     'label' => 'Diagnostic price', 'name' => 'diag_price', 'type' => 'text', 'default_value' => $d['offers']['diag_price']],
+      ['key' => 'field_hf_diag_combo',     'label' => 'Combo diagnostic price', 'name' => 'diag_combo_price', 'type' => 'text', 'default_value' => $d['offers']['diag_combo_price'], 'instructions' => 'For Stackable Washer/Dryer (Washer, Dryer pages) and Microwave/Oven (Oven page).'],
+      ['key' => 'field_hf_diag_note',      'label' => 'Diagnostic note', 'name' => 'diag_note', 'type' => 'text', 'default_value' => $d['offers']['diag_note'], 'instructions' => 'Use %s where the price goes. Shown under the buttons on each repair page.'],
+      ['key' => 'field_hf_warranty_text',  'label' => 'Repair warranty wording', 'name' => 'warranty_text', 'type' => 'text', 'default_value' => $d['offers']['warranty_text'], 'instructions' => 'Our HamersFix repair warranty (e.g. “3-month parts & labor warranty”).'],
+
       /* ---- Footer ---- */
       ['key' => 'field_hf_tab_footer', 'label' => 'Footer', 'type' => 'tab'],
       ['key' => 'field_hf_foot_services', 'label' => 'Footer — Services', 'name' => 'footer_services', 'type' => 'repeater', 'layout' => 'table', 'button_label' => 'Add link', 'sub_fields' => [

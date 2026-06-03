@@ -84,6 +84,17 @@ while (have_posts()) :
           <a class="btn btn--ghost btn--lg" href="<?php echo esc_url($booking); ?>"><?php esc_html_e('Book online →', 'hamersfix'); ?></a>
         </div>
 
+        <?php
+        $hf_diag = hf_diagnostic_lines($hf_slug);
+        if (!empty($hf_diag['base'])) : ?>
+          <div class="diag-note">
+            <span class="diag-note__row"><span class="diag-note__ic" aria-hidden="true">🔧</span><?php echo esc_html($hf_diag['base']); ?></span>
+            <?php if (!empty($hf_diag['combo'])) : ?>
+              <span class="diag-note__row diag-note__row--combo"><?php echo esc_html($hf_diag['combo']); ?></span>
+            <?php endif; ?>
+          </div>
+        <?php endif; ?>
+
         <?php if ($epa_show) : ?>
           <div style="margin-top:24px">
             <div class="epa-badge">

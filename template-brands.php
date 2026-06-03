@@ -39,7 +39,7 @@ if (!$hero_url) $hero_url = $d['hero']['image'];
       <div>
         <span class="hero__eyebrow"><span class="pulse"></span>Factory-authorized · OEM parts only</span>
         <h1 id="hero-h">Appliance brands <em>homes &amp; businesses</em> rely on.</h1>
-        <p class="lede">We service 25+ residential brands and 14+ commercial equipment makers across Northeast Georgia. Factory-authorized on premium, OEM-certified on mainstream — every repair backed by a 1-year warranty.</p>
+        <p class="lede">We service 25+ residential brands and 14+ commercial equipment makers across Northeast Georgia. Factory-authorized on premium, OEM-certified on mainstream — every repair backed by a 3-month warranty.</p>
 
         <div class="ctas">
           <a class="btn btn--cta btn--lg" href="tel:<?php echo esc_attr(hf_phone_link()); ?>">
@@ -77,7 +77,7 @@ if (!$hero_url) $hero_url = $d['hero']['image'];
     <div class="s__head">
       <span class="eyebrow">Our scope</span>
       <h2 id="scope-h">Brands we repair</h2>
-      <p>Every brand we work on is covered by genuine OEM parts, manufacturer procedures, and our 1-year parts &amp; labor warranty. Here's what that scope looks like in practice.</p>
+      <p>Every brand we work on is covered by genuine OEM parts, manufacturer procedures, and our 3-month parts &amp; labor warranty. Here's what that scope looks like in practice.</p>
     </div>
     <div class="s__body">
       <div class="scope-row">
@@ -446,7 +446,7 @@ if (!$hero_url) $hero_url = $d['hero']['image'];
           <ul>
             <li>Authorized service for AHS, Choice, Sears</li>
             <li>Manufacturer warranty work direct-billed</li>
-            <li>1-year HamersFix warranty stacks on top</li>
+            <li>3-month HamersFix warranty stacks on top</li>
           </ul>
         </div>
 
@@ -531,7 +531,7 @@ if (!$hero_url) $hero_url = $d['hero']['image'];
           </div>
           <div class="sig">
             <div class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
-            <div class="tx"><b>1-year warranty</b>Parts &amp; labor</div>
+            <div class="tx"><b>3-month warranty</b>Parts &amp; labor</div>
           </div>
           <div class="sig">
             <div class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
