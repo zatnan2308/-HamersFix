@@ -2,11 +2,12 @@
 /**
  * HamersFix — Demo Data importer: section pages.
  *
- * Extends the importer (inc/demo-import.php) to populate the seven section-page
+ * Extends the importer (inc/demo-import.php) to populate the nine section-page
  * templates (Commercial, About, Brands, Contact, Appliance Repair Services,
- * Reviews, Service Areas) so NO ACF field is empty in the admin after an
- * import. The front end already renders these from design defaults; this just
- * mirrors the same defaults into the editable fields.
+ * Reviews, Service Areas, Appliance Deep Cleaning, Air Vent Cleaning) so NO ACF
+ * field is empty in the admin after an import. The front end already renders
+ * these from design defaults; this just mirrors the same defaults into the
+ * editable fields.
  *
  * Called from hf_demo_apply() (inc/demo-import.php). Reuses hf_demo_set() and
  * hf_demo_rows() defined there.
@@ -48,7 +49,7 @@ function hf_demo_lines($list) {
   return implode("\n", array_map('strval', (array) $list));
 }
 
-/** Populate all seven section pages. */
+/** Populate all nine section pages. */
 function hf_demo_apply_pages($overwrite, &$count) {
 
   /* ===== Commercial ===== */
@@ -376,6 +377,127 @@ function hf_demo_apply_pages($overwrite, &$count) {
     hf_demo_set('final_signals', hf_demo_map($d['final_signals'], ['b', 'sub']), $pid, $overwrite, $count);
   }
 
+  /* ===== Appliance Deep Cleaning ===== */
+  $pid = hf_demo_page_id('template-deep-cleaning.php', 'appliance-deep-cleaning');
+  if ($pid && function_exists('hf_deep_cleaning_defaults')) {
+    $d = hf_deep_cleaning_defaults();
+    $h = $d['hero'];
+    hf_demo_set('hero_eyebrow',     $h['eyebrow'],     $pid, $overwrite, $count);
+    hf_demo_set('hero_h1',          $h['h1'],          $pid, $overwrite, $count);
+    hf_demo_set('hero_lede',        $h['lede'],        $pid, $overwrite, $count);
+    hf_demo_set('hero_image_alt',   $h['image_alt'],   $pid, $overwrite, $count);
+    hf_demo_set('hero_badge_text',  $h['badge_text'],  $pid, $overwrite, $count);
+    hf_demo_set('hero_tag_small',   $h['tag_small'],   $pid, $overwrite, $count);
+    hf_demo_set('hero_tag_text',    $h['tag_text'],    $pid, $overwrite, $count);
+    hf_demo_set('hero_pills', hf_demo_map($h['pills'], ['text', 'dot']), $pid, $overwrite, $count);
+    hf_demo_set('hero_trust', hf_demo_map($h['trust'], ['ic', 'style', 'label']), $pid, $overwrite, $count);
+
+    $s = $d['services'];
+    hf_demo_set('services_eyebrow', $s['eyebrow'], $pid, $overwrite, $count);
+    hf_demo_set('services_h2',      $s['h2'],      $pid, $overwrite, $count);
+    hf_demo_set('services_intro',   $s['intro'],   $pid, $overwrite, $count);
+    $blocks = [];
+    foreach ($s['blocks'] as $b) {
+      $blocks[] = [
+        'id' => $b['id'], 'media' => $b['media'], 'eyebrow' => $b['eyebrow'],
+        'h2' => $b['h2'], 'sub' => $b['sub'], 'chip' => $b['chip'],
+        'items' => hf_demo_rows($b['items'], 'text'), 'cta' => $b['cta'],
+      ];
+    }
+    hf_demo_set('clean_blocks', $blocks, $pid, $overwrite, $count);
+
+    $cb = $d['combo'];
+    hf_demo_set('combo_badge',       $cb['badge'],       $pid, $overwrite, $count);
+    hf_demo_set('combo_h2',          $cb['h2'],          $pid, $overwrite, $count);
+    hf_demo_set('combo_intro',       $cb['intro'],       $pid, $overwrite, $count);
+    hf_demo_set('combo_panel_title', $cb['panel_title'], $pid, $overwrite, $count);
+    hf_demo_set('combo_panel_meta',  $cb['panel_meta'],  $pid, $overwrite, $count);
+    hf_demo_set('combo_rows', hf_demo_rows($cb['rows'], 'text'), $pid, $overwrite, $count);
+
+    $w = $d['why'];
+    hf_demo_set('why_eyebrow', $w['eyebrow'], $pid, $overwrite, $count);
+    hf_demo_set('why_h2',      $w['h2'],      $pid, $overwrite, $count);
+    hf_demo_set('why_intro',   $w['intro'],   $pid, $overwrite, $count);
+    hf_demo_set('why_cards', hf_demo_map($w['cards'], ['icon', 'h3', 'p']), $pid, $overwrite, $count);
+
+    $hw = $d['how'];
+    hf_demo_set('how_eyebrow', $hw['eyebrow'], $pid, $overwrite, $count);
+    hf_demo_set('how_h2',      $hw['h2'],      $pid, $overwrite, $count);
+    hf_demo_set('how_intro',   $hw['intro'],   $pid, $overwrite, $count);
+    hf_demo_set('how_steps', hf_demo_map($hw['steps'], ['num', 'h3', 'p', 'time']), $pid, $overwrite, $count);
+
+    $fq = $d['faq'];
+    hf_demo_set('faq_eyebrow', $fq['eyebrow'], $pid, $overwrite, $count);
+    hf_demo_set('faq_h2',      $fq['h2'],      $pid, $overwrite, $count);
+    hf_demo_set('faq', hf_demo_map($fq['items'], ['q', 'a']), $pid, $overwrite, $count);
+
+    $fn = $d['final'];
+    hf_demo_set('final_eyebrow', $fn['eyebrow'], $pid, $overwrite, $count);
+    hf_demo_set('final_h2',      $fn['h2'],      $pid, $overwrite, $count);
+    hf_demo_set('final_intro',   $fn['intro'],   $pid, $overwrite, $count);
+    hf_demo_set('final_signals', hf_demo_map($fn['signals'], ['title', 'sub']), $pid, $overwrite, $count);
+  }
+
+  /* ===== Air Vent Cleaning ===== */
+  $pid = hf_demo_page_id('template-air-vent.php', 'air-vent-cleaning');
+  if ($pid && function_exists('hf_air_vent_defaults')) {
+    $d = hf_air_vent_defaults();
+    $h = $d['hero'];
+    hf_demo_set('hero_eyebrow',    $h['eyebrow'],    $pid, $overwrite, $count);
+    hf_demo_set('hero_h1',         $h['h1'],         $pid, $overwrite, $count);
+    hf_demo_set('hero_lede',       $h['lede'],       $pid, $overwrite, $count);
+    hf_demo_set('hero_price_from', $h['price_from'], $pid, $overwrite, $count);
+    hf_demo_set('hero_badge_text', $h['badge_text'], $pid, $overwrite, $count);
+    hf_demo_set('hero_tag_small',  $h['tag_small'],  $pid, $overwrite, $count);
+    hf_demo_set('hero_tag_text',   $h['tag_text'],   $pid, $overwrite, $count);
+    hf_demo_set('hero_trust', hf_demo_map($h['trust'], ['ic', 'style', 'label']), $pid, $overwrite, $count);
+
+    $in = $d['included'];
+    hf_demo_set('incl_eyebrow', $in['eyebrow'], $pid, $overwrite, $count);
+    hf_demo_set('incl_h2',      $in['h2'],      $pid, $overwrite, $count);
+    hf_demo_set('incl_intro',   $in['intro'],   $pid, $overwrite, $count);
+    hf_demo_set('incl_items', hf_demo_rows($in['items'], 'text'), $pid, $overwrite, $count);
+
+    $bn = $d['benefits'];
+    hf_demo_set('benefits_eyebrow', $bn['eyebrow'], $pid, $overwrite, $count);
+    hf_demo_set('benefits_h2',      $bn['h2'],      $pid, $overwrite, $count);
+    hf_demo_set('benefits_intro',   $bn['intro'],   $pid, $overwrite, $count);
+    hf_demo_set('benefit_cards', hf_demo_map($bn['cards'], ['icon', 'h3', 'p']), $pid, $overwrite, $count);
+
+    $pr = $d['props'];
+    hf_demo_set('props_eyebrow', $pr['eyebrow'], $pid, $overwrite, $count);
+    hf_demo_set('props_h2',      $pr['h2'],      $pid, $overwrite, $count);
+    hf_demo_set('props_intro',   $pr['intro'],   $pid, $overwrite, $count);
+    $props = [];
+    foreach ($pr['cards'] as $c) {
+      $props[] = [
+        'variant' => $c['variant'], 'icon' => $c['icon'], 'h3' => $c['h3'],
+        'p' => $c['p'], 'items' => hf_demo_rows($c['items'], 'text'),
+      ];
+    }
+    hf_demo_set('prop_cards', $props, $pid, $overwrite, $count);
+
+    $hw = $d['how'];
+    hf_demo_set('how_eyebrow', $hw['eyebrow'], $pid, $overwrite, $count);
+    hf_demo_set('how_h2',      $hw['h2'],      $pid, $overwrite, $count);
+    hf_demo_set('how_intro',   $hw['intro'],   $pid, $overwrite, $count);
+    hf_demo_set('how_steps', hf_demo_map($hw['steps'], ['num', 'h3', 'p', 'time']), $pid, $overwrite, $count);
+
+    $p = $d['price'];
+    hf_demo_set('price_h3',         $p['h3'],         $pid, $overwrite, $count);
+    hf_demo_set('price_intro',      $p['intro'],      $pid, $overwrite, $count);
+    hf_demo_set('price_from_label', $p['from_label'], $pid, $overwrite, $count);
+    hf_demo_set('price_amount',     $p['amount'],     $pid, $overwrite, $count);
+    hf_demo_set('price_note',       $p['note'],       $pid, $overwrite, $count);
+    hf_demo_set('price_cta',        $p['cta'],        $pid, $overwrite, $count);
+
+    $fn = $d['final'];
+    hf_demo_set('final_eyebrow', $fn['eyebrow'], $pid, $overwrite, $count);
+    hf_demo_set('final_h2',      $fn['h2'],      $pid, $overwrite, $count);
+    hf_demo_set('final_intro',   $fn['intro'],   $pid, $overwrite, $count);
+    hf_demo_set('final_signals', hf_demo_map($fn['signals'], ['title', 'sub']), $pid, $overwrite, $count);
+  }
+
   /* ===== Per-page SEO (title + description) ===== */
   hf_demo_apply_seo($overwrite, $count);
 }
@@ -404,6 +526,12 @@ function hf_demo_apply_seo($overwrite, &$count) {
     ['template-reviews.php', 'reviews',
       'Reviews — Appliance Repair in Northeast Georgia | HamersFix',
       'Read verified customer reviews of HamersFix appliance repair across Google, BBB, Yelp and HomeAdvisor. Honest pricing, on-time service, and warranty-backed repairs.'],
+    ['template-deep-cleaning.php', 'appliance-deep-cleaning',
+      'Appliance Deep Cleaning — Refrigerator & Oven | HamersFix',
+      'Professional refrigerator and oven deep cleaning across Northeast Georgia. Safe products, sanitized surfaces, odor removal — book the fridge + oven combo and save.'],
+    ['template-air-vent.php', 'air-vent-cleaning',
+      'Air Vent Cleaning in Northeast Georgia — From $179 | HamersFix',
+      'Professional air vent cleaning from $179 — includes dryer vent inspection and flexible vent hose replacement. Better airflow, less dust, residential & commercial.'],
   ];
   foreach ($seo as $row) {
     $pid = hf_demo_page_id($row[0], $row[1]);
